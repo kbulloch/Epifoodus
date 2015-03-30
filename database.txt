@@ -1,0 +1,65 @@
+DB = epifoodus / epifoodus_test
+
+Class Restaurant (evan)
+----------------
+name | varchar
+price_id | int
+vegetarian | binary
+hours | varchar
+id | int
+
+Class Price (erica)
+-----------
+level | varchar
+id | int
+
+Class Cuisine (kyle)
+-------------
+type | varchar
+id | int
+
+Class User (abeer)
+----------
+username | varchar
+password | varchar
+id | int
+
+
+
+Tables
+
+restaurants
+-----------
+name | varchar
+price_id | int
+vegetarian | binary
+hours | varchar
+id | int
+
+prices
+------
+level | varchar
+id | int
+
+cuisines
+--------
+type | varchar
+id | int
+
+cuisines_restaurants
+--------------------
+restaurant_id | int
+cuisine_id | int
+id | int
+
+users
+-----
+username | varchar
+password | varchar
+id | int
+
+likes (users + restaurants)
+-----
+answer | true/false
+restaurant_id | int
+user_id | int
