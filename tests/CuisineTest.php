@@ -7,14 +7,14 @@
 
     require_once "src/Cuisine.php";
 
-    $DB = new PDO('pgsql:host=localhost;dbname=epifoodus_test');
+    // $DB = new PDO('pgsql:host=localhost;dbname=epifoodus_test');
 
     class CuisineTest extends PHPUnit_Framework_TestCase
     {
-        protected function tearDown()
-        {
-            Cuisine::deleteAll();
-        }
+        // protected function tearDown()
+        // {
+        //     Cuisine::deleteAll();
+        // }
 
         function test_getName()
         {
@@ -29,5 +29,19 @@
             $this->assertEquals($name, $result);
         }
 
+        function test_setName()
+        {
+            //Arrange
+            $name = "Italian";
+            $test_cuisine = new Cuisine($name);
+
+            $new_name = "Mexican";
+
+            //Act
+            $test_cuisine->setName($new_name);
+
+            //Assert
+            $this->assertEquals($new_name, $test_cuisine->getName());
+        }
     }
 ?>
