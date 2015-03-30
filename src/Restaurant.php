@@ -78,5 +78,35 @@
             return $this->id;
         }
 
+        function save()
+        {
+            $statement = $GLOBALS['DB']->query("INSERT INTO restaurants (name, price_id, vegie, opentime, closetime)
+                VALUES ('{$this->getName()}', {$this->getPrice_id()}, {$this->getVegie()}, {$this->getOpentime()}, {$this->getClosetime()}) RETURNING id;");
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $this->setId($result['id']);
+        }
+
+        static function getAll()
+        {
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants;");
+            $restaurants = array();
+            foreach($returned_restaurants as $restaurant) {
+                $name = $restaurant['name'];
+                $price_id = $restaurant['price_id'];
+                $vegie = $restaurant['vegie'];
+                $opentime = $restaurant['opentime'];
+                $closetime = $restaurant['closetime'];
+                $id = $restaurant['id'];
+                $new_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+                array_push($restaurants, $new_restaurant);
+            }
+            return $restaurants;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM restaurants *;");
+        }
+
     }
 ?>

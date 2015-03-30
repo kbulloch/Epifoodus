@@ -9,10 +9,10 @@
 
     Class RestaurantTest extends PHPUnit_Framework_TestCase
     {
-        // function tearDown()
-        // {
-        //     Restaurant::deleteAll();
-        // }
+        function tearDown()
+        {
+            Restaurant::deleteAll();
+        }
 
         function test_getName()
         {
@@ -210,7 +210,7 @@
             $test_restaurant2->save();
 
             //Act
-            Restaurtant::deleteAll();
+            Restaurant::deleteAll();
             $result = Restaurant::getAll();
 
             //Assert
