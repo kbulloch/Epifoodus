@@ -25,6 +25,10 @@ username | varchar
 password | varchar
 id | int
 
+Class Like
+----------
+
+
 
 
 Tables

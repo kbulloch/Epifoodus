@@ -140,5 +140,81 @@
             //Assert
             $this->assertEquals(2, $result);
         }
+
+        function test_save()
+        {
+            //Arrange
+            $name = "Little Big Burger";
+            $price_id = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant->save();
+
+            //Act
+            $result = Restaurant::getAll();
+
+            //Assert
+            $this->assertEquals($test_restaurant, $result[0]);
+        }
+
+        function test_getAll()
+        {
+            //Arrange
+            $name = "Little Big Burger";
+            $price_id = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant->save();
+
+            $name2 = "Kingsland";
+            $price_id2 = 2;
+            $vegie2 = 0;
+            $opentime2 = 0800;
+            $closetime2 = 2200;
+            $id2 = 2;
+            $test_restaurant2 = new Restaurant($name2, $price_id2, $vegie2, $opentime2, $closetime2, $id2);
+            $test_restaurant2->save();
+
+            //Act
+            $result = Restaurant::getAll();
+
+            //Assert
+            $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
+        }
+
+        function test_deleteAll()
+        {
+            //Arrange
+            $name = "Little Big Burger";
+            $price_id = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant->save();
+
+            $name2 = "Kingsland";
+            $price_id2 = 2;
+            $vegie2 = 0;
+            $opentime2 = 0800;
+            $closetime2 = 2200;
+            $id2 = 2;
+            $test_restaurant2 = new Restaurant($name2, $price_id2, $vegie2, $opentime2, $closetime2, $id2);
+            $test_restaurant2->save();
+
+            //Act
+            Restaurtant::deleteAll();
+            $result = Restaurant::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+        }
     }
 ?>
