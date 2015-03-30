@@ -5,7 +5,8 @@ Class Restaurant (evan)
 name | varchar
 price_id | int
 vegetarian | binary
-hours | varchar
+opentime | int
+closetime | int
 id | int
 
 Class Price (erica)
@@ -33,7 +34,8 @@ restaurants
 name | varchar
 price_id | int
 vegetarian | binary
-hours | varchar
+opentime | int
+closetime | int
 id | int
 
 prices
@@ -66,7 +68,7 @@ user_id | int
 
 CREATE DATABASE epifoodus;
 \c epifoodus;
-CREATE TABLE restaurants (id serial PRIMARY KEY, name varchar, price_id int, vegetarian int, hours time);
+CREATE TABLE restaurants (id serial PRIMARY KEY, name varchar, price_id int, vegetarian int, opentime int, closetime int);
 CREATE TABLE prices (id serial PRIMARY KEY, level int);
 CREATE TABLE cuisines (id serial PRIMARY KEY, type varchar);
 CREATE TABLE cuisines_restaurants (id serial PRIMARY KEY, cuisine_id int, restaurant_id int);
