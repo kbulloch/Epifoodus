@@ -57,5 +57,18 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM cuisines *;");
         }
+
+        static function find($search_id) //READ SINGLE
+        {
+            $found_cuisine = null;
+            $cuisines = Cuisine::getAll();
+            foreach($cuisines as $my_cuisine) {
+                $cuisine_id = $my_cuisine->getId();
+                if ($cuisine_id == $search_id) {
+                    $found_cuisine = $my_cuisine;
+                }
+            }
+            return $found_cuisine;
+        }
     }
 ?>
