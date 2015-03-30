@@ -28,20 +28,21 @@
 
         }
 
-        // function test_setLevel()
-        // {
-        //     //Arrange
-        //     $level = 2;
-        //     $id = 4;
-        //     $test_price = new Price($level, $id);
-        //     $new_level = 5;
-        //
-        //     //Act
-        //     $result = $test_price->setLevel($new_level);
-        //
-        //     //Arrange
-        //     $this->assertEquals(5, $result);
-        // }
+        function test_setLevel()
+        {
+            //Arrange
+            $level = 2;
+            $id = 4;
+            $test_price = new Price($level, $id);
+            $new_level = 5;
+
+            //Act
+            $test_price->setLevel($new_level);
+            $result = $test_price->getLevel();
+
+            //Arrange
+            $this->assertEquals(5, $result);
+        }
 
 
 
