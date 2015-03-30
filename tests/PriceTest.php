@@ -74,6 +74,52 @@
             $this->assertEquals(4, $result);
         }
 
+        function test_save()
+        {
+            //Arrange
+            $level = 6.00;
+            $id = 3;
+            $test_price = new Price($level, $id);
+            $test_price->save();
+
+            //Act
+            $result = $test_price->getAll();
+
+            //Arrange
+            $this->assertEquals([$test_price], $result);
+        }
+
+        function test_getAll()
+        {
+            //Arrange
+            $level = 4.00;
+            $id = 1 ;
+            $test_price = new Price($level, $id);
+            $test_price->save();
+
+            $level1 = 5.00;
+            $id1 = 2;
+            $test_price1  = new Price($level1, $id1);
+            $test_price1->save();
+
+            //Act
+            $result = Price::getAll();
+
+            //Arrange
+            $this->assertEquals([$test_price,$test_price1], $result);
+        }
+
+        function test_deleteAll()
+        {
+            //Arrange
+            $level = 5.00;
+            $id = 1;
+            $test_price = new Price($level, $id);
+            $test_price->save();
+
+            //Act
+        }
+
 
 
     }
