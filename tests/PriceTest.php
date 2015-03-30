@@ -44,6 +44,20 @@
             $this->assertEquals(5, $result);
         }
 
+        function test_getId()
+        {
+            //Arrange
+            $level = 4;
+            $id =2;
+            $test_price = new Price($level, $id);
+
+            //Act
+            $result = $test_price->getId();
+
+            //Arrange
+            $this->assertEquals(2, $result);
+        }
+
 
 
     }
