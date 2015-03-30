@@ -50,7 +50,32 @@
         //getters
         function getName()
         {
+            return $this->name;
+        }
 
+        function getPrice_id()
+        {
+            return $this->price_id;
+        }
+
+        function getVegie()
+        {
+            return $this->vegie;
+        }
+
+        function getOpentime()
+        {
+            return $this->opentime;
+        }
+
+        function getClosetime()
+        {
+            return $this->closetime;
+        }
+
+        function getId()
+        {
+            return $this->id;
         }
 
     }
