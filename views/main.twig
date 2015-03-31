@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    <title>Epifoodus: I'm Hungry</title>
+  </head>
+  <body>
+
+    <div class="container">
+
+    <!-- main button -->
+    <form action="/choices" method="get">
+        <button name="choice" class="btn-danger btn-xl">I'm Hungry!</button>
+    </form>
+
+    <!-- user sign in -->
+    <form action="/choices" method="get">
+      <label for="user_name">Name:</label>
+      <input type="text" id="user_name" name="user_name">
+      <label for="user_password">Password:</label>
+      <input name="user_password" value="user_password">
+      <button name="sign_in">Sign In</button>
+    </form>
+
+    <!-- create new user -->
+    <form action="/create_user" method="post">
+      <button name="button">Sign Up</button>
+    </form>
+
+    </div>
+
+  </body>
+</html>
