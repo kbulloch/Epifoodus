@@ -6,38 +6,9 @@
   <body>
 
     <div class="container">
-
-    <div class="left column">
-      <!-- option 1 -->
-      <form action="/choice/{id}" method="get">
-
-          <!-- gets overall cuisine img, but sends to specific restaurant -->
-        <input type="image" src="{{ restaurant1.getCuisineImg }}">
-      </form>
-
-      <!-- keep option 2, reload option 1 -->
-      <form action="/keep2" method="post">
-        <button type="submit" name="keep2">X</button>
-      </form>
-    </div>
-
-    <div class="right column">
-      <!-- option 2 -->
-      <form action="/choice/{id}" method="get">
-        <input type="image" src="{{ restaurant2.getCuisineImg }}">
-      </form>
-
-      <!-- keep option 1, reload option 2 -->
-      <form action="/keep1" method="post">
-        <button type="submit" name="keep1">X</button>
-      </form>
-    </div>
-
-    <!-- reload both -->
-    <form action="/options" method="get">
-      <button type="submit" name="reload">I don't want either of these options</button>
-    </form>
-
+        <a href="/choice/{{ restaurant1.getId }}"><h1>{{ restaurant1.getName }}</h1></a>
+        <a href="/choice/{{ restaurant2.getId }}"><h1>{{ restaurant2.getName }}</h1></a>
+        
     </div>
 
   </body>
