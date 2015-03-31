@@ -152,7 +152,7 @@
             $result = User::find($test_User->getId());
             $this->assertEquals($test_User, $result);
         }
-        function testUpdate()
+        function testUpdateUsername()
         {
             //Arrange
             $User = "sHOE sTORE";
@@ -160,9 +160,21 @@
             $test_User->save();
             $new_name = "Home Economics";
             //Act
-            $test_User->update($new_name);
+            $test_User->updateUsername($new_name);
             //Assert
-            $this->assertEquals("Home Economics", $test_User->getUser());
+            $this->assertEquals("Home Economics", $test_User->getUsername());
+        }
+        function testUpdatePassword()
+        {
+            //Arrange
+            $User = "sHOE sTORE";
+            $test_User = new User($User,$password="pasnnnsword");
+            $test_User->save();
+            $new_password = "abeer";
+            //Act
+            $test_User->updatePassword($new_password);
+            //Assert
+            $this->assertEquals("abeer", $test_User->getPassword());
         }
         function testDeleteUser()
         {
@@ -179,23 +191,23 @@
             //Assert
             $this->assertEquals([$test_User2], User::getAll());
         }
-        // function testAddUser()
-        // {
-        //     //Arrange
-        //     //We need a User and a User saved
-        //     $User = "sHOE sTORE";
-        //     $test_User = new User($User);
-        //     $test_User->save();
+        function testAddanswer()
+        {
+            //Arrange
+            //We need a User and a User saved
+            $User = "sHOE sTORE";
+            $test_User = new User($User,$password="pasnnnsword");
+            $test_User->save();
 
-        //     $name= "Drupal";
-        //     $test_store = new Store($name);
-        //     $test_store->save();
+            $name= "Drupal";
+            $test_store = new Store($name,$password="pasnnnsword");
+            $test_store->save();
 
-        //     $test_User->addStore($test_store);
-        //     $this->assertEquals($test_User->getStores(), [$test_store]);
-        // }
+            $test_User->addStore($test_store);
+            $this->assertEquals($test_User->getStores(), [$test_store]);
+        }
         // //Now we write a test for the getStores method since we need it to be able to test the Add User method.
-        // function testGetStores()
+        // function testGetLikes()
         // {
         //     //Arrange
         //     //start with a User
