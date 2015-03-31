@@ -1,13 +1,9 @@
 <?php
     require_once __DIR__."/../vendor/autoload.php";
-<<<<<<< HEAD
     require_once __DIR__."/../src/Cuisine.php";
     require_once __DIR__."/../src/Restaurant.php";
     //ADD OTHER CLASSES ONCE COMPLETE [users, likes, ??]
-=======
-    require_once __DIR__."/../src/Restaurant.php"; //ADD CLASS NAMES
-    require_once __DIR__."/../src/Cuisine.php";
->>>>>>> df708246d1425a9ec024c6a71e26af858544092a
+
 
     $app = new Silex\Application();
     $app['debug'] = true;
