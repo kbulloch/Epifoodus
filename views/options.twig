@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    <title>Epifoodus: Choices</title>
+  </head>
+  <body>
+
+    <div class="container">
+
+    <div class="left column">
+      <!-- option 1 -->
+      <form action="/choice" method="get">
+
+        <!-- get cuisine img, sends to specific restaurant -->
+        <img src="{{ restaurant1.getCuisineImg }}">
+      </form>
+
+      <!-- keep option 2, reload option 1 -->
+      <form action="/keep2" method="post">
+        <button name="button">X</button>
+      </form>
+    </div>
+
+    <div class="right column">
+      <!-- option 2 -->
+      <form action="/choice" method="get">
+        <img src="{{ restaurant2.getCuisineImg }}">
+      </form>
+
+      <!-- keep option 1, reload option 2 -->
+      <form action="/keep1" method="post">
+        <button name="button">X</button>
+      </form>
+    </div>
+
+    <!-- reload both -->
+    <form action="/options" method="get">
+      <button name="button">I don't want either of these options</button>
+    </form>
+
+    </div>
+
+  </body>
+</html>
