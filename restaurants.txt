@@ -1,0 +1,65 @@
+Food Carts
+----------
+name: Small Pharoah's
+address: SW 5th and Stark
+phone: 917 500 9181
+price:
+vegie:
+open: 1100
+close: 1900
+
+name: Deutschland Curry
+address: SW 5th and Stark
+phone: none
+price:
+vegie:
+open: 1100
+close: 1500
+
+name: Left Coast
+address: SW 5th and Stark
+phone: 513 520 3206
+price:
+vegie:
+open: 1030
+close: 1600
+
+name: Chez Dodo
+address: SW 5th and Stark
+phone: 503 284-4575
+price:
+vegie:
+open: 1100
+close: 2300
+
+name: Hawaiian Grill
+address: SW 5th and Stark
+phone: none
+price:
+vegie:
+open: 1100
+close: 1400
+
+name: BrunchBox
+address: SW 5th and Stark
+phone: 503 477 3286
+price:
+vegie:
+open: 0800
+close: 1800
+
+name: Khob Kun Thai Food
+address: SW 5th and Stark
+phone: 503 702 5844
+price:
+vegie:
+open: 1100
+close: 1400
+
+name: 
+address:
+phone:
+price:
+vegie:
+open:
+close:
