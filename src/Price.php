@@ -45,6 +45,11 @@
         $this->setLevel($new_level);
     }
 
+    function singleDelete()
+    {
+        $GLOBALS['DB']->exec("DELETE FROM prices WHERE id = {$this->getId()};");
+    }
+
     static function findId($search_id)
     {
         $statement = $GLOBALS['DB']->query("SELECT * FROM prices WHERE id = {$search_id};");

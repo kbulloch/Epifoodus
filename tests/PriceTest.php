@@ -190,6 +190,22 @@
             $this->assertEquals(7, $get_newLevel);
         }
 
+        function test_singleDelete()
+        {
+            //Arrange
+            $level = 6.00;
+            $id = 1;
+            $test_price = new Price($level, $id);
+            $test_price->save();
+
+            //Act
+            $test_price->singleDelete();
+            $result = Price::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+        }
+
 
     }
 
