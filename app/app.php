@@ -1,7 +1,7 @@
 <?php
     require_once __DIR__."/../vendor/autoload.php";
-    require_once __DIR__."/../src/_____.php"; //ADD CLASS NAMES
-    require_once __DIR__."/../src/_____.php";
+    require_once __DIR__."/../src/Restaurant.php"; //ADD CLASS NAMES
+    require_once __DIR__."/../src/Cuisine.php";
 
     $app = new Silex\Application();
     $app['debug'] = true;
