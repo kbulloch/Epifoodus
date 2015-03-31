@@ -6,6 +6,7 @@ class User
 	private $id;
 	private $vegie;
 	private $admin;
+
 	function __construct($new_username, $new_password, $new_vegie, $new_admin, $new_id = null)
 	{
 		$this->id       = $new_id;

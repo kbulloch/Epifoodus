@@ -7,6 +7,9 @@
     require_once "src/response.php";
     require_once "src/Restaurant.php";
     $DB = new PDO('pgsql:host=localhost;dbname=epifoodus');
+
+    //ADD COLUMN VEGGIE AND ADMIN TO USER TABLE
+
   class UserTest extends PHPUnit_Framework_TestCase
     {
         protected function tearDown()
