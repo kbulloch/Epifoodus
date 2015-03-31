@@ -98,6 +98,12 @@
             $this->setPrice_id($new_price_id);
         }
 
+        function updateVegie($new_vegie)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurants SET vegie = {$new_vegie} WHERE id = {$this->getId()};");
+            $this->setVegie($new_vegie);
+        }
+
         static function getAll()
         {
             $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants;");
