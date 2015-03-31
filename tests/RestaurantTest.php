@@ -231,12 +231,14 @@
             $test_restaurant->save();
 
             $name2 = "Kingsland";
-            $price_id2 = 2;
+            $address2 = "124 SW 5th";
+            $phone2 = "456-292-2801";
+            $price2 = 2;
             $vegie2 = 0;
             $opentime2 = 0800;
             $closetime2 = 2200;
             $id2 = 2;
-            $test_restaurant2 = new Restaurant($name2, $price_id2, $vegie2, $opentime2, $closetime2, $id2);
+            $test_restaurant2 = new Restaurant($name2, $address2, $phone2, $price2, $vegie2, $opentime2, $closetime2, $id2);
             $test_restaurant2->save();
 
             //Act
@@ -261,12 +263,14 @@
             $test_restaurant->save();
 
             $name2 = "Kingsland";
-            $price_id2 = 2;
+            $address2 = "124 SW 5th";
+            $phone2 = "456-292-2801";
+            $price2 = 2;
             $vegie2 = 0;
             $opentime2 = 0800;
             $closetime2 = 2200;
             $id2 = 2;
-            $test_restaurant2 = new Restaurant($name2, $price_id2, $vegie2, $opentime2, $closetime2, $id2);
+            $test_restaurant2 = new Restaurant($name2, $address2, $phone2, $price2, $vegie2, $opentime2, $closetime2, $id2);
             $test_restaurant2->save();
 
             //Act
@@ -299,7 +303,7 @@
             $opentime2 = 0800;
             $closetime2 = 2200;
             $id2 = 2;
-            $test_restaurant2 = new Restaurant($name2, $price2, $vegie2, $opentime2, $closetime2, $id2);
+            $test_restaurant2 = new Restaurant($name2, $address2, $phone2, $price2, $vegie2, $opentime2, $closetime2, $id2);
             $test_restaurant2->save();
 
             //Act
