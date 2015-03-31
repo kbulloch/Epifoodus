@@ -5,8 +5,8 @@
     * @backupStaticAttributes disabled
     */
 
-    require_once "src/Cuisine.php";
     require_once "src/Restaurant.php";
+    require_once "src/Cuisine.php";
 
     $DB = new PDO('pgsql:host=localhost;dbname=epifoodus');
 
@@ -152,7 +152,7 @@
             $test_cuisine = new Cuisine($type);
             $test_cuisine->save();
 
-            $name = "Little Big Burger";
+            $name = "Fiorentino Ristorante";
             $address = "123 NW 23rd Ave.";
             $phone = "971-289-8000";
             $price = 1;
@@ -178,7 +178,7 @@
             $test_cuisine = new Cuisine($type);
             $test_cuisine->save();
 
-            $name = "Little Big Burger";
+            $name = "Fiorentino Ristorante";
             $address = "123 NW 23rd Ave.";
             $phone = "971-289-8000";
             $price = 1;
@@ -189,7 +189,7 @@
             $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
-            $name2 = "Kingsland";
+            $name2 = "Pomodoro";
             $address2 = "124 SW 5th";
             $phone2 = "456-292-2801";
             $price2 = 2;
@@ -231,7 +231,7 @@
             $test_cuisine = new Cuisine($type);
             $test_cuisine->save();
 
-            $name = "Little Big Burger";
+            $name = "Fiorentino Ristorante";
             $address = "123 NW 23rd Ave.";
             $phone = "971-289-8000";
             $price = 1;
@@ -250,6 +250,20 @@
 
             //Assert
             $this->assertEquals([$test_restaurant], $result);
+        }
+
+        function test_getImg()
+        {
+            //Arrange
+            $type = "Mexican";
+            $test_cuisine = new Cuisine($type);
+            $test_cuisine->save();
+
+            //Act
+            $result = $test_cuisine->getImg();
+
+            //Assert
+            $this->assertEquals("/web/img/Mexican.jpeg", $result);
         }
     }
 ?>

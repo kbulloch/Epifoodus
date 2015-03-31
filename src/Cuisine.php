@@ -21,7 +21,7 @@
             $this->type = (string) $new_type;
         }
 
-        function getid()
+        function getId()
         {
             return $this->id;
         }
@@ -29,6 +29,11 @@
         function setId($new_id)
         {
             $this->id = (int) $new_id;
+        }
+
+        function getImg()
+        {
+            return "/web/img/" . $this->getType() . ".jpeg";
         }
 
         function save()

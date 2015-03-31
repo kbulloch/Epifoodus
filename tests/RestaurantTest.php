@@ -556,5 +556,31 @@
             //Assert
             $this->assertEquals([], $test_cuisine->getRestaurants());
         }
+
+        function test_getImg()
+        {
+            //Arrange
+            $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
+            $price = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant->save();
+
+            $type = "Mexican";
+            $test_cuisine = new Cuisine($type);
+            $test_cuisine->save();
+
+            //Act
+            $test_restaurant->addCuisine($test_cuisine);
+            $result = $test_restaurant->getImg();
+
+            //Assert
+            $this->assertEquals($test_cuisine->getImg(), $result);
+        }
     }
 // ?>

@@ -10,19 +10,28 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
+<<<<<<< HEAD
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
+=======
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
+>>>>>>> 42ec94d45371e3051b175f7ddf0d9282653c37ba
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
+<<<<<<< HEAD
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
+=======
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
+>>>>>>> 42ec94d45371e3051b175f7ddf0d9282653c37ba
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+<<<<<<< HEAD
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -414,6 +423,8 @@ ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 
+=======
+>>>>>>> 42ec94d45371e3051b175f7ddf0d9282653c37ba
 --
 -- Name: public; Type: ACL; Schema: -; Owner: epicodus
 --
@@ -427,3 +438,7 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
+<<<<<<< HEAD
+=======
+
+>>>>>>> 42ec94d45371e3051b175f7ddf0d9282653c37ba
