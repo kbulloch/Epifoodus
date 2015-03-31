@@ -1,7 +1,7 @@
 <?php
     require_once __DIR__."/../vendor/autoload.php";
-    require_once __DIR__."/../src/_____.php"; //ADD CLASS NAMES
-    require_once __DIR__."/../src/_____.php";
+    require_once __DIR__."/../src/Cuisine.php"; //ADD CLASS NAMES
+    require_once __DIR__."/../src/Restaurant.php";
 
     $app = new Silex\Application();
     $app['debug'] = true;
@@ -30,10 +30,10 @@
 
       $restaurants = Restaurant::getAll();
 
-      array_rand($restaurants, 2) = $choices;
+      $choices = array_rand($restaurants, 2);
 
-      $choices[0] = $restaurant1;
-      $choices[1] = $restaurant2;
+      $restaurant1 = $choices[0];
+      $restaurant2 = $choices[1] ;
 
       return $app['twig']->render('options.twig', array('restaurants' => Restaurant::getAll(), 'restaurant1' => $restaurant1, 'restaurant2' => $restaurant2));
     });
@@ -47,7 +47,7 @@
     //cuisine
     $app->get("/cuisines/{id}", function($id) use($app) {
       $current_cuisine = Cuisine::find($id);
-      return $app['twig']->render('cuisine.twig', array('cuisine' => $current_cuisine, 'restaurants' => $current_cuisine->getRestaurants());
+      return $app['twig']->render('cuisine.twig', array('cuisine' => $current_cuisine, 'restaurants' => $current_cuisine->getRestaurants()));
     });
 
     //all cuisines
