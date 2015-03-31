@@ -42,8 +42,10 @@
 
         function addRestaurant($new_restaurant)
         {
-            $GLOBALS['DB']->exec("INSERT INTO cuisines_restaurants (cuisine_id, restaurant_id)
-                                  VALUES ({$this->getId()}, {$new_restaurant->getId()});");
+            if(!in_array($new_restaurant, $this->getRestaurants())){
+                $GLOBALS['DB']->exec("INSERT INTO cuisines_restaurants (cuisine_id, restaurant_id)
+                                      VALUES ({$this->getId()}, {$new_restaurant->getId()});");
+            }
         }
 
         function getRestaurants()
@@ -97,6 +99,17 @@
             return $found_cuisine;
         }
 
-        
+        static function findByType($search_type)
+        {
+            $found_cuisine = null;
+            $all_cuisines = Cuisine::getAll();
+            foreach($all_cuisines as $cuisine){
+                $cuisine_type = $cuisine->getType();
+                if ($cuisine_type == $search_type){
+                    $found_cuisine = $cuisine;
+                }
+            }
+            return $found_cuisine;
+        }
     }
 ?>
