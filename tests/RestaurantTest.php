@@ -328,5 +328,26 @@
             //Assert
             $this->assertEquals($new_opentime, $test_restaurant->getOpentime());
         }
+
+        function test_updateClosetime()
+        {
+            //Arrange
+            $name = "Little Big Burger";
+            $price_id = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant->save();
+
+            $new_closetime = 2200;
+
+            //Act
+            $test_restaurant->updateClosetime($new_closetime);
+
+            //Assert
+            $this->assertEquals($new_closetime, $test_restaurant->getClosetime());
+        }
     }
 ?>

@@ -110,6 +110,12 @@
             $this->setOpentime($new_opentime);
         }
 
+        function updateClosetime($new_closetime)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurants SET closetime = {$new_closetime} WHERE id = {$this->getId()};");
+            $this->setClosetime($new_closetime);
+        }
+
         static function getAll()
         {
             $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants;");
