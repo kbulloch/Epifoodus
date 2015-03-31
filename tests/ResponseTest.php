@@ -193,6 +193,72 @@
             $this->assertEquals($new_id, $result);
         }
 
+		function test_save()
+        {
+            //Arrange
+            $answer = 1;
+            $restaurant_id = 1;
+            $user_id = 1;
+            $id = 1;
+            $test_response = new Response($answer, $restaurant_id, $user_id, $id);
+            $test_response->save()
+
+            //Act
+            $result = Response::getAll();
+
+            //Assert
+            $this->assertEquals([$test_response], $result);
+        }
+
+        function test_getAll()
+        {
+            //Arrange
+            $answer = 1;
+            $restaurant_id = 1;
+            $user_id = 1;
+            $id = 1;
+            $test_response = new Response($answer, $restaurant_id, $user_id, $id);
+            $test_response->save()
+
+            $answer2 = 2;
+            $restaurant_id2 = 2;
+            $user_id2 = 2;
+            $id2 = 2;
+            $test_response2 = new Response($answer2, $restaurant_id2, $user_id2, $id2);
+            $test_response2->save()
+
+            //Act
+            $result = Response::getAll();
+
+            //Assert
+            $this->assertEquals([$test_response, $test_response2], $result);
+        }
+
+        function test_deleteAll()
+        {
+            //Arrange
+            $answer = 1;
+            $restaurant_id = 1;
+            $user_id = 1;
+            $id = 1;
+            $test_response = new Response($answer, $restaurant_id, $user_id, $id);
+            $test_response->save()
+
+            $answer2 = 2;
+            $restaurant_id2 = 2;
+            $user_id2 = 2;
+            $id2 = 2;
+            $test_response2 = new Response($answer2, $restaurant_id2, $user_id2, $id2);
+            $test_response2->save()
+
+            //Act
+            Response::deleteAll()
+            $result = Response::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+        }
+
 
 
 
