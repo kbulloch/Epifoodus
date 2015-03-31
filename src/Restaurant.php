@@ -102,6 +102,13 @@
             return $this->id;
         }
 
+        function getImg()
+        {
+            $cuisines = $this->getCuisines();
+            $img = $cuisines[0]->getImg();
+            return $img;
+        }
+
         function save()
         {
             $statement = $GLOBALS['DB']->query("INSERT INTO restaurants (name, address, phone, price, vegie, opentime, closetime)

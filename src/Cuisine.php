@@ -36,12 +36,6 @@
             return "/web/img/" . $this->getType() . ".jpeg";
         }
 
-        // function setImg()
-        // {
-        //     $type = $this->getType();
-        //
-        // }
-
         function save()
         {
             $statement = $GLOBALS['DB']->query("INSERT INTO cuisines (type)

@@ -252,18 +252,18 @@
             $this->assertEquals([$test_restaurant], $result);
         }
 
-        // function test_getImg()
-        // {
-        //     //Arrange
-        //     $type = "Mexican";
-        //     $test_cuisine = new Cuisine($type);
-        //     $test_cuisine->save();
-        //
-        //     //Act
-        //     $result = $test_cuisine->getImg();
-        //
-        //     //Assert
-        //     $this->assertEquals("/web/img/Mexican.jpeg", $result);
-        // }
+        function test_getImg()
+        {
+            //Arrange
+            $type = "Mexican";
+            $test_cuisine = new Cuisine($type);
+            $test_cuisine->save();
+
+            //Act
+            $result = $test_cuisine->getImg();
+
+            //Assert
+            $this->assertEquals("/web/img/Mexican.jpeg", $result);
+        }
     }
 ?>
