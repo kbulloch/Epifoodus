@@ -1,4 +1,4 @@
-<?php 
+<?php
 
     /**
     * @backupGlobals disabled
@@ -8,7 +8,7 @@
 
     $DB = new PDO('pgsql:host=localhost;dbname=epifoodus_test');
 
-	require_once __DIR__."/src/response.php";
+	require_once "src/Response.php";
 
 	class ResponseTest extends PHPUnit_Framework_TestCase
 	{
@@ -30,10 +30,10 @@
             $user_id = 1;
             $id = 1;
             $test_response = new Response($answer, $restaurant_id, $user_id, $id);
-            
+
             //Act
             $result = $test_response->getAnswer();
-            
+
             //Assert
             $this->assertEquals($answer, $result);
         }
@@ -46,10 +46,10 @@
             $user_id = 1;
             $id = 1;
             $test_response = new Response($answer, $restaurant_id, $user_id, $id);
-            
+
             //Act
             $result = $test_response->getRestaurantId();
-            
+
             //Assert
             $this->assertEquals($restaurant_id, $result);
         }
@@ -62,10 +62,10 @@
             $user_id = 1;
             $id = 1;
             $test_response = new Response($answer, $restaurant_id, $user_id, $id);
-            
+
             //Act
             $result = $test_response->getUserId();
-            
+
             //Assert
             $this->assertEquals($user_id, $result);
         }
@@ -78,29 +78,12 @@
             $user_id = 1;
             $id = 1;
             $test_response = new Response($answer, $restaurant_id, $user_id, $id);
-            
+
             //Act
             $result = $test_response->getId();
-            
+
             //Assert
             $this->assertEquals($id, $result);
-        }
-
-		function test_setAnswerLike()
-        {
-            //Arrange
-            $answer = 1;
-            $restaurant_id = 1;
-            $user_id = 1;
-            $id = 1;
-            $test_response = new Response($answer, $restaurant_id, $user_id, $id);
-
-            //Act
-            $test_response->setAnswer(2)
-            $result = $test_response->getAnswer();
-
-            //Assert
-            $this->assertEquals($answer, $result);
         }
 
         function test_setAnswerDisike()
@@ -121,23 +104,23 @@
             $this->assertEquals($new_answer, $result);
         }
 
-		function test_setAnswerLike()
-        {
-            //Arrange
-            $answer = 1;
-            $restaurant_id = 1;
-            $user_id = 1;
-            $id = 1;
-            $test_response = new Response($answer, $restaurant_id, $user_id, $id);
-
-            //Act
-            $new_answer = 2;
-            $test_response->setAnswer($new_answer);
-            $result = $test_response->getAnswer();
-
-            //Assert
-            $this->assertEquals($new_answer, $result);
-        }
+		// function test_setAnswerLike()
+        // {
+        //     //Arrange
+        //     $answer = 1;
+        //     $restaurant_id = 1;
+        //     $user_id = 1;
+        //     $id = 1;
+        //     $test_response = new Response($answer, $restaurant_id, $user_id, $id);
+        //
+        //     //Act
+        //     $new_answer = 2;
+        //     $test_response->setAnswer($new_answer);
+        //     $result = $test_response->getAnswer();
+        //
+        //     //Assert
+        //     $this->assertEquals($new_answer, $result);
+        // }
 
 		function test_setRestaurantId()
         {
@@ -187,7 +170,7 @@
             //Act
             $new_id = 2;
             $test_response->setId($new_id);
-            $result = $test_response->getAnswer();
+            $result = $test_response->getId();
 
             //Assert
             $this->assertEquals($new_id, $result);
@@ -252,7 +235,7 @@
             $test_response2->save();
 
             //Act
-            Response::deleteAll()
+            Response::deleteAll();
             $result = Response::getAll();
 
             //Assert
@@ -260,7 +243,7 @@
         }
 
         function test_update()
-        {           
+        {
         	//Arrange
             $answer = 1;
             $restaurant_id = 1;
@@ -294,11 +277,11 @@
             $id2 = 2;
             $test_response2 = new Response($answer2, $restaurant_id2, $user_id2, $id2);
             $test_response2->save();
-           
+
             //Act
             $test_response->delete();
-            $result = Checkout::getAll();
-            
+            $result = Response::getAll();
+
             //Assert
             $this->assertEquals([$test_response2], $result);
         }
