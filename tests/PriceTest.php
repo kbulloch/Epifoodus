@@ -12,6 +12,11 @@
     class PriceTest extends PHPUnit_Framework_TestCase
 
     {
+        protected function tearDown()
+       {
+           Price::deleteAll();
+
+       }
 
         function test_getLevel()
         {
@@ -118,6 +123,11 @@
             $test_price->save();
 
             //Act
+            Price::deleteAll();
+            $result = Price::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
         }
 
 

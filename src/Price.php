@@ -34,7 +34,7 @@
 
     function save()
     {
-        $statement = $GLOBALS['DB']->query("INSERT INTO prices (level) VALUES {$this->getLevel()} RETURNING id;");
+        $statement = $GLOBALS['DB']->query("INSERT INTO prices (level) VALUES ('{$this->getLevel()}') RETURNING id;");
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         $this->setId($result['id']);
     }
@@ -55,7 +55,15 @@
         }
             return $return_array;
         }
+
+
+    static function deleteAll()
+    {
+        $GLOBALS['DB']->exec("DELETE FROM prices *;");
     }
+
+    }
+
 
 
 
