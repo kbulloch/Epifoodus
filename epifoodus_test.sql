@@ -10,22 +10,14 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
-<<<<<<< HEAD
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
-=======
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
-<<<<<<< HEAD
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
-=======
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -38,11 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
-<<<<<<< HEAD
--- Name: cuisines; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
-=======
 -- Name: cuisines; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8
 --
 
 CREATE TABLE cuisines (
@@ -75,11 +63,7 @@ ALTER SEQUENCE cuisines_id_seq OWNED BY cuisines.id;
 
 
 --
-<<<<<<< HEAD
--- Name: cuisines_restaurants; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
-=======
 -- Name: cuisines_restaurants; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8
 --
 
 CREATE TABLE cuisines_restaurants (
@@ -113,11 +97,7 @@ ALTER SEQUENCE cuisines_restaurants_id_seq OWNED BY cuisines_restaurants.id;
 
 
 --
-<<<<<<< HEAD
--- Name: likes; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
-=======
 -- Name: likes; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8
 --
 
 CREATE TABLE likes (
@@ -152,11 +132,7 @@ ALTER SEQUENCE likes_id_seq OWNED BY likes.id;
 
 
 --
-<<<<<<< HEAD
--- Name: prices; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
-=======
 -- Name: prices; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8
 --
 
 CREATE TABLE prices (
@@ -189,28 +165,15 @@ ALTER SEQUENCE prices_id_seq OWNED BY prices.id;
 
 
 --
-<<<<<<< HEAD
--- Name: restaurants; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
-=======
 -- Name: restaurants; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8
 --
 
 CREATE TABLE restaurants (
     id integer NOT NULL,
     name character varying,
-<<<<<<< HEAD
-    address character varying,
-    phone character varying,
-    price integer,
-    vegie integer,
-    opentime integer,
-    closetime integer
-=======
     price_id integer,
     vegetarian integer,
     hours time without time zone
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8
 );
 
 
@@ -238,11 +201,7 @@ ALTER SEQUENCE restaurants_id_seq OWNED BY restaurants.id;
 
 
 --
-<<<<<<< HEAD
--- Name: users; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
-=======
 -- Name: users; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8
 --
 
 CREATE TABLE users (
@@ -381,11 +340,7 @@ SELECT pg_catalog.setval('prices_id_seq', 1, false);
 -- Data for Name: restaurants; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-<<<<<<< HEAD
-COPY restaurants (id, name, address, phone, price, vegie, opentime, closetime) FROM stdin;
-=======
 COPY restaurants (id, name, price_id, vegetarian, hours) FROM stdin;
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8
 \.
 
 
@@ -412,11 +367,7 @@ SELECT pg_catalog.setval('users_id_seq', 1, false);
 
 
 --
-<<<<<<< HEAD
--- Name: cuisines_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
-=======
 -- Name: cuisines_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8
 --
 
 ALTER TABLE ONLY cuisines
@@ -424,11 +375,7 @@ ALTER TABLE ONLY cuisines
 
 
 --
-<<<<<<< HEAD
--- Name: cuisines_restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
-=======
 -- Name: cuisines_restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8
 --
 
 ALTER TABLE ONLY cuisines_restaurants
@@ -436,11 +383,7 @@ ALTER TABLE ONLY cuisines_restaurants
 
 
 --
-<<<<<<< HEAD
--- Name: likes_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
-=======
 -- Name: likes_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8
 --
 
 ALTER TABLE ONLY likes
@@ -448,11 +391,7 @@ ALTER TABLE ONLY likes
 
 
 --
-<<<<<<< HEAD
--- Name: prices_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
-=======
 -- Name: prices_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8
 --
 
 ALTER TABLE ONLY prices
@@ -460,11 +399,7 @@ ALTER TABLE ONLY prices
 
 
 --
-<<<<<<< HEAD
--- Name: restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
-=======
 -- Name: restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8
 --
 
 ALTER TABLE ONLY restaurants
@@ -472,11 +407,7 @@ ALTER TABLE ONLY restaurants
 
 
 --
-<<<<<<< HEAD
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
-=======
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8
 --
 
 ALTER TABLE ONLY users
@@ -496,7 +427,3 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
-<<<<<<< HEAD
-
-=======
->>>>>>> 380a0e96833b0838793821242231dea4505e58d8

@@ -124,22 +124,22 @@ class User
 
    }
 
-   function getLikes(){
-       $user_likes= $GLOBALS['DB']->exec("SELECT restaurants.*
-       	FROM users JOIN likes ON  (users.id = likes.user_id)
-       	JOIN restaurants ON (likes.restaurant_id = restaurants.id)
-       	WHERE answer = 2 &&  user_id = {$this->getId()};");
-
+   function getLikes(){  $user_likes= $GLOBALS['DB']->query("SELECT restaurants.* FROM users JOIN
+   likes ON  (users.id = likes.user_id) JOIN restaurants ON (likes.restaurant_id =
+   restaurants.id) WHERE likes.answer = 2 AND likes.user_id = {$this->getId()};");
+        
        $likes= array();
        foreach ($user_likes as $restaurant){
-         $restaurant_id=$restaurant['id'];
-         $restaurant_name= $restaurant['name'];
-         $restaurant_price=$restaurant['price_id'];
-         $restaurant_vegetarian=$restaurant['vegie'];
-         $restaurant_hours=$restaurant['hours'];
-
-         $new_restaurant= new Restaurant();
-         $array_push($likes, $new_restaurant);
+        $name = $restaurant['name'];
+        $address = $restaurant['address'];
+        $phone = $restaurant['phone'];
+        $price = $restaurant['price'];
+        $vegie = $restaurant['vegie'];
+        $opentime = $restaurant['opentime'];
+        $closetime = $restaurant['closetime'];
+        $id = $restaurant['id'];
+        $new_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
+        array_push($likes, $new_restaurant);
 
        }
 
