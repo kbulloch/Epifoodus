@@ -40,6 +40,32 @@
             $this->setId($result['id']);
         }
 
+        function addRestaurant($new_restaurant)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO cuisines_restaurants (cuisine_id, restaurant_id)
+                                  VALUES ({$this->getId()}, {$new_restaurant->getId()});");
+        }
+
+        function getRestaurants()
+        {
+            $restaurants = array();
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT restaurants.* FROM cuisines
+                                    JOIN cuisines_restaurants ON (cuisines.id = cuisines_restaurants.cuisine_id)
+                                    JOIN restaurants ON (restaurants.id = cuisines_restaurants.restaurant_id)
+                                    WHERE cuisine_id = {$this->getId()};");
+            foreach($returned_restaurants as $restaurant) {
+                $name = $restaurant['name'];
+                $price_id = $restaurant['price_id'];
+                $vegie = $restaurant['vegie'];
+                $opentime = $restaurant['opentime'];
+                $closetime = $restaurant['closetime'];
+                $id = $restaurant['id'];
+                $new_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+                array_push($restaurants, $new_restaurant);
+            }
+            return $restaurants;
+        }
+
         static function getAll() //READ ALL
         {
             $returned_cuisines = $GLOBALS['DB']->query("SELECT * FROM cuisines;");
@@ -70,5 +96,7 @@
             }
             return $found_cuisine;
         }
+
+        
     }
 ?>

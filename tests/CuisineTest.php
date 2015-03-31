@@ -143,7 +143,104 @@
             $this->assertEquals($test_cuisine, $result);
         }
 
+        function test_addRestaurant()
+        {
+            //Arrange
+            $type = "Italian";
+            $test_cuisine = new Cuisine($type);
+            $test_cuisine->save();
 
+            $name = "Fiorentino Ristorante";
+            $price_id = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant->save();
+
+            //Act
+            $test_cuisine->addRestaurant($test_restaurant);
+
+            //Assert
+            $result = $test_cuisine->getRestaurants();
+            $this->assertEquals([$test_restaurant], $result);
+        }
+
+        function test_getRestaurants()
+        {
+            //Arrange
+            $type = "Italian";
+            $test_cuisine = new Cuisine($type);
+            $test_cuisine->save();
+
+            $name1 = "Fiorentino Ristorante";
+            $price_id = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name1, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant->save();
+
+            $name2 = "Pomodoro";
+            $price_id2 = 2;
+            $vegie2 = 0;
+            $opentime2 = 0800;
+            $closetime2 = 2200;
+            $id2 = 2;
+            $test_restaurant2 = new Restaurant($name2, $price_id2, $vegie2, $opentime2, $closetime2, $id2);
+            $test_restaurant2->save();
+
+            $test_cuisine->addRestaurant($test_restaurant);
+            $test_cuisine->addRestaurant($test_restaurant2);
+
+            //Act
+            $result = $test_cuisine->getRestaurants();
+
+            //Assert
+            $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
+        }
+
+        // function test_findByType()
+        // {
+        //     //Arrange
+        //     $type = "Italian";
+        //     $test_cuisine = new Cuisine($type);
+        //     $test_cuisine->save();
+        //
+        //     //Act
+        //     $result = Cuisine::findByType("Italian");
+        //
+        //     //Assert
+        //     $this->assertEquals($test_cuisine, $result);
+        // }
+        //
+        // function test_duplicateAddRestaurant()
+        // {
+        //     //Arrange
+        //     $type = "Italian";
+        //     $test_cuisine = new Cuisine($type);
+        //     $test_cuisine->save();
+        //
+        //     $name1 = "Fiorentino Ristorante";
+        //     $price_id = 1;
+        //     $vegie = 0;
+        //     $opentime = 0900;
+        //     $closetime = 2100;
+        //     $id = 1;
+        //     $test_restaurant = new Restaurant($name1, $price_id, $vegie, $opentime, $closetime, $id);
+        //     $test_restaurant->save();
+        //
+        //     $test_cuisine->addRestaurant($test_restaurant);
+        //     $test_cuisine->addRestaurant($test_restaurant);
+        //
+        //     //Act
+        //     $result = $test_cuisine->getRestaurants();
+        //
+        //     //Assert
+        //     $this->assertEquals([$test_restaurant], $result);
+        // }
 
 
 
