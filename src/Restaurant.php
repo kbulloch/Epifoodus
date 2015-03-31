@@ -166,7 +166,7 @@
 
         function getCuisines()
         {
-            $statment = $GLOBALS['DB']->query("SELECT cuisines.* FROM restaurants
+            $statement = $GLOBALS['DB']->query("SELECT cuisines.* FROM restaurants
                 JOIN cuisines_restaurants ON (restaurants.id = cuisines_restaurants.restaurant_id)
                 JOIN cuisines ON (cuisines_restaurants.cuisine_id = cuisines.id)
                 WHERE restaurants.id = {$this->getId()};");

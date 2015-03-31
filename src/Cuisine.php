@@ -57,12 +57,14 @@
                                     WHERE cuisine_id = {$this->getId()};");
             foreach($returned_restaurants as $restaurant) {
                 $name = $restaurant['name'];
-                $price_id = $restaurant['price_id'];
+                $address = $restaurant['address'];
+                $phone = $restaurant['phone'];
+                $price = $restaurant['price'];
                 $vegie = $restaurant['vegie'];
                 $opentime = $restaurant['opentime'];
                 $closetime = $restaurant['closetime'];
                 $id = $restaurant['id'];
-                $new_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+                $new_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
                 array_push($restaurants, $new_restaurant);
             }
             return $restaurants;
