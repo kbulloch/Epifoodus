@@ -158,6 +158,29 @@
             $GLOBALS['DB']->exec("DELETE FROM cuisines_restaurants WHERE id = {$this->getId()};");
         }
 
+        function addCuisine($cuisine)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO cuisines_restaurants (cuisine_id, restaurant_id) VALUES ({$cuisine->getId()}, {$this->getId()});");
+        }
+
+
+        function getCuisines()
+        {
+            $statment = $GLOBALS['DB']->query("SELECT cuisines.* FROM restaurants
+                JOIN cuisines_restaurants ON (restaurants.id = cuisines_restaurants.restaurant_id)
+                JOIN cuisines ON (cuisines_restaurants.cuisine_id = cuisines.id)
+                WHERE restaurants.id = {$this->getId()};");
+                $cuisine_ids = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $cuisines = array();
+                foreach ($cuisine_ids as $cuisine) {
+                    $type = $cuisine['type'];
+                    $id = $cuisine['id'];
+                    $new_cuisine = new Cuisine($type, $id);
+                    array_push($cuisines, $new_cuisine);
+                }
+                return $cuisines;
+        }
+
         static function getAll()
         {
             $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants;");
@@ -194,10 +217,6 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM restaurants *;");
         }
-
-        //function addCuisine($cuisine)
-
-        //function getCuisines()
 
     }
 ?>

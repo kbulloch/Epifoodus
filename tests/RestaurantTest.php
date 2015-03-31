@@ -4,6 +4,7 @@
     * @backupStaticAttributes disabled
     */
     require_once "src/Restaurant.php";
+    require_once "src/Cuisine.php";
 
     $DB = new PDO('pgsql:host=localhost;dbname=epifoodus_test');
 
@@ -12,6 +13,7 @@
         function tearDown()
         {
             Restaurant::deleteAll();
+            Cuisine::deleteAll();
         }
 
         function test_getName()
@@ -472,6 +474,87 @@
 
             //Assert
             $this->assertEquals($new_closetime, $test_restaurant->getClosetime());
+        }
+
+        function test_addCuisine()
+        {
+            //Arrange
+            $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
+            $price = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant->save();
+
+            $type = "Italian";
+            $test_cuisine = new Cuisine($type);
+            $test_cuisine->save();
+
+            //Act
+            $test_restaurant->addCuisine($test_cuisine);
+
+            //Assert
+            $this->assertEquals($test_restaurant->getCuisines(), [$test_cuisine]);
+        }
+
+        function test_getCuisines()
+        {
+            //Arrange
+            $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
+            $price = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant->save();
+
+            $type = "Italian";
+            $test_cuisine = new Cuisine($type);
+            $test_cuisine->save();
+
+            $type2 = "Mexican";
+            $test_cuisine2 = new Cuisine($type2);
+            $test_cuisine2->save();
+
+            //Act
+            $test_restaurant->addCuisine($test_cuisine);
+            $test_restaurant->addCuisine($test_cuisine2);
+
+            //Assert
+            $this->assertEquals($test_restaurant->getCuisines(), [$test_cuisine, $test_cuisine2]);
+        }
+
+        function test_delete()
+        {
+            //Arrange
+            $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
+            $price = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant->save();
+
+            $type = "Italian";
+            $test_cuisine = new Cuisine($type);
+            $test_cuisine->save();
+
+            //Act
+            $test_restaurant->addCuisine($test_cuisine);
+            $test_restaurant->delete();
+
+            //Assert
+            $this->assertEquals([], $test_cuisine->getRestaurants());
         }
     }
 ?>
