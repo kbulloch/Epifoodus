@@ -11,31 +11,31 @@
       <!-- option 1 -->
       <form action="/choice" method="get">
 
-        <!-- get cuisine img, sends to specific restaurant -->
-        <img src="{{ restaurant1.getCuisineImg }}">
+          <!-- gets overall cuisine img, but sends to specific restaurant -->
+        <input type="image" src="{{ restaurant1.getCuisineImg }}">
       </form>
 
       <!-- keep option 2, reload option 1 -->
       <form action="/keep2" method="post">
-        <button name="keep2">X</button>
+        <button type="submit" name="keep2">X</button>
       </form>
     </div>
 
     <div class="right column">
       <!-- option 2 -->
       <form action="/choice" method="get">
-        <img src="{{ restaurant2.getCuisineImg }}">
+        <input type="image" src="{{ restaurant1.getCuisineImg }}">
       </form>
 
       <!-- keep option 1, reload option 2 -->
       <form action="/keep1" method="post">
-        <button name="keep1">X</button>
+        <button type="submit" name="keep1">X</button>
       </form>
     </div>
 
     <!-- reload both -->
     <form action="/options" method="get">
-      <button name="reload">I don't want either of these options</button>
+      <button type="submit" name="reload">I don't want either of these options</button>
     </form>
 
     </div>
