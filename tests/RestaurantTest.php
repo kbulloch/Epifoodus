@@ -18,12 +18,12 @@
         {
             //Arrange
             $name = "Little Big Burger";
-            $price_id = 1;
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
 
             //Act
             $result = $test_restaurant->getName();
@@ -36,30 +36,30 @@
         {
             //Arrange
             $name = "Little Big Burger";
-            $price_id = 1;
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
 
             //Act
-            $result = $test_restaurant->getPrice_id();
+            $result = $test_restaurant->getPrice();
 
             //Assert
-            $this->assertEquals($price_id, $result);
+            $this->assertEquals($price, $result);
         }
 
         function test_getVegie()
         {
             //Arrange
             $name = "Little Big Burger";
-            $price_id = 1;
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
 
             //Act
             $result = $test_restaurant->getVegie();
@@ -72,12 +72,12 @@
         {
             //Arrange
             $name = "Little Big Burger";
-            $price_id = 1;
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
 
             //Act
             $result = $test_restaurant->getOpentime();
@@ -90,12 +90,12 @@
         {
             //Arrange
             $name = "Little Big Burger";
-            $price_id = 1;
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
 
             //Act
             $result = $test_restaurant->getClosetime();
@@ -108,12 +108,12 @@
         {
             //Arrange
             $name = "Little Big Burger";
-            $price_id = 1;
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
 
             //Act
             $result = $test_restaurant->getId();
@@ -126,12 +126,12 @@
         {
             //Arrange
             $name = "Little Big Burger";
-            $price_id = 1;
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
 
             //Act
             $test_restaurant->setId(2);
@@ -145,12 +145,12 @@
         {
             //Arrange
             $name = "Little Big Burger";
-            $price_id = 1;
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             //Act
@@ -164,12 +164,12 @@
         {
             //Arrange
             $name = "Little Big Burger";
-            $price_id = 1;
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             $name2 = "Kingsland";
@@ -192,12 +192,12 @@
         {
             //Arrange
             $name = "Little Big Burger";
-            $price_id = 1;
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             $name2 = "Kingsland";
@@ -221,12 +221,12 @@
         {
             //Arrange
             $name = "Little Big Burger";
-            $price_id = 1;
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             $name2 = "Kingsland";
@@ -249,12 +249,12 @@
         {
             //Arrange
             $name = "Little Big Burger";
-            $price_id = 1;
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             $new_name = "Phat Phood";
@@ -270,33 +270,33 @@
         {
             //Arrange
             $name = "Little Big Burger";
-            $price_id = 1;
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
-            $new_price_id = 2;
+            $new_price = 2;
 
             //Act
-            $test_restaurant->updatePrice($new_price_id);
+            $test_restaurant->updatePrice($new_price);
 
             //Assert
-            $this->assertEquals($new_price_id, $test_restaurant->getPrice_id());
+            $this->assertEquals($new_price, $test_restaurant->getPrice());
         }
 
         function test_updateVegie()
         {
             //Arrange
             $name = "Little Big Burger";
-            $price_id = 1;
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             $new_vegie = 1;
@@ -312,12 +312,12 @@
         {
             //Arrange
             $name = "Little Big Burger";
-            $price_id = 1;
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             $new_opentime = 0930;
@@ -333,12 +333,12 @@
         {
             //Arrange
             $name = "Little Big Burger";
-            $price_id = 1;
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             $new_closetime = 2200;
