@@ -9,7 +9,7 @@
 
     <div class="left column">
       <!-- option 1 -->
-      <form action="/choice" method="get">
+      <form action="/choice/{id}" method="get">
 
           <!-- gets overall cuisine img, but sends to specific restaurant -->
         <input type="image" src="{{ restaurant1.getCuisineImg }}">
@@ -23,8 +23,8 @@
 
     <div class="right column">
       <!-- option 2 -->
-      <form action="/choice" method="get">
-        <input type="image" src="{{ restaurant1.getCuisineImg }}">
+      <form action="/choice/{id}" method="get">
+        <input type="image" src="{{ restaurant2.getCuisineImg }}">
       </form>
 
       <!-- keep option 1, reload option 2 -->
