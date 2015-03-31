@@ -76,8 +76,13 @@
       $user = new User($_POST['name'], $_POST['password']);
     });
 
+    $app->get("/restaurant_form", function() use($app) {
+        return $app['twig']->render('restaurant_form.twig');
+    });
+
     $app->post("/add_restaurant", function() use($app) {
       // needs all info for restaurant class & form. twig page currently blank
+
     });
 
 
