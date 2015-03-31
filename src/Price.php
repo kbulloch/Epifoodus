@@ -39,6 +39,22 @@
         $this->setId($result['id']);
     }
 
+    static function findId($search_id)
+    {
+        $statement = $GLOBALS['DB']->query("SELECT * FROM prices WHERE id = {$search_id};");
+        $price_array = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $return_price = null;
+
+        foreach ($price_array as $price)
+        {
+            $level = $price['level'];
+            $id = $price['id'];
+            $return_price = new Price($level, $id);
+
+        }
+        return $return_price;
+    }
+
     static function getAll()
     {
         $statement = $GLOBALS['DB']->query("SELECT * FROM prices; ");
@@ -61,6 +77,8 @@
     {
         $GLOBALS['DB']->exec("DELETE FROM prices *;");
     }
+
+
 
     }
 

@@ -130,6 +130,27 @@
             $this->assertEquals([], $result);
         }
 
+        function test_findId()
+        {
+
+            //Arrange
+            $level = 5.00;
+            $id = 1;
+            $test_price = new Price($level, $id);
+            $test_price->save();
+
+            $level1 = 6.00;
+            $id1 = 3;
+            $test_price1 = new Price($level1, $id1);
+            $test_price1->save();
+
+            //Act
+            $result = Price::findId($test_price->getId());
+
+            //Assert
+            $this->assertEquals($test_price, $result);
+        }
+
 
 
     }
