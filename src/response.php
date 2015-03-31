@@ -81,6 +81,17 @@ class Response
     {
     	 $GLOBALS['DB']->exec("DELETE FROM responses *;");
     }
+
+    function update($new_answer)
+    {
+        $GLOBALS['DB']->exec("UPDATE responses SET answer = '{$new_answer}' WHERE id = {$this->getId()};");
+        $this->setAnswer($new_answer);
+    }
+
+    function delete()
+    {
+        $GLOBALS['DB']->exec("DELETE FROM responses WHERE id = ({$this->getId()});");
+    }
 }
 
 ?>
