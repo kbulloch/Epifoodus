@@ -1,0 +1,112 @@
+<?php
+    Class Restaurant
+    {
+        private $name;
+        private $price_id;
+        private $vegie;
+        private $opentime;
+        private $closetime;
+        private $id;
+
+        function __construct($name, $price_id, $vegie, $opentime, $closetime, $id = null)
+        {
+            $this->name = $name;
+            $this->price_id = $price_id;
+            $this->vegie = $vegie;
+            $this->opentime = $opentime;
+            $this->closetime = $closetime;
+            $this->id = $id;
+        }
+        //setters
+        function setName($new_name)
+        {
+            $this->name = (string) $new_name;
+        }
+
+        function setPrice_id($new_price_id)
+        {
+            $this->price_id = (int) $new_price_id;
+        }
+
+        function setVegie ($new_vegie)
+        {
+            $this->vegie = (int) $new_vegie;
+        }
+
+        function setOpentime($new_opentime)
+        {
+            $this->opentime = (int) $new_opentime;
+        }
+
+        function setClosetime($new_closetime)
+        {
+            $this->closetime = (int) $new_closetime;
+        }
+
+        function setId($new_id)
+        {
+            $this->id = (int) $new_id;
+        }
+        //getters
+        function getName()
+        {
+            return $this->name;
+        }
+
+        function getPrice_id()
+        {
+            return $this->price_id;
+        }
+
+        function getVegie()
+        {
+            return $this->vegie;
+        }
+
+        function getOpentime()
+        {
+            return $this->opentime;
+        }
+
+        function getClosetime()
+        {
+            return $this->closetime;
+        }
+
+        function getId()
+        {
+            return $this->id;
+        }
+
+        function save()
+        {
+            $statement = $GLOBALS['DB']->query("INSERT INTO restaurants (name, price_id, vegie, opentime, closetime)
+                VALUES ('{$this->getName()}', {$this->getPrice_id()}, {$this->getVegie()}, {$this->getOpentime()}, {$this->getClosetime()}) RETURNING id;");
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $this->setId($result['id']);
+        }
+
+        static function getAll()
+        {
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants;");
+            $restaurants = array();
+            foreach($returned_restaurants as $restaurant) {
+                $name = $restaurant['name'];
+                $price_id = $restaurant['price_id'];
+                $vegie = $restaurant['vegie'];
+                $opentime = $restaurant['opentime'];
+                $closetime = $restaurant['closetime'];
+                $id = $restaurant['id'];
+                $new_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+                array_push($restaurants, $new_restaurant);
+            }
+            return $restaurants;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM restaurants *;");
+        }
+
+    }
+?>
