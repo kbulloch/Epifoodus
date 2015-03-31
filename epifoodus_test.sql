@@ -172,8 +172,9 @@ CREATE TABLE restaurants (
     id integer NOT NULL,
     name character varying,
     price_id integer,
-    vegetarian integer,
-    hours time without time zone
+    vegie integer,
+    opentime integer,
+    closetime integer
 );
 
 
@@ -340,7 +341,7 @@ SELECT pg_catalog.setval('prices_id_seq', 1, false);
 -- Data for Name: restaurants; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY restaurants (id, name, price_id, vegetarian, hours) FROM stdin;
+COPY restaurants (id, name, price_id, vegie, opentime, closetime) FROM stdin;
 \.
 
 
