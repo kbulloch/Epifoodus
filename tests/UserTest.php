@@ -20,7 +20,9 @@
             $user = "HIST100";
             $password= "Abeer";
             $id=null;
-            $test_User = new User($user,$password,$id);
+            $vegie=0;
+            $admin=1;
+            $test_User = new User($user,$password,$vegie,$admin , $id);
            
             //Act
             $result = $test_User->getUsername();
@@ -30,9 +32,13 @@
         function testsetUserName()
         { //can I change the User in the object with setUserName() after initializing it?
             //Arrange
-            $User = "HIST100";
+            $user = "HIST100";
             $password= "Abeer";
-            $test_User = new User($User,$password);
+            $id=null;
+            $vegie=0;
+            $admin=1;
+            $test_User = new User($user,$password,$vegie,$admin , $id);
+           
             //No need to save here because we are communicating with the object only and not the database.
             //Act
             $test_User->setUsername("Famous Footware");
@@ -46,10 +52,13 @@
         {
             //Arrange
 
-            $User = "Famous Footware";
-            $id=1;
+            $user = "HIST100";
             $password= "Abeer";
-            $test_User = new User($User,$password,$id);
+            $id=1;
+            $vegie=0;
+            $admin=1;
+            $test_User = new User($user,$password,$vegie,$admin , $id);
+           
             //Act
             $result = $test_User->getId();
             //Assert
@@ -60,9 +69,13 @@
         {
             //Arrange
 
-            $User = "Famous Footware";
+            $user = "HIST100";
             $password= "Abeer";
-            $test_User = new User($User,$password);
+            $id=null;
+            $vegie=0;
+            $admin=1;
+            $test_User = new User($user,$password,$vegie,$admin , $id);
+           
             //Act
             $test_User->setId(2);
             //Assert
@@ -73,9 +86,13 @@
         function testSave()
         {
             //Arrange
-            $User = "Prada";
-            $password="password";
-            $test_User = new User($User,$password);
+            $user = "HIST100";
+            $password= "Abeer";
+            $id=null;
+            $vegie=0;
+            $admin=1;
+            $test_User = new User($user,$password,$vegie,$admin, $id);
+           
             $test_User->save();
             //Act
             $result = User::getAll();
@@ -87,9 +104,13 @@
         function testSaveSetsId()
         {
             //Arrange
-            $User = "Famous Footware";
-            $password="password";
-            $test_User = new User($User,$password);
+            $user = "HIST100";
+            $password= "Abeer";
+            $id=null;
+            $vegie=0;
+            $admin=1;
+            $test_User = new User($user,$password,$vegie,$admin , $id);
+           
             //Act
             //save it. Id should be assigned in database, then Userd in object.
             $test_User->save();
@@ -101,17 +122,24 @@
         function testGetAll()
         {
             //Arrange
-            $User = "Famous Footware";
-            $password="password";
-            
-            $test_User = new User($User,$password);
+            $user = "HIST100";
+            $password= "Abeer";
+            $id=null;
+            $vegie=0;
+            $admin=1;
+            $test_User = new User($user,$password,$vegie,$admin , $id);
+           
             $test_User->save();
-            $name2 = "Epicodus PHP";
-            $password2="passwommmmrd";
-
-
-            $test_User2 = new User($name2,$password2);
+            
+             $user2 = "HIST100";
+            $password2= "Abeer";
+            $id2=null;
+            $vegie2=0;
+            $admin2=1;
+            $test_User2 = new User($user2,$password2,$vegie2,$admin2 , $id2);
+           
             $test_User2->save();
+           
             //Act
             $result = User::getAll();
             //Assert
@@ -122,12 +150,20 @@
         {
             //Arrange
             //We need some categories saved into the database so that we can make sure our deleteAll method removes them all.
-            $User = "sHOE sTORE";
-            $test_User = new User($User,$password="password");
-            $test_User->save();
-            $name2 = "Epicodus Ruby";
-
-            $test_User2 = new User($name2,$password="pass");
+            $user = "HIST100";
+            $password= "Abeer";
+            $id=null;
+            $vegie=0;
+            $admin=1;
+            $test_User = new User($user,$password,$vegie,$admin , $id);
+           
+            $user2 = "HIST100";
+            $password2= "Abeer";
+            $id2=null;
+            $vegie2=0;
+            $admin2=1;
+            $test_User2 = new User($user2,$password2,$vegie2,$admin2 , $id2);
+           
             $test_User2->save();
             //Act
             //Delete categories.
@@ -141,13 +177,21 @@
         {
             //Arrange
             //Create and save 2 categories.
-            $User = "sHOE sTORE";
-
-            $test_User = new User($User,$password="password");
+            $user = "HIST100";
+            $password= "Abeer";
+            $id=null;
+            $vegie=0;
+            $admin=1;
+            $test_User = new User($user,$password,$vegie,$admin , $id);
             $test_User->save();
-            $name2 = "Home Economics";
 
-            $test_User2 = new User($name2,$password="pasnnnsword");
+            $user2 = "HIST100";
+            $password2= "Abeer";
+            $id2=null;
+            $vegie2=0;
+            $admin2=1;
+            $test_User2 = new User($user2,$password2,$vegie2,$admin2 , $id2);
+           
             $test_User2->save();
             $result = User::find($test_User->getId());
             $this->assertEquals($test_User, $result);
@@ -155,57 +199,78 @@
         function testUpdateUsername()
         {
             //Arrange
-            $User = "sHOE sTORE";
-            $test_User = new User($User,$password="pasnnnsword");
-            $test_User->save();
+            $user2 = "HIST100";
+            $password2= "Abeer";
+            $id2=null;
+            $vegie2=0;
+            $admin2=1;
+            $test_User2 = new User($user2,$password2,$vegie2,$admin2 , $id2);
+           
+            $test_User2->save();
             $new_name = "Home Economics";
             //Act
-            $test_User->updateUsername($new_name);
+            $test_User2->updateUsername($new_name);
             //Assert
-            $this->assertEquals("Home Economics", $test_User->getUsername());
+            $this->assertEquals("Home Economics", $test_User2->getUsername());
         }
         function testUpdatePassword()
         {
             //Arrange
-            $User = "sHOE sTORE";
-            $test_User = new User($User,$password="pasnnnsword");
-            $test_User->save();
+            $user2 = "HIST100";
+            $password2= "Abeer";
+            $id2=null;
+            $vegie2=0;
+            $admin2=1;
+            $test_User2 = new User($user2,$password2,$vegie2,$admin2 , $id2);
+            $test_User2->save();
+
             $new_password = "abeer";
             //Act
-            $test_User->updatePassword($new_password);
+            $test_User2->updatePassword($new_password);
             //Assert
-            $this->assertEquals("abeer", $test_User->getPassword());
+            $this->assertEquals("abeer", $test_User2->getPassword());
         }
         function testDeleteUser()
         {
             //Arrange
-            $User = "sHOE sTORE";
-            $test_User = new User($User,$password="pasnnnsword");
+
+             $user= "HIST100";
+            $password= "Abeer";
+            $id=null;
+            $vegie=0;
+            $admin=1;
+            $test_User = new User($user,$password,$vegie,$admin , $id);
             $test_User->save();
 
-            $name2 = "Home Economics";
-            $test_User2 = new User($name2,$password="pasnnnsword");
+
+            $user2 = "HIST100";
+            $password2= "Abeer";
+            $id2=null;
+            $vegie2=0;
+            $admin2=1;
+            $test_User2 = new User($user2,$password2,$vegie2,$admin2 , $id2);
             $test_User2->save();
+
             //Act
             $test_User->delete();
             //Assert
             $this->assertEquals([$test_User2], User::getAll());
         }
-        function testAddanswer()
-        {
-            //Arrange
-            //We need a User and a User saved
-            $User = "sHOE sTORE";
-            $test_User = new User($User,$password="pasnnnsword");
-            $test_User->save();
+        // function testAddanswer()
+        // {
+        //     //Arrange
+        //     //We need a User and a User saved
+        //     $User = "sHOE sTORE";
+        //     $test_User = new User($User,$password="pasnnnsword");
+        //     $test_User->save();
 
-            $name= "Drupal";
-            $test_store = new Store($name,$password="pasnnnsword");
-            $test_store->save();
+        //     $name= "Drupal";
+        //     $test_store = new Store($name,$password="pasnnnsword");
+        //     $test_store->save();
 
-            $test_User->addStore($test_store);
-            $this->assertEquals($test_User->getStores(), [$test_store]);
-        }
+        //     $test_User->addStore($test_store);
+        //     $this->assertEquals($test_User->getStores(), [$test_store]);
+        // }
         // //Now we write a test for the getStores method since we need it to be able to test the Add User method.
         // function testGetLikes()
         // {

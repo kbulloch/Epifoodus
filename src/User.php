@@ -5,12 +5,16 @@ class User
 	private $username;
 	private $password;
 	private $id;
+  private $vegie;
+  private $admin; 
 
 
-	function __construct($new_username,$new_password,$new_id =null){
+	function __construct($new_username,$new_password,$new_vegie,$new_admin, $new_id =null){
            $this->id = $new_id;
            $this->password=$new_password;
            $this->username=$new_username;
+           $this->vegie=$new_vegie; 
+           $this->admin= $new_admin;
 	}
 
 	function getUsername()
@@ -29,17 +33,32 @@ class User
 	{
 	$this->id = (int) $new_id;
 	}
-    function getPassword()
-    {
-    return $this->password;
-    }
-    function setPassword($new_password)
-    {
-     $this->password = $new_password;
-    }
+  function getPassword()
+  {
+  return $this->password;
+  }
+  function setPassword($new_password)
+  {
+   $this->password = $new_password;
+  }
 
-    function save(){  $statemnt= $GLOBALS['DB']->query("INSERT INTO users (username, password) VALUES
-    ('{$this->getUsername()}', '{$this->getPassword()}')RETURNING id;");
+  function getVegie(){
+
+    return $this->vegie;
+  }
+  function setVegie($new_vegie){
+       $this->vegie= $new_vegie;
+  }
+  function getAdmin(){
+
+    return $this->admin;
+  }
+  function setAdmin($new_admin){
+       $this->admin= $new_admin;
+  }
+
+    function save(){  $statemnt= $GLOBALS['DB']->query("INSERT INTO users (username, password,vegie,admin) VALUES
+    ('{$this->getUsername()}', '{$this->getPassword()}',{$this->getVegie()},{$this->getAdmin()}) RETURNING id;");
     $result= $statemnt->fetch(PDO::FETCH_ASSOC);
     $this->setId($result['id']);
     }
@@ -50,8 +69,10 @@ class User
        foreach($returned_users as $user){
        	$username=$user['username'];
        	$password=$user['password'];
+        $admin=$user['admin'];
+        $vegie=$user['vegie'];
        	$id=$user['id'];
-       	$new_user= new User($username,$password,$id);
+       	$new_user= new User($username,$password,$vegie,$admin, $id);
        	array_push($users, $new_user);
 
        }
@@ -114,7 +135,7 @@ class User
          $restaurant_id=$restaurant['id'];
          $restaurant_name= $restaurant['name'];
          $restaurant_price=$restaurant['price_id'];
-         $restaurant_vegetarian=$restaurant['vegetarian';]
+         $restaurant_vegetarian=$restaurant['vegie'];
          $restaurant_hours=$restaurant['hours'];
 
          $new_restaurant= new Restaurant();

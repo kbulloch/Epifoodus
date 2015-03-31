@@ -8,7 +8,7 @@
     require_once "src/Cuisine.php";
     require_once "src/Restaurant.php";
 
-    $DB = new PDO('pgsql:host=localhost;dbname=epifoodus_test');
+    $DB = new PDO('pgsql:host=localhost;dbname=epifoodus;user=abeer;password=abeer');
 
     class CuisineTest extends PHPUnit_Framework_TestCase
     {
