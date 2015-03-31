@@ -54,6 +54,33 @@ class Response
 	{
 		$this->id = (int) $new_id;
 	}
+
+	function save()
+	{
+		$statement = $GLOBALS['DB']->query("INSERT INTO responses (answer, restaurant_id, user_id) VALUES ({$this->getAnswer()}, '{$this->getRestaurantId()}', {$this->getUserId()}) RETURNING id;");
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        $this->setId($result['id']);
+	}
+
+	static function getAll()
+    {
+        $all_responses = $GLOBALS['DB']->query("SELECT * FROM responses;");
+        $returned_responses = array();
+        foreach ($all_responses as $response){
+            $answer = $response['answer'];
+            $restaurant_id = $response['restaurant_id'];
+            $user_id = $response['user_id'];
+            $id = $response['id'];
+            $new_response = new Response($answer, $restaurant_id, $user_id, $id);
+            array_push ($returned_responses, $new_response);
+        }
+        return $returned_responses;
+    }
+
+    static function deleteAll()
+    {
+    	 $GLOBALS['DB']->exec("DELETE FROM responses *;");
+    }
 }
 
 ?>
