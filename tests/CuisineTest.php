@@ -6,6 +6,7 @@
     */
 
     require_once "src/Cuisine.php";
+    require_once "src/Restaurant.php";
 
     $DB = new PDO('pgsql:host=localhost;dbname=epifoodus_test');
 
@@ -14,6 +15,7 @@
         protected function tearDown()
         {
             Cuisine::deleteAll();
+            Restaurant::deleteAll();
         }
 
         function test_getType()
@@ -150,13 +152,15 @@
             $test_cuisine = new Cuisine($type);
             $test_cuisine->save();
 
-            $name = "Fiorentino Ristorante";
-            $price_id = 1;
+            $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             //Act
@@ -174,22 +178,26 @@
             $test_cuisine = new Cuisine($type);
             $test_cuisine->save();
 
-            $name1 = "Fiorentino Ristorante";
-            $price_id = 1;
+            $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name1, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
-            $name2 = "Pomodoro";
-            $price_id2 = 2;
+            $name2 = "Kingsland";
+            $address2 = "124 SW 5th";
+            $phone2 = "456-292-2801";
+            $price2 = 2;
             $vegie2 = 0;
             $opentime2 = 0800;
             $closetime2 = 2200;
             $id2 = 2;
-            $test_restaurant2 = new Restaurant($name2, $price_id2, $vegie2, $opentime2, $closetime2, $id2);
+            $test_restaurant2 = new Restaurant($name2, $address2, $phone2, $price2, $vegie2, $opentime2, $closetime2, $id2);
             $test_restaurant2->save();
 
             $test_cuisine->addRestaurant($test_restaurant);
@@ -223,13 +231,15 @@
             $test_cuisine = new Cuisine($type);
             $test_cuisine->save();
 
-            $name1 = "Fiorentino Ristorante";
-            $price_id = 1;
+            $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
+            $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name1, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             $test_cuisine->addRestaurant($test_restaurant);
