@@ -8,11 +8,11 @@
     $DB = new PDO('pgsql:host=localhost;dbname=epifoodus;user=abeer;password=abeer');
   class UserTest extends PHPUnit_Framework_TestCase
     {
-        // protected function tearDown()
-        //  {
-        //     User::deleteAll();
-        //     Store::deleteAll();
-        //  }
+        protected function tearDown()
+         {
+            User::deleteAll();
+            //Like::deleteAll();
+         }
         //Initialize a Store with a User and be able to get it back out of the object using getUser().
         function testGetUser()
         {
@@ -83,103 +83,102 @@
             //Assert
             $this->assertEquals($test_User, $result[0]);
         }
-        // //
-        // function testSaveSetsId()
-        // {
-        //     //Arrange
-        //     $User = "Famous Footware";
-        //     $test_User = new User($User);
-        //     //Act
-        //     //save it. Id should be assigned in database, then Userd in object.
-        //     $test_User->save();
-        //     //Assert
-        //     //That id in the object should be numeric (not null)
-        //     $this->assertEquals(true, is_numeric($test_User->getId()));
-        // }
-        // //READ - All categories
-        // //This method should return an array of all User objects from the categories table.
-        // // //Since it isn't specifically for only one User, it is for all, it should be a static method.
-        // function testGetAll()
-        // {
-        //     //Arrange
-        //     $User = "Famous Footware";
-
-        //     $test_User = new User($User);
-        //     $test_User->save();
-        //     $name2 = "Epicodus PHP";
-
-        //     $test_User2 = new User($name2);
-        //     $test_User2->save();
-        //     //Act
-        //     $result = User::getAll();
-        //     //Assert
-        //     $this->assertEquals([$test_User, $test_User2], $result);
-        // }
-        // // //DELETE - All categories
-        // // //Since this also deals with more than one User it should be a static method.
-        // function testDeleteAll()
-        // {
-        //     //Arrange
-        //     //We need some categories saved into the database so that we can make sure our deleteAll method removes them all.
-        //     $User = "sHOE sTORE";
-        //     $test_User = new User($User);
-        //     $test_User->save();
-        //     $name2 = "Epicodus Ruby";
-
-        //     $test_User2 = new User($name2);
-        //     $test_User2->save();
-        //     //Act
-        //     //Delete categories.
-        //     User::deleteAll();
-        //     //Assert
-        //     //Now when we call getAll, we should get an empty array because we deleted all categories.
-        //     $result = User::getAll();
-        //     $this->assertEquals([], $result);
-        // }
-        // function testFind()
-        // {
-        //     //Arrange
-        //     //Create and save 2 categories.
-        //     $User = "sHOE sTORE";
-
-        //     $test_User = new User($User);
-        //     $test_User->save();
-        //     $name2 = "Home Economics";
-
-        //     $test_User2 = new User($name2);
-        //     $test_User2->save();
-        //     $result = User::find($test_User->getId());
-        //     $this->assertEquals($test_User, $result);
-        // }
-        // function testUpdate()
-        // {
-        //     //Arrange
-        //     $User = "sHOE sTORE";
+        //
+        function testSaveSetsId()
+        {
+            //Arrange
+            $User = "Famous Footware";
+            $password="password";
+            $test_User = new User($User,$password);
+            //Act
+            //save it. Id should be assigned in database, then Userd in object.
+            $test_User->save();
+            //Assert
+            //That id in the object should be numeric (not null)
+            $this->assertEquals(true, is_numeric($test_User->getId()));
+        }
+        
+        function testGetAll()
+        {
+            //Arrange
+            $User = "Famous Footware";
+            $password="password";
+            
+            $test_User = new User($User,$password);
+            $test_User->save();
+            $name2 = "Epicodus PHP";
+            $password2="passwommmmrd";
 
 
-        //     $test_User = new User($User);
-        //     $test_User->save();
-        //     $new_name = "Home Economics";
-        //     //Act
-        //     $test_User->update($new_name);
-        //     //Assert
-        //     $this->assertEquals("Home Economics", $test_User->getUser());
-        // }
-        // function testDeleteUser()
-        // {
-        //     //Arrange
-        //     $User = "sHOE sTORE";
-        //     $test_User = new User($User);
-        //     $test_User->save();
+            $test_User2 = new User($name2,$password2);
+            $test_User2->save();
+            //Act
+            $result = User::getAll();
+            //Assert
+            $this->assertEquals([$test_User, $test_User2], $result);
+        }
+      
+        function testDeleteAll()
+        {
+            //Arrange
+            //We need some categories saved into the database so that we can make sure our deleteAll method removes them all.
+            $User = "sHOE sTORE";
+            $test_User = new User($User,$password="password");
+            $test_User->save();
+            $name2 = "Epicodus Ruby";
 
-        //     $name2 = "Home Economics";
-        //     $test_User2 = new User($name2);
-        //     $test_User2->save();
-        //     //Act
-        //     $test_User->delete();
-        //     //Assert
-        //     $this->assertEquals([$test_User2], User::getAll());
-        // }
+            $test_User2 = new User($name2,$password="pass");
+            $test_User2->save();
+            //Act
+            //Delete categories.
+            User::deleteAll();
+            //Assert
+            //Now when we call getAll, we should get an empty array because we deleted all categories.
+            $result = User::getAll();
+            $this->assertEquals([], $result);
+        }
+        function testFind()
+        {
+            //Arrange
+            //Create and save 2 categories.
+            $User = "sHOE sTORE";
+
+            $test_User = new User($User,$password="password");
+            $test_User->save();
+            $name2 = "Home Economics";
+
+            $test_User2 = new User($name2,$password="pasnnnsword");
+            $test_User2->save();
+            $result = User::find($test_User->getId());
+            $this->assertEquals($test_User, $result);
+        }
+        function testUpdate()
+        {
+            //Arrange
+            $User = "sHOE sTORE";
+            $test_User = new User($User,$password="pasnnnsword");
+            $test_User->save();
+            $new_name = "Home Economics";
+            //Act
+            $test_User->update($new_name);
+            //Assert
+            $this->assertEquals("Home Economics", $test_User->getUser());
+        }
+        function testDeleteUser()
+        {
+            //Arrange
+            $User = "sHOE sTORE";
+            $test_User = new User($User,$password="pasnnnsword");
+            $test_User->save();
+
+            $name2 = "Home Economics";
+            $test_User2 = new User($name2,$password="pasnnnsword");
+            $test_User2->save();
+            //Act
+            $test_User->delete();
+            //Assert
+            $this->assertEquals([$test_User2], User::getAll());
+        }
         // function testAddUser()
         // {
         //     //Arrange

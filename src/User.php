@@ -38,8 +38,51 @@ class User
      $this->password = $new_password;
     }
 
+    function save(){  $statemnt= $GLOBALS['DB']->query("INSERT INTO users (username, password) VALUES
+    ('{$this->getUsername()}', '{$this->getPassword()}')RETURNING id;");
+    $result= $statemnt->fetch(PDO::FETCH_ASSOC);
+    $this->setId($result['id']);
+    }
+    
+    static function getAll(){
+       $returned_users =$GLOBALS['DB']->query("SELECT * FROM users ;");
+       $users=  array();
+       foreach($returned_users as $user){
+       	$username=$user['username'];
+       	$password=$user['password'];
+       	$id=$user['id'];
+       	$new_user= new User($username,$password,$id);
+       	array_push($users, $new_user);
 
+       }
 
+      return $users;
+    }
+
+    static function deleteAll()
+    {
+    	
+       $GLOBALS['DB']->exec("DELETE FROM users *;");
+    
+    }
+
+    static function find($search_id){
+    	$returned_user =null;
+    	$all_users= User::getAll();
+    	foreach ($all_users as $user) {
+          $user_id=$user->getId();
+          if ($user_id==$search_id){
+               $returned_user= $user;
+          }
+    	}
+
+  return $returned_user;
+    }
+
+   function update(){
+
+   	
+   }
 }
 
 ?>
