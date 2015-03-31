@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    <title>Epifoodus: Cuisine</title>
+  </head>
+  <body>
+
+    <div class="container">
+
+<!-- show all similar restaurants to the choice -->
+
+      <h3>{{ cuisine.getType }}</h3>
+
+      {% if cuisine is not empty %}
+
+        {% for restaurants in cuisine %}
+
+          <li><a href="/choices/{{ restaurant.getId }}">{{ restaurant.getName }}</a></li>
+
+        {% endfor %}
+
+      {% else %}
+
+        <p>There are no restaurants serving this cuisine nearby.</p>
+
+      {% endif %}
+
+<!-- link to show all available cuisines -->
+      <form action="/cuisines" method="get">
+        <button type="submit">Get All Cuisines</button>
+      </form>
+
+  </div>
+
+  </body>
+</html>
