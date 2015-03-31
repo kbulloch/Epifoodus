@@ -336,10 +336,95 @@
             $this->assertEquals($test_User->getDisLikes(), [$test_restaurant]);
         }
 
+        function testUpdateAnswer()
+        {
+            //Arrange
+            //We need a User and a User saved
+            //Arrange
+            //We need a User and a User saved
+            $user= "HIST100";
+            $password= "Abeer";
+            $id=null;
+            $vegie=0;
+            $admin=1;
+            $test_User = new User($user,$password,$vegie,$admin , $id);
+            $test_User->save();
 
 
+            $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
+            $price = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant->save();
 
+            $answer = 0;
+            $restaurant_id = 1;
+            $user_id = 1;
+            $id2 = 1;
+            $test_response = new Response($answer, $restaurant_id, $user_id, $id2);
+            $test_response->save();
+            $test_User->addAnswer($test_User->getId(),$test_restaurant->getId(),$test_response->getAnswer());
 
+            $test_User->updateAnswer(2,1);
+
+            $this->assertEquals($test_User->getDisLikes(), [$test_restaurant]);
+        }
+
+        function test_CheckUsersExists()
+        {
+            //Arrange
+            $user= "Abeer";
+            $password= "Epicodus";
+            $id=null;
+            $vegie=0;
+            $admin=1;
+            $test_User = new User($user,$password,$vegie,$admin , $id);
+            $test_User->save();
+
+            $result = User::CheckUsers($user);
+
+            $this->assertEquals(1, $result);
+        }
+
+        function test_CheckUsersDoesNotExist()
+        {
+            //Arrange
+            $user= "Abeer";
+            $password= "Epicodus";
+            $id=null;
+            $vegie=0;
+            $admin=1;
+            $test_User = new User($user,$password,$vegie,$admin , $id);
+            $test_User->save();
+
+            $new_user = "Jill";
+
+            $result = User::CheckUsers($new_user);
+
+            $this->assertEquals(0, $result);
+        }
+
+        function test_CheckPasswordMatch()
+        {
+            //Arrange
+            $user= "Abeer";
+            $password= "Epicodus";
+            $id=null;
+            $vegie=0;
+            $admin=1;
+            $test_User = new User($user,$password,$vegie,$admin , $id);
+            $test_User->save();
+
+            $test_username = "Abeer";
+            $test_password = "Epicodus";
+            $result = User::CheckPassword($test_username, $test_password);
+            $this->assertEquals(0, $result);
+        }
 
 
 
