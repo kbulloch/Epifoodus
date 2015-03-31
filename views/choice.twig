@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    <title>Epifoodus: I'm Hungry</title>
+  </head>
+  <body>
+
+    <div class="container">
+
+     <!-- displays restaurant and info -->
+
+      <h1>{{ restaurant.getName }}</h1>
+
+      <p>{# restaurant.getCuisineImg #}</p>
+      <p><a href="/cuisine/{{ cuisine.getId }}">{{ cuisine.getType }}</a></p>
+      <p>Address:{{ restaurant.getAddress}}</p>
+      <p>Phone:{{ restaurant.getPhone }}</p>
+      <p>Price Range:{{ restaurant.getPrice }}</p>
+      <p>Vegetarian Options:{{ restaurant.getVegie }}</p>
+      <p>Open Time:{{ restaurant.getOpenTime }}</p>
+      <p>Close Time:{{ restaurant.getCloseTime }}</p>
+
+      <!-- buttons for negative or positive feedback -->
+      <form action="/" method="post">
+          <button type="submit" class="btn btn-info">I enjoyed their food!</button>
+      </form>
+      <form action="/" method="post">
+          <button type="submit" class="btn btn-warning">I did not enjoy their food.</button>
+      </form>
+
+
+      <!-- if they havent signed in, ask if they want to save their info -->
+      {% if user is empty %}
+        <p> Want to save your preferences for next time? Create an account with us!</p>
+          <form action="/create_user" method="post">
+            <button name="button">Sign Up</button>
+          </form>
+      {% end if %}
+
+
+      <p><a href="/">Home</a></p>
+    </div>
+  </body>
+</html>
