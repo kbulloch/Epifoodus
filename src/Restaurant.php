@@ -1,5 +1,5 @@
 <?php
-    Class Restaurant
+    class Restaurant
     {
         private $name;
         private $address;
@@ -166,19 +166,18 @@
 
         function getCuisines()
         {
-            $statment = $GLOBALS['DB']->query("SELECT cuisines.* FROM restaurants
+            $cuisines = array();
+            $returned_cuisines = $GLOBALS['DB']->query("SELECT cuisines.* FROM restaurants
                 JOIN cuisines_restaurants ON (restaurants.id = cuisines_restaurants.restaurant_id)
                 JOIN cuisines ON (cuisines_restaurants.cuisine_id = cuisines.id)
                 WHERE restaurants.id = {$this->getId()};");
-                $cuisine_ids = $statement->fetchAll(PDO::FETCH_ASSOC);
-                $cuisines = array();
-                foreach ($cuisine_ids as $cuisine) {
-                    $type = $cuisine['type'];
-                    $id = $cuisine['id'];
-                    $new_cuisine = new Cuisine($type, $id);
-                    array_push($cuisines, $new_cuisine);
-                }
-                return $cuisines;
+            foreach ($returned_cuisines as $cuisine) {
+                $type = $cuisine['type'];
+                $id = $cuisine['id'];
+                $new_cuisine = new Cuisine($type, $id);
+                array_push($cuisines, $new_cuisine);
+            }
+            return $cuisines;
         }
 
         static function getAll()
