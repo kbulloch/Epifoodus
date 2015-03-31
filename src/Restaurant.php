@@ -104,6 +104,12 @@
             $this->setVegie($new_vegie);
         }
 
+        function updateOpentime($new_opentime)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurants SET opentime = {$new_opentime} WHERE id = {$this->getId()};");
+            $this->setOpentime($new_opentime);
+        }
+
         static function getAll()
         {
             $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants;");
