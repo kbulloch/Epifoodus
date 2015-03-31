@@ -82,7 +82,18 @@
 
     $app->post("/add_restaurant", function() use($app) {
       // needs all info for restaurant class & form. twig page currently blank
+        $new_restaurant = new Restaurant(
+            $_POST['name'],
+            $_POST['address'],
+            $_POST['phone'],
+            $_POST['price'],
+            $_POST['vegie'],
+            $_POST['opentime'],
+            $_POST['closetime']);
 
+        $new_restaurant->save();
+
+        return $app['twig']->render('add_restaurant.twig', array('restaurant' => $new_restaurant));
     });
 
 
