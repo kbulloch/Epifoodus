@@ -3,7 +3,9 @@ DB = epifoodus / epifoodus_test
 Class Restaurant (evan)
 ----------------
 name | varchar
-price_id | int
+address | varchar
+phone | varchar
+price | int
 vegetarian | binary
 opentime | int
 closetime | int
@@ -36,8 +38,10 @@ Tables
 restaurants
 -----------
 name | varchar
-price_id | int
-vegetarian | binary
+address | varchar
+phone | varchar
+price | int
+vegie | binary
 opentime | int
 closetime | int
 id | int
@@ -72,7 +76,7 @@ user_id | int
 
 CREATE DATABASE epifoodus;
 \c epifoodus;
-CREATE TABLE restaurants (id serial PRIMARY KEY, name varchar, price_id int, vegie int, opentime int, closetime int);
+CREATE TABLE restaurants (id serial PRIMARY KEY, name varchar, address varchar, phone varchar, price_id int, vegie int, opentime int, closetime int);
 CREATE TABLE prices (id serial PRIMARY KEY, level int);
 CREATE TABLE cuisines (id serial PRIMARY KEY, type varchar);
 CREATE TABLE cuisines_restaurants (id serial PRIMARY KEY, cuisine_id int, restaurant_id int);
