@@ -172,6 +172,24 @@
             $this->assertEquals($test_price, $result);
         }
 
+        function test_updateLevel()
+        {
+            //Arrange
+            $level = 5.00;
+            $id = 1;
+            $test_price = new Price($level, $id);
+            $test_price->save();
+
+            //Act
+            $new_level = 7.00;
+            $test_price->updateLevel($new_level);
+            $result = Price::getAll();
+            $get_newLevel = $result[0]->getLevel();
+
+            //Assert
+            $this->assertEquals(7, $get_newLevel);
+        }
+
 
     }
 

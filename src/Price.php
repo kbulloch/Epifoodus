@@ -39,6 +39,12 @@
         $this->setId($result['id']);
     }
 
+    function updateLevel($new_level)
+    {
+        $GLOBALS['DB']->exec("UPDATE prices SET level = {$new_level};");
+        $this->setLevel($new_level);
+    }
+
     static function findId($search_id)
     {
         $statement = $GLOBALS['DB']->query("SELECT * FROM prices WHERE id = {$search_id};");
@@ -54,6 +60,7 @@
         }
         return $return_price;
     }
+
 
     static function findByLevel($search_level)
     {
