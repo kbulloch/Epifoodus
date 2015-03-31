@@ -86,10 +86,16 @@
             $this->setId($result['id']);
         }
 
-        function update($new_name)
+        function updateName($new_name)
         {
             $GLOBALS['DB']->exec("UPDATE restaurants SET name = '{$new_name}' WHERE id = {$this->getId()};");
             $this->setName($new_name);
+        }
+
+        function updatePrice($new_price_id)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurants SET price_id = {$new_price_id} WHERE id = {$this->getId()};");
+            $this->setPrice_id($new_price_id);
         }
 
         static function getAll()

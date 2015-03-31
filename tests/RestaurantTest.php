@@ -245,7 +245,7 @@
             $this->assertEquals($test_restaurant, $result);
         }
 
-        function test_update()
+        function test_updateName()
         {
             //Arrange
             $name = "Little Big Burger";
@@ -260,10 +260,31 @@
             $new_name = "Phat Phood";
 
             //Act
-            $test_restaurant->update($new_name);
+            $test_restaurant->updateName($new_name);
 
             //Assert
             $this->assertEquals($new_name, $test_restaurant->getName());
+        }
+
+        function test_updatePriceId()
+        {
+            //Arrange
+            $name = "Little Big Burger";
+            $price_id = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant->save();
+
+            $new_price_id = 2;
+
+            //Act
+            $test_restaurant->updatePrice($new_price_id);
+
+            //Assert
+            $this->assertEquals($new_price_id, $test_restaurant->getPrice_id());
         }
     }
 ?>
