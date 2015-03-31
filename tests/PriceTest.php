@@ -151,6 +151,26 @@
             $this->assertEquals($test_price, $result);
         }
 
+        function test_findByLevel()
+        {
+            //Arrange
+            $level = 4.00;
+            $test_price = new Price($level);
+            $test_price->save();
+
+            $level1 = 5.00;
+            $test_price1 = new Price($level1);
+            $test_price1->save();
+
+            $search_level = 4.00;
+
+
+            //Act
+            $result = Price::findByLevel($search_level);
+
+            //Assert
+            $this->assertEquals($test_price, $result);
+        }
 
 
     }

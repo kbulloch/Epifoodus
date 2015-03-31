@@ -55,6 +55,23 @@
         return $return_price;
     }
 
+    static function findByLevel($search_level)
+    {
+        $returned_price = null;
+        $all_prices = Price::getAll();
+        foreach ($all_prices as $price)
+        {
+            $price_level = $price->getLevel();
+            if ($price_level == $search_level)
+            {
+                $returned_price = $price;
+            }
+
+
+        }
+        return $returned_price;
+
+    }
     static function getAll()
     {
         $statement = $GLOBALS['DB']->query("SELECT * FROM prices; ");
