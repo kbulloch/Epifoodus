@@ -6,14 +6,14 @@ class User
 	private $password;
 	private $id;
   private $vegie;
-  private $admin; 
+  private $admin;
 
 
 	function __construct($new_username,$new_password,$new_vegie,$new_admin, $new_id =null){
            $this->id = $new_id;
            $this->password=$new_password;
            $this->username=$new_username;
-           $this->vegie=$new_vegie; 
+           $this->vegie=$new_vegie;
            $this->admin= $new_admin;
 	}
 
@@ -62,7 +62,7 @@ class User
     $result= $statemnt->fetch(PDO::FETCH_ASSOC);
     $this->setId($result['id']);
     }
-    
+
     static function getAll(){
        $returned_users =$GLOBALS['DB']->query("SELECT * FROM users ;");
        $users=  array();
@@ -82,9 +82,9 @@ class User
 
     static function deleteAll()
     {
-    	
+
        $GLOBALS['DB']->exec("DELETE FROM users *;");
-    
+
     }
 
     static function find($search_id){
@@ -114,7 +114,7 @@ class User
     function delete(){
 
 	$GLOBALS['DB']->exec("DELETE FROM users * WHERE id={$this->getId()};");
-    
+
    }
 
    function addAnswer($user_id, $res_id, $answer)
@@ -127,7 +127,7 @@ class User
    function getLikes(){  $user_likes= $GLOBALS['DB']->query("SELECT restaurants.* FROM users JOIN
    likes ON  (users.id = likes.user_id) JOIN restaurants ON (likes.restaurant_id =
    restaurants.id) WHERE likes.answer = 2 AND likes.user_id = {$this->getId()};");
-        
+
        $likes= array();
        foreach ($user_likes as $restaurant){
         $name = $restaurant['name'];
@@ -145,7 +145,27 @@ class User
 
 	return $likes;
    }
+	function getDisLikes(){  $user_likes= $GLOBALS['DB']->query("SELECT restaurants.* FROM users JOIN
+	likes ON  (users.id = likes.user_id) JOIN restaurants ON (likes.restaurant_id =
+	restaurants.id) WHERE likes.answer = 0 AND likes.user_id = {$this->getId()};");
 
+		$likes= array();
+		foreach ($user_likes as $restaurant){
+		$name = $restaurant['name'];
+		$address = $restaurant['address'];
+		$phone = $restaurant['phone'];
+		$price = $restaurant['price'];
+		$vegie = $restaurant['vegie'];
+		$opentime = $restaurant['opentime'];
+		$closetime = $restaurant['closetime'];
+		$id = $restaurant['id'];
+		$new_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
+		array_push($likes, $new_restaurant);
+
+		}
+
+	return $likes;
+	}
 
 
 }

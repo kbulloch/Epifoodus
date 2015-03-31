@@ -7,7 +7,7 @@
 
     require_once "src/Price.php";
 
-    $DB = new PDO('pgsql:host=localhost;dbname=epifoodus;user=abeer;password=abeer');
+    $DB = new PDO('pgsql:host=localhost;dbname=epifoodus');
     class PriceTest extends PHPUnit_Framework_TestCase
 
     {
