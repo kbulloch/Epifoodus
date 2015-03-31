@@ -1,10 +1,13 @@
 <?php
     require_once __DIR__."/../vendor/autoload.php";
-    require_once __DIR__."/../src/_____.php"; //ADD CLASS NAMES
-    require_once __DIR__."/../src/_____.php";
+    require_once __DIR__."/../src/Cuisine.php";
+    require_once __DIR__."/../src/Restaurant.php";
+    //ADD OTHER CLASSES ONCE COMPLETE [users, likes, ??]
 
     $app = new Silex\Application();
     $app['debug'] = true;
+
+    //do we need session info here for users who don't sign in ?
 
     $DB = new PDO('pgsql:host=localhost;dbname=epifoodus');
 
@@ -30,10 +33,10 @@
 
       $restaurants = Restaurant::getAll();
 
-      array_rand($restaurants, 2) = $choices;
+      $choices = array_rand($restaurants, 2);
 
-      $choices[0] = $restaurant1;
-      $choices[1] = $restaurant2;
+      $restaurant1 = $choices[0];
+      $restaurant2 = $choices[1];
 
       return $app['twig']->render('options.twig', array('restaurants' => Restaurant::getAll(), 'restaurant1' => $restaurant1, 'restaurant2' => $restaurant2));
     });
@@ -47,7 +50,7 @@
     //cuisine
     $app->get("/cuisines/{id}", function($id) use($app) {
       $current_cuisine = Cuisine::find($id);
-      return $app['twig']->render('cuisine.twig', array('cuisine' => $current_cuisine, 'restaurants' => $current_cuisine->getRestaurants());
+      return $app['twig']->render('cuisine.twig', array('cuisine' => $current_cuisine, 'restaurants' => $current_cuisine->getRestaurants()));
     });
 
     //all cuisines
@@ -77,6 +80,36 @@
       // needs all info for restaurant class & form. twig page currently blank
     });
 
+
+    /* a route for keeping option 1 / option 2 but re-randoming the other
+    * if we keep option 1, we use array_pop to drop restaurant2 from $choices
+    * if we keep option 2, we use array_shift to drop restuarant1 from $choices
+    */
+    $app->get("/keep1", function() use($app) {
+      array_pop($choices);
+
+      $restaurants = Restaurant::getAll();
+
+      $new_choices = array_rand($restaurants, 2);
+
+      $restaurant3 = $new_choices[0];
+      $restaurant4 = $new_choices[1];
+
+      return $app['twig']->render('options.twig', array('restaurants' => Restaurant::getAll(), 'restaurant1' => $choices[0], 'restaurant2' => $restaurant3));
+    });
+
+    $app->get("/keep2", function() use($app) {
+      array_shift($choices);
+
+      $restaurants = Restaurant::getAll();
+
+      $new_choices = array_rand($restaurants, 2);
+
+      $restaurant3 = $new_choices[0];
+      $restaurant4 = $new_choices[1];
+
+      return $app['twig']->render('options.twig', array('restaurants' => Restaurant::getAll(), 'restaurant2' => $choices[0], 'restaurant1' => $restaurant3));
+    });
 
     return $app;
 ?>
