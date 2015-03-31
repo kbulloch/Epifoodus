@@ -2,15 +2,19 @@
     Class Restaurant
     {
         private $name;
+        private $address;
+        private $phone;
         private $price;
         private $vegie;
         private $opentime;
         private $closetime;
         private $id;
 
-        function __construct($name, $price, $vegie, $opentime, $closetime, $id = null)
+        function __construct($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id = null)
         {
             $this->name = $name;
+            $this->address = $address;
+            $this->phone = $phone;
             $this->price = $price;
             $this->vegie = $vegie;
             $this->opentime = $opentime;
@@ -21,6 +25,16 @@
         function setName($new_name)
         {
             $this->name = (string) $new_name;
+        }
+
+        function setAddress($new_address)
+        {
+            $this->address = (string) $new_address;
+        }
+
+        function setPhone($new_phone)
+        {
+            $this->phone = (string) $new_phone;
         }
 
         function setPrice($new_price)
@@ -53,6 +67,16 @@
             return $this->name;
         }
 
+        function getAddress()
+        {
+            return $this->address;
+        }
+
+        function getPhone()
+        {
+            return $this->phone;
+        }
+
         function getPrice()
         {
             return $this->price;
@@ -80,8 +104,8 @@
 
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO restaurants (name, price, vegie, opentime, closetime)
-                VALUES ('{$this->getName()}', {$this->getPrice()}, {$this->getVegie()}, {$this->getOpentime()}, {$this->getClosetime()}) RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO restaurants (name, address, phone, price, vegie, opentime, closetime)
+                VALUES ('{$this->getName()}', '{$this->getAddress()}', '{$this->getPhone()}', {$this->getPrice()}, {$this->getVegie()}, {$this->getOpentime()}, {$this->getClosetime()}) RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
@@ -90,6 +114,18 @@
         {
             $GLOBALS['DB']->exec("UPDATE restaurants SET name = '{$new_name}' WHERE id = {$this->getId()};");
             $this->setName($new_name);
+        }
+
+        function updateAddress($new_address)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurants SET address = '{$new_address}' WHERE id = {$this->getId()};");
+            $this->setAddress($new_address);
+        }
+
+        function updatePhone($new_phone)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurants SET phone = '{$new_phone}' WHERE id = {$this->getId()};");
+            $this->setPhone($new_phone);
         }
 
         function updatePrice($new_price)
@@ -128,12 +164,14 @@
             $restaurants = array();
             foreach($returned_restaurants as $restaurant) {
                 $name = $restaurant['name'];
+                $address = $restaurant['address'];
+                $phone = $restaurant['phone'];
                 $price = $restaurant['price'];
                 $vegie = $restaurant['vegie'];
                 $opentime = $restaurant['opentime'];
                 $closetime = $restaurant['closetime'];
                 $id = $restaurant['id'];
-                $new_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+                $new_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
                 array_push($restaurants, $new_restaurant);
             }
             return $restaurants;

@@ -18,12 +18,14 @@
         {
             //Arrange
             $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
             $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
 
             //Act
             $result = $test_restaurant->getName();
@@ -32,16 +34,58 @@
             $this->assertEquals($name, $result);
         }
 
-        function test_getPriceId()
+        function test_getAddress()
         {
             //Arrange
             $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
             $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
+
+            //Act
+            $result = $test_restaurant->getAddress();
+
+            //Assert
+            $this->assertEquals($address, $result);
+        }
+
+        function test_getPhone()
+        {
+            //Arrange
+            $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
+            $price = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
+
+            //Act
+            $result = $test_restaurant->getPhone();
+
+            //Assert
+            $this->assertEquals($phone, $result);
+        }
+
+        function test_getPrice()
+        {
+            //Arrange
+            $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
+            $price = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
 
             //Act
             $result = $test_restaurant->getPrice();
@@ -54,12 +98,14 @@
         {
             //Arrange
             $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
             $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
 
             //Act
             $result = $test_restaurant->getVegie();
@@ -72,12 +118,14 @@
         {
             //Arrange
             $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
             $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
 
             //Act
             $result = $test_restaurant->getOpentime();
@@ -90,12 +138,14 @@
         {
             //Arrange
             $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
             $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
 
             //Act
             $result = $test_restaurant->getClosetime();
@@ -108,12 +158,14 @@
         {
             //Arrange
             $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
             $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
 
             //Act
             $result = $test_restaurant->getId();
@@ -126,12 +178,14 @@
         {
             //Arrange
             $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
             $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
 
             //Act
             $test_restaurant->setId(2);
@@ -145,12 +199,14 @@
         {
             //Arrange
             $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
             $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             //Act
@@ -164,12 +220,14 @@
         {
             //Arrange
             $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
             $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             $name2 = "Kingsland";
@@ -192,12 +250,14 @@
         {
             //Arrange
             $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
             $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             $name2 = "Kingsland";
@@ -221,21 +281,25 @@
         {
             //Arrange
             $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
             $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             $name2 = "Kingsland";
-            $price_id2 = 2;
+            $address2 = "124 SW 5th";
+            $phone2 = "456-292-2801";
+            $price2 = 2;
             $vegie2 = 0;
             $opentime2 = 0800;
             $closetime2 = 2200;
             $id2 = 2;
-            $test_restaurant2 = new Restaurant($name2, $price_id2, $vegie2, $opentime2, $closetime2, $id2);
+            $test_restaurant2 = new Restaurant($name2, $price2, $vegie2, $opentime2, $closetime2, $id2);
             $test_restaurant2->save();
 
             //Act
@@ -249,12 +313,14 @@
         {
             //Arrange
             $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
             $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             $new_name = "Phat Phood";
@@ -266,16 +332,64 @@
             $this->assertEquals($new_name, $test_restaurant->getName());
         }
 
-        function test_updatePriceId()
+        function test_updateAddress()
         {
             //Arrange
             $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
             $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant->save();
+
+            $new_address = "789 SW 4th";
+
+            //Act
+            $test_restaurant->updateAddress($new_address);
+
+            //Assert
+            $this->assertEquals($new_address, $test_restaurant->getAddress());
+        }
+
+        function test_updatePhone()
+        {
+            //Arrange
+            $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
+            $price = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant->save();
+
+            $new_phone = "308-282-4291";
+
+            //Act
+            $test_restaurant->updatePhone($new_phone);
+
+            //Assert
+            $this->assertEquals($new_phone, $test_restaurant->getPhone());
+        }
+
+        function test_updatePrice()
+        {
+            //Arrange
+            $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
+            $price = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             $new_price = 2;
@@ -291,12 +405,14 @@
         {
             //Arrange
             $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
             $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             $new_vegie = 1;
@@ -312,12 +428,14 @@
         {
             //Arrange
             $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
             $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             $new_opentime = 0930;
@@ -333,12 +451,14 @@
         {
             //Arrange
             $name = "Little Big Burger";
+            $address = "123 NW 23rd Ave.";
+            $phone = "971-289-8000";
             $price = 1;
             $vegie = 0;
             $opentime = 0900;
             $closetime = 2100;
             $id = 1;
-            $test_restaurant = new Restaurant($name, $price, $vegie, $opentime, $closetime, $id);
+            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
             $test_restaurant->save();
 
             $new_closetime = 2200;
