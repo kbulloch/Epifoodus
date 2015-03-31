@@ -35,8 +35,8 @@
 
       $choices = array_rand($restaurants, 2);
 
-      $restaurant1 = $choices[0];
-      $restaurant2 = $choices[1];
+      $restaurant1 = $restaurants[$choices[0]];
+      $restaurant2 = $restaurants[$choices[1]];
 
       return $app['twig']->render('options.twig', array('restaurants' => Restaurant::getAll(), 'restaurant1' => $restaurant1, 'restaurant2' => $restaurant2));
     });
@@ -93,7 +93,13 @@
 
         $new_restaurant->save();
 
-        return $app['twig']->render('add_restaurant.twig', array('restaurant' => $new_restaurant));
+        //for now, do the check for dupes later bra
+        $new_cuisine = new Cuisine($_POST['cuisine']);
+        $new_cuisine->save();
+
+        $new_restaurant->addCuisine($new_cuisine);
+
+        return $app['twig']->render('add_restaurant.twig', array('restaurant' => $new_restaurant, 'cuisine' => $new_cuisine));
     });
 
 
