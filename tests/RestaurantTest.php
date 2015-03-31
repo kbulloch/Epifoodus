@@ -244,5 +244,26 @@
             //Assert
             $this->assertEquals($test_restaurant, $result);
         }
+
+        function test_update()
+        {
+            //Arrange
+            $name = "Little Big Burger";
+            $price_id = 1;
+            $vegie = 0;
+            $opentime = 0900;
+            $closetime = 2100;
+            $id = 1;
+            $test_restaurant = new Restaurant($name, $price_id, $vegie, $opentime, $closetime, $id);
+            $test_restaurant->save();
+
+            $new_name = "Phat Phood";
+
+            //Act
+            $test_restaurant->update($new_name);
+
+            //Assert
+            $this->assertEquals($new_name, $test_restaurant->getName());
+        }
     }
 ?>
