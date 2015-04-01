@@ -68,7 +68,7 @@
     //EDIT a restaurant
     $app->get("/restaurants/{id}/edit", function($id) use ($app) {
       $restaurant = Restaurant::find($id);
-      return $app['twig']->render('edit_restaurant.twig', array('restaurant' => $restaurant));
+      return $app['twig']->render('restaurant_edit.twig', array('restaurant' => $restaurant));
     });
 
     //DELETE a restaurant
