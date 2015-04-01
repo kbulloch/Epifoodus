@@ -54,6 +54,50 @@
       return $app['twig']->render('cuisine.twig', array('cuisine' => $current_cuisine, 'restaurants' => $current_cuisine->getRestaurants()));
     });
 
+    //view a single restaurant
+    $app->get("/restaurant/{id}", function($id) use ($app) {
+      $restaurant = Restaurant::find($id);
+      $cuisine = Cuisine::find($id);
+      return $app['twig']->render('restaurant.twig', array('restaurant' => $restaurant, 'cuisine' => $cuisine, 'restaurants' => Restaurant::getAll()));
+    });
+
+    //EDIT a restaurant
+    $app->get("/restaurants/{id}/edit", function($id) use ($app) {
+      $restaurant = Restaurant::find($id);
+      return $app['twig']->render('edit_restaurant.twig', array('restaurant' => $restaurant));
+    });
+
+    //DELETE a restaurant
+    $app->delete("/restaurants/{id}", function($id) use ($app) {
+      $restaurant = Restaurant::find($id);
+      $restaurant->delete();
+      return $app['twig']->render('restaurants.twig', array('restaurants' => Restaurant::getAll()));
+    });
+
+    //UPDATE a restaurant
+    $app->patch("/restaurants/{id}", function($id) use ($app) {
+      $name = $_POST['name'];
+      $address = $_POST['address'];
+      $phone = $_POST['address'];
+      // $price = $_POST['price'];
+      // $vegie = $_POST['vegie'];
+      $opentime = $_POST['opentime'];
+      $closetime = $_POST['closetime'];
+      $restaurant = Restaurant::find($id);
+      $restaurant->updateName($name);
+      $restaurant->updateAddress($address);
+      $restaurant->updatePhone($phone);
+      // $restaurant->updatePrice($price);
+      // $restaurant->updateVegie($vegie);
+      $restaurant->updateOpentime($opentime);
+      $restaurant->updateClosetime($closetime);
+      return $app['twig']->render('restaurants.twig', array('restaurant' => $restaurant, 'restaurants' => Restaurant::getAll()));
+    });
+
+    // $app->get("/restaurants", function() use ($app) {
+    //   return $app['twig']->render('rest')
+    // })
+
     //all cuisines
     $app->get("/cuisines", function() use($app) {
       return $app['twig']->render('cuisines.twig', array('cuisines' => Cuisine::getAll()));

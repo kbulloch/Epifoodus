@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    <title>Epifoodus: I'm Hungry</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>All Restaurants in the Database</h2>
+
+      {% if restaurants is not empty %}
+        {% for restaurant in restaurants %}
+          <p><a href="/restaurant/{id}">{{ restaurant.getName }}</a></p>
+            <ul>
+              <li>{{ restaurant.getAddress }}</li>
+              <li>{{ restaurant.getPhone }}</li>
+              <li>{{ restaurant.getOpentime }}</li>
+              <li>{{ restaurant.getClosetime }}</li>
+              <li>{{ restaurant.getPrice }}</li>
+              <li>{{ restaurant.getClosetime }}</li>
+              <li>{{ restaurant.getVegie }}</li>
+            </ul>
+        {% endfor %}
+      {% endif %}
+
+      <p><a href="/restaurant_form">Enter a New Restaurant</a></p>
+      <p><a href="/">Home</a></p>
+    </div>
+
+  </body>
+</html>
