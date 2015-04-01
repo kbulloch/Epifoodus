@@ -2,6 +2,7 @@
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Cuisine.php";
     require_once __DIR__."/../src/Restaurant.php";
+    require_once __DIR__."/../src/User.php";
     //ADD OTHER CLASSES ONCE COMPLETE [users, likes, ??]
 
 
@@ -23,10 +24,16 @@
     *   main, options, choice, cuisine, all cuisines, create_user, user info
     */
 
+    session_start();
+    if (empty($_SESSION['user_id'])) {
+    $_SESSION['user_id'] = null;
+    }
+
     //main
     $app->get("/", function() use ($app) {
         return $app['twig']->render('main.twig');
     });
+
 
 
     //options -- randomly shows 2 restaurant options out of all restaurants
@@ -59,10 +66,49 @@
       return $app['twig']->render('cuisines.twig', array('cuisines' => Cuisine::getAll()));
     });
 
+
+
+
+
+/////////////////////////////////////////////////////////////
     //create user
     $app->get("/create_user", function() use($app) {
-      return $app['twig']->render('create_user.twig');
+
+
+      return $app['twig']->render('create_user.twig', array('user_id' => $_SESSION['user_id'], 'exists' => 0));
     });
+
+
+
+
+    $app->post("/create_user", function() use($app) {
+        $user = null;
+        $exists = User::checkIfExists($_POST['username']);
+
+        if ($exists == 0){
+            $user = new User($_POST['username'], $_POST['password'],0,0);
+            $user->save();
+            $new_user_id = $user->getId();
+            $_SESSION['user_id'] = $new_user_id;
+        }
+        else {
+            return $app['twig']->render('create_user.twig', array('user_exist' => $user, 'user_id' => $_SESSION['user_id'],'exists' => $exists));
+        }
+        return $app['twig']->render('user.twig', array('user'=>$user, 'user_id' => $_SESSION['user_id'], 'exists' => $exists));
+    });
+
+
+
+
+
+
+    $app->post("/logout", function() use($app) {
+        $_SESSION['user_id'] = null;
+        return $app['twig']->render('main.twig');
+    });
+    /////////////////////////////////////////////////////////////
+
+
 
     //user info
     $app->get("/user/{id}", function($id) use($app) {
@@ -73,9 +119,10 @@
     /* post routes for adding user + restaurant
       (cuisine will be created when restaurant is created)
     */
-    $app->post("/add_user", function() use($app) {
-      $user = new User($_POST['name'], $_POST['password']);
-    });
+
+
+
+
 
     $app->get("/restaurant_form", function() use($app) {
         return $app['twig']->render('restaurant_form.twig');

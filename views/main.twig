@@ -14,15 +14,15 @@
 
     <!-- user sign in -->
     <form action="/options" method="get">
-      <label for="user_name">Name:</label>
-      <input type="text" id="user_name" name="user_name">
+      <label for="signin_username">username:</label>
+      <input type="text" id="signin_username" name="signin_username">
       <label for="user_password">Password:</label>
       <input name="user_password" value="user_password">
       <button name="sign_in">Sign In</button>
     </form>
 
     <!-- create new user -->
-    <form action="/create_user" method="post">
+    <form action="/create_user" method="get">
       <button name="button">Sign Up</button>
     </form>
 
