@@ -2,6 +2,7 @@
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Cuisine.php";
     require_once __DIR__."/../src/Restaurant.php";
+    require_once __DIR__."/../src/User.php";
     //ADD OTHER CLASSES ONCE COMPLETE [users, likes, ??]
 
 
@@ -23,11 +24,19 @@
     *   main, options, choice, cuisine, all cuisines, create_user, user info
     */
 
-    $used_ids = [];
+    session_start();
+    if (empty($_SESSION['user_id'])) {
+        $_SESSION['user_id'] = null;
+    };
+    if (empty($_SESSION['is_admin'])) {
+        $_SESSION['is_admin'] = null;
+    };
 
     //main
+    //if user is already logged in,
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('main.twig');
+        $user = User::find($_SESSION['user_id']);
+        return $app['twig']->render('main.twig', array('user_id' => $_SESSION['user_id'], 'user' => $user));
     });
 
     //options -- randomly shows 2 restaurant options out of all restaurants
@@ -109,10 +118,59 @@
       return $app['twig']->render('cuisines.twig', array('cuisines' => Cuisine::getAll()));
     });
 
+
+
+
+
+/////////////////////////////////////////////////////////////
     //create user
     $app->get("/create_user", function() use($app) {
-      return $app['twig']->render('create_user.twig');
+      return $app['twig']->render('create_user.twig', array('user_id' => $_SESSION['user_id'], 'exists' => 0));
     });
+
+    //create user post route, will render profile page if user doesn't already exist, will render "create user" page with error msg if user exists already
+    $app->post("/create_user", function() use($app) {
+        $user = null;
+        $exists = User::checkIfExists($_POST['username']);
+
+        if ($exists == 0){
+            $user = new User($_POST['username'], $_POST['password'],0,0);
+            $user->save();
+            $new_user_id = $user->getId();
+            $_SESSION['user_id'] = $new_user_id;
+            $new_user_is_admin = $user->getAdmin();
+            $_SESSION['is_admin'] = $new_user_is_admin;
+        }
+        else {
+            return $app['twig']->render('create_user.twig', array('user_exist' => $user, 'user_id' => $_SESSION['user_id'],'exists' => $exists));
+        }
+        return $app['twig']->render('user.twig', array('user'=>$user, 'user_id' => $_SESSION['user_id'], 'exists' => $exists));
+    });
+
+    $app->post("/logout", function() use($app) {
+        $_SESSION['user_id'] = null;
+        return $app['twig']->render('main.twig', array('user_id' => $_SESSION['user_id']));
+    });
+
+    $app->post("/login", function() use($app) {
+        $username = $_POST['signin_username'];
+        $password = $_POST['user_password'];
+        $user = User::authenticatePassword($username, $password);
+        if ($user) {
+            $user_id= $user->getId();
+            $_SESSION['user_id']=$user_id;
+            $new_user_is_admin = $user->getAdmin();
+            $_SESSION['is_admin'] = $new_user_is_admin;
+            return $app['twig']->render('user.twig', array('user'=> $user, 'user_id' => $_SESSION['user_id'], 'is_admin' => $_SESSION['is_admin']));
+        }
+        else {
+            return $app['twig']->render('main.twig',array('user_id' => $_SESSION['user_id']));
+
+        }
+    });
+    /////////////////////////////////////////////////////////////
+
+
 
     //user info
     $app->get("/user/{id}", function($id) use($app) {
@@ -123,9 +181,10 @@
     /* post routes for adding user + restaurant
       (cuisine will be created when restaurant is created)
     */
-    $app->post("/add_user", function() use($app) {
-      $user = new User($_POST['name'], $_POST['password']);
-    });
+
+
+
+
 
     $app->get("/restaurant_form", function() use($app) {
         return $app['twig']->render('restaurant_form.twig');

@@ -389,7 +389,7 @@
             $test_User = new User($user,$password,$vegie,$admin , $id);
             $test_User->save();
 
-            $result = User::CheckUsers($user);
+            $result = User::CheckIfExists($user);
 
             $this->assertEquals(1, $result);
         }
@@ -407,7 +407,7 @@
 
             $new_user = "Jill";
 
-            $result = User::CheckUsers($new_user);
+            $result = User::CheckIfExists($new_user);
 
             $this->assertEquals(0, $result);
         }
@@ -425,8 +425,8 @@
 
             $test_username = "Abeer";
             $test_password = "Epicodus";
-            $result = User::CheckPassword($test_username, $test_password);
-            $this->assertEquals(0, $result);
+            $result = User::AuthenticatePassword($test_username, $test_password);
+            $this->assertEquals($test_User, $result);
         }
 
 

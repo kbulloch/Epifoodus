@@ -7,41 +7,28 @@
 
     <div class="container">
 
-    <!-- main button -->
     <br>
     <form action="/options" method="get">
         <button name="options" class="btn-danger btn-xl">I'm Hungry!</button>
     </form>
 
-    <!-- user sign in -->
-    <!-- <form action="/options" method="get">
-      <label for="user_name">Name:</label>
-      <input type="text" id="user_name" name="user_name">
+    {% if user_id is empty %}
+    <form action="/login" method="post">
+      <label for="signin_username">username:</label>
+      <input type="text" id="signin_username" name="signin_username">
       <label for="user_password">Password:</label>
-      <input name="user_password" value="user_password">
+      <input name="user_password" type="password">
       <button name="sign_in">Sign In</button>
-    </form> -->
-
-    <form id='login' action='login.php' method='post' accept-charset='UTF-8'>
-      <fieldset >
-      <legend>Login</legend>
-      <input type='hidden' name='submitted' id='submitted' value='1'/>
-
-      <label for='username' >UserName*:</label>
-      <input type='text' name='username' id='username'  maxlength="50" />
-
-      <label for='password' >Password*:</label>
-      <input type='password' name='password' id='password' maxlength="50" />
-
-      <input type='submit' name='Submit' value='Submit' />
-
-      </fieldset>
     </form>
 
-    <!-- create new user -->
-    <form action="/create_user" method="post">
+
+    <form action="/create_user" method="get">
       <button name="button">Sign Up</button>
     </form>
+    {% else %}
+        <p>You are logged in as {{ user.getUsername }}</p>
+    {% endif %}
+
 
     </div>
 

@@ -1,23 +1,29 @@
 <html>
   <head>
-    <title>Epifoodus: create account</title>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
   </head>
   <body>
-    <div class="container">
-      <h1> Create new user name and password!</h1>
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input placeholder="enter name" type="text" name="name" class="form-control required"
-      </div>
-      <br>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input placeholder= "new password" type="text" name="name" class="form-control required"
-      </div>
-      <br>
-      <button type="submit" class="btn btn-success">CREATE!!</button>
-    </div>
+    <h1>Create new user!</h2>
 
+    {% if user_id is not empty %}
+        <p>Someone is already logged in.</p>
+    {% else %}
+    {% if exists == 1 %}
+        <p>This username already exists</p>
+    {% endif %}
+    <form action="/create_user" method="post">
+        <div class="form-group">
+            <label for="name">Username</label>
+            <input placeholder="enter username" type="text" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input placeholder= "new password" type="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-success">CREATE!!</button>
+    </form>
+    {% endif %}
+    <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
   </body>
 </html>

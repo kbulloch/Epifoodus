@@ -183,14 +183,7 @@ restaurants.id) WHERE likes.answer = 2 AND likes.user_id = {$this->getId()};");
 	}
 
 
-    static function deleteAll()
-    {
-
-       $GLOBALS['DB']->exec("DELETE FROM users *;");
-
-    }
-
-	static function CheckUsers($username){
+	static function checkIfExists($username){
 		//if a user already exists, CheckUsers will return 1. If not, the user can be created and CheckUsers will return 0.
 		$result = 0;
 		$all_users= User::getAll();
@@ -202,17 +195,17 @@ restaurants.id) WHERE likes.answer = 2 AND likes.user_id = {$this->getId()};");
 		}
 		return $result;
 	}
-	
-	static function CheckPassword($username,$password)
+
+	static function AuthenticatePassword($username,$password)
 	{
 		//0 means there is a match, which we want
-		$result = 1;
+		$result = null;
 		$all_users= User::getAll();
 		 foreach($all_users as $user){
 			$user_username= $user->getUsername();
 			$user_password= $user->getPassword();
 			if($user_username == $username && $user_password == $password){
-				$result = 0;
+				$result = $user;
 
 			}
 		}
