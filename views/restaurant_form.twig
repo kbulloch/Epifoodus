@@ -6,38 +6,41 @@
 <body>
     <div class="container">
 
-        <h1>Create a new restaurant::</h1>
+        <h1>Create a new restaurant:</h1>
         <form action="/add_restaurant" method="post">
 
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Name:</label>
                 <input placeholder="Name" type="text" name="name" class="form-control" required>
             </div>
 
             <div class="form-group">
-                <label for="cuisine">Cuisine</label>
-                <input type="text" name="cuisine" class="form-control">
-                <!-- make a dropdown later -->
+                <label for="address">Address:</label>
+                <input placeholder="123 Fake St." type="text" name="address" class="form-control">
             </div>
 
             <div class="form-group">
-                <label for="address">Address</label>
-                <input type="text" name="address" class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="phone">Phone number</label>
+                <label for="phone">Phone number:</label>
                 <input placeholder="xxx xxx xxxx" type="text" name="phone" class="form-control">
             </div>
 
             <div class="form-group">
-                <label for="opentime">Open time</label>
-                <input placeholder="2400" type="number" name="opentime" class="form-control">
+                <label for="opentime">Open time:</label>
+                <input placeholder="0000" type="number" name="opentime" class="form-control">
             </div>
 
             <div class="form-group">
-                <label for="closetime">Close time</label>
+                <label for="closetime">Close time:</label>
                 <input placeholder="2400" type="number" name="closetime" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="cuisine">Cuisine:</label>
+                <select id="cuisine" name="cuisine">
+                    {% for cuisine in cuisines %}
+                    <option value={{ cuisine.getType }}>{{ cuisine.getType }}</option>
+                    {% endfor %}
+                </select>
             </div>
 
             <div class="form-group">
@@ -49,7 +52,7 @@
             </div>
 
             <div class="form-group">
-                <label for="price">Price level</label>
+                <label for="price">Price level:</label>
                 <select name="price">
                     <option value=1>$</option>
                     <option value=2>$$</option>

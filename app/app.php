@@ -60,13 +60,51 @@
     //choice
     $app->get("/choice/{id}", function($id) use($app) {
       $current_restaurant = Restaurant::find($id);
-      return $app['twig']->render('choice.twig', array('restaurant' => $current_restaurant, 'cuisine' => $current_restaurant->getCuisines()));
+      $cuisine = $current_restaurant->getCuisines();
+      $user = User::find($_SESSION['user_id']);
+      return $app['twig']->render('choice.twig', array('restaurant' => $current_restaurant, 'cuisine' => $cuisine[0], 'user' => $user));
     });
 
     //cuisine
     $app->get("/cuisines/{id}", function($id) use($app) {
       $current_cuisine = Cuisine::find($id);
       return $app['twig']->render('cuisine.twig', array('cuisine' => $current_cuisine, 'restaurants' => $current_cuisine->getRestaurants()));
+    });
+
+    //all cuisines
+    $app->get("/cuisines", function() use($app) {
+      return $app['twig']->render('cuisines.twig', array('cuisines' => Cuisine::getAll()));
+    });
+
+////////////////////////////////////////////////////////////////
+
+/*
+* ALL OF THESE ROUTES ARE HIDDEN FOR THE USER, ONLY ADMINS CAN ADD/ALTER RESTAURANTS
+*/
+
+
+    $app->get("/restaurant_form", function() use($app) {
+        return $app['twig']->render('restaurant_form.twig', array('cuisines' => Cuisine::getAll()));
+    });
+
+    $app->post("/add_restaurant", function() use($app) {
+      // needs all info for restaurant class & form. twig page currently blank
+        $new_restaurant = new Restaurant(
+            $_POST['name'],
+            $_POST['address'],
+            $_POST['phone'],
+            $_POST['price'],
+            $_POST['vegie'],
+            $_POST['opentime'],
+            $_POST['closetime']);
+
+        $new_restaurant->save();
+
+        //for now, do the check for dupes later bra
+        $new_cuisine = $_POST['cuisine'];
+        $new_restaurant->addCuisine($new_cuisine);
+
+        return $app['twig']->render('add_restaurant.twig', array('restaurant' => $new_restaurant, 'cuisine' => $new_cuisine, 'restaurants' => Restaurant::getAll()));
     });
 
     //view a single restaurant
@@ -112,15 +150,6 @@
       $restaurant->updateClosetime($closetime);
       return $app['twig']->render('restaurants.twig', array('restaurant' => $restaurant, 'restaurants' => Restaurant::getAll()));
     });
-
-    //all cuisines
-    $app->get("/cuisines", function() use($app) {
-      return $app['twig']->render('cuisines.twig', array('cuisines' => Cuisine::getAll()));
-    });
-
-
-
-
 
 /////////////////////////////////////////////////////////////
     //create user
@@ -178,70 +207,37 @@
       return $app['twig']->render('user.twig', array('user' => $current_user));
     });
 
-    /* post routes for adding user + restaurant
-      (cuisine will be created when restaurant is created)
-    */
 
-
-
-
-
-    $app->get("/restaurant_form", function() use($app) {
-        return $app['twig']->render('restaurant_form.twig');
-    });
-
-    $app->post("/add_restaurant", function() use($app) {
-      // needs all info for restaurant class & form. twig page currently blank
-        $new_restaurant = new Restaurant(
-            $_POST['name'],
-            $_POST['address'],
-            $_POST['phone'],
-            $_POST['price'],
-            $_POST['vegie'],
-            $_POST['opentime'],
-            $_POST['closetime']);
-
-        $new_restaurant->save();
-
-        //for now, do the check for dupes later bra
-        $new_cuisine = new Cuisine($_POST['cuisine']);
-        $new_cuisine->save();
-
-        $new_restaurant->addCuisine($new_cuisine);
-
-        return $app['twig']->render('add_restaurant.twig', array('restaurant' => $new_restaurant, 'cuisine' => $new_cuisine, 'restaurants' => Restaurant::getAll()));
-    });
-
-
-    /* a route for keeping option 1 / option 2 but re-randoming the other
-    * if we keep option 1, we use array_pop to drop restaurant2 from $choices
-    * if we keep option 2, we use array_shift to drop restuarant1 from $choices
-    */
-    $app->get("/keep1", function() use($app) {
-      array_pop($choices);
-
-      $restaurants = Restaurant::getAll();
-
-      $new_choices = array_rand($restaurants, 2);
-
-      $restaurant3 = $new_choices[0];
-      $restaurant4 = $new_choices[1];
-
-      return $app['twig']->render('options.twig', array('restaurants' => Restaurant::getAll(), 'restaurant1' => $choices[0], 'restaurant2' => $restaurant3));
-    });
-
-    $app->get("/keep2", function() use($app) {
-      array_shift($choices);
-
-      $restaurants = Restaurant::getAll();
-
-      $new_choices = array_rand($restaurants, 2);
-
-      $restaurant3 = $new_choices[0];
-      $restaurant4 = $new_choices[1];
-
-      return $app['twig']->render('options.twig', array('restaurants' => Restaurant::getAll(), 'restaurant2' => $choices[0], 'restaurant1' => $restaurant3));
-    });
+////// FUTURE WISHLIST CODE
+    // /* a route for keeping option 1 / option 2 but re-randoming the other
+    // * if we keep option 1, we use array_pop to drop restaurant2 from $choices
+    // * if we keep option 2, we use array_shift to drop restuarant1 from $choices
+    // */
+    // $app->get("/keep1", function() use($app) {
+    //   array_pop($choices);
+    //
+    //   $restaurants = Restaurant::getAll();
+    //
+    //   $new_choices = array_rand($restaurants, 2);
+    //
+    //   $restaurant3 = $new_choices[0];
+    //   $restaurant4 = $new_choices[1];
+    //
+    //   return $app['twig']->render('options.twig', array('restaurants' => Restaurant::getAll(), 'restaurant1' => $choices[0], 'restaurant2' => $restaurant3));
+    // });
+    //
+    // $app->get("/keep2", function() use($app) {
+    //   array_shift($choices);
+    //
+    //   $restaurants = Restaurant::getAll();
+    //
+    //   $new_choices = array_rand($restaurants, 2);
+    //
+    //   $restaurant3 = $new_choices[0];
+    //   $restaurant4 = $new_choices[1];
+    //
+    //   return $app['twig']->render('options.twig', array('restaurants' => Restaurant::getAll(), 'restaurant2' => $choices[0], 'restaurant1' => $restaurant3));
+    // });
 
     return $app;
 ?>
