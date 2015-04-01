@@ -6,24 +6,24 @@
   <body>
     <div class="containter">
 
-      <h2> New restaurant created! </h2>
-      <h1>{{ restaurant.getName }}</h1>
+        <h2> New restaurant created! </h2>
+        <h1>{{ restaurant.getName }}</h1>
 
-      <p>{# restaurant.getCuisineImg #}</p>
-      <p><a href="/cuisine/{{ cuisine.getId }}">{{ cuisine.getType }}</a></p>
-      <p>Address: {{ restaurant.getAddress }}</p>
-      <p>Phone: {{ restaurant.getPhone }}</p>
-      <p>Price Level: {{ restaurant.getPrice }}</p>
+        <p>{# restaurant.getCuisineImg #}</p>
+        <p><a href="/cuisine/{{ cuisine.getId }}">{{ cuisine.getType }}</a></p>
+        <p>Address: {{ restaurant.getAddress }}</p>
+        <p>Phone: {{ restaurant.getPhone }}</p>
+        <p>Price Level: {{ restaurant.getPrice }}</p>
 
 
-      <p>Vegetarian Options: {{ restaurant.getVegie }}</p>
-      <p>Open Time: {{ restaurant.getOpenTime }}</p>
-      <p>Close Time: {{ restaurant.getCloseTime }}</p>
+        <p>Vegetarian Options: {{ restaurant.getVegie }}</p>
+        <p>Open Time: {{ restaurant.getOpenTime }}</p>
+        <p>Close Time: {{ restaurant.getCloseTime }}</p>
 
-      <p><a href="/restaurant_form">Add more!</a></p>
-      <p><a href="/">Home</a></p>
+        <p><a href="/restaurant_form">Add more!</a></p>
+        <p><a href="/">Home</a></p>
 
-        <li><a href="/restaurants">View All Restaurants</a></li>
+        <a href="/restaurants">View All Restaurants</a>
 
     </div>
   </body>

@@ -9,14 +9,14 @@
 
       {% if restaurants is not empty %}
         {% for restaurant in restaurants %}
-          <p><a href="/restaurants/{id}/edit">{{ restaurant.getName }}</a></p>
+          <p><a href="/restaurants/{{ restaurant.getId }}/edit">{{ restaurant.getName }}</a></p>
             <ul>
-              <li>{{ restaurant.getAddress }}</li>
-              <li>{{ restaurant.getPhone }}</li>
-              <li>{{ restaurant.getOpentime }}</li>
-              <li>{{ restaurant.getClosetime }}</li>
-              <li>{{ restaurant.getPrice }}</li>
-              <li>{{ restaurant.getVegie }}</li>
+              <li>Address: {{ restaurant.getAddress }}</li>
+              <li>Phone: {{ restaurant.getPhone }}</li>
+              <li>Open: {{ restaurant.getOpentime }}</li>
+              <li>Close: {{ restaurant.getClosetime }}</li>
+              <li>Price: {{ restaurant.getPrice }}</li>
+              <li>Vegie: {{ restaurant.getVegie }}</li>
             </ul>
         {% endfor %}
       {% endif %}
