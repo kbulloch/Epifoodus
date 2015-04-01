@@ -6,10 +6,10 @@
 
     {% if user_id is not empty %}
         <p>Someone is already logged in.</p>
-    {% elseif exists == 1 %}
+    {% else %}
+    {% if exists == 1 %}
         <p>This username already exists</p>
     {% endif %}
-
     <form action="/create_user" method="post">
         <div class="form-group">
             <label for="name">Username</label>
