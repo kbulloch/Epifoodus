@@ -28,19 +28,44 @@
         return $app['twig']->render('main.twig');
     });
 
-
     //options -- randomly shows 2 restaurant options out of all restaurants
     $app->get("/options", function() use($app) {
 
-      $two_restaurants = Restaurant::getTwo();
+    $restaurant_list = Restaurant::getAll();
 
-      $GLOBALS['two_choices'] = $two_restaurants;
-      
-      $restaurant1 = $two_restaurants[0];
-      $restaurant2 = $two_restaurants[1];
+    $two_choices = [];
 
-      return $app['twig']->render('options.twig', array('restaurants' => Restaurant::getAll(), 'restaurant1' => $restaurant1, 'restaurant2' => $restaurant2));
+    $picks = array_rand($restaurant_list, 2);
+
+    $two_choices[0] = array_slice($restaurant_list, $picks[0], 1, true)[$picks[0]];
+    $two_choices[1] = array_slice($restaurant_list, $picks[1], 1, true)[$picks[1]];
+
+    $restaurant1 = $two_choices[0];
+    $restaurant2 = $two_choices[1];
+    // echo($restaurant_list);
+
+
+      return $app['twig']->render('options.twig', array('restaurant_list' => $restaurant_list, 'restaurant1' => $restaurant1, 'restaurant2' => $restaurant2));
     });
+
+    // $app->post("/new_options", function() use($app) {
+    //
+    // $restaurant_list = $_POST['restaurant_list'];
+    // var_dump($restaurant_list);
+    //
+    // $two_choices = [];
+    //
+    // $picks = array_rand($restaurant_list, 2);
+    //
+    // $two_choices[0] = array_slice($restaurant_list, $picks[0], 1, true)[$picks[0]];
+    // $two_choices[1] = array_slice($restaurant_list, $picks[1], 1, true)[$picks[1]];
+    //
+    // $restaurant1 = $two_choices[0];
+    // $restaurant2 = $two_choices[1];
+    //
+    //   return $app['twig']->render('options.twig', array('restaurant_list' => $restaurant_list, 'restaurant1' => $restaurant1, 'restaurant2' => $restaurant2));
+    // });
+
 
     //choice
     $app->get("/choice/{id}", function($id) use($app) {

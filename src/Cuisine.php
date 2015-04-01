@@ -33,7 +33,7 @@
 
         function getImg()
         {
-            return "/web/img/" . $this->getType() . ".jpeg";
+            return "/img/" . $this->getType() . ".png";
         }
 
         function save()

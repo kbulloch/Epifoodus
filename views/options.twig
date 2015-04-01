@@ -1,55 +1,55 @@
 <html>
-  <head>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
-    <title>Epifoodus: Choices</title>
-  </head>
-  <body>
+<head>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+<title>Epifoodus: Choices</title>
+</head>
+<body>
 
-    <div class="container">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9">
+      <div class="col-md-6 col-md-offset-2">
+        <h3 class="text-center"> Here's what's on the menu:</h3>
+      </div>
+
+
       <div class="row">
-        <div class="col-sm-9">
-          <div class="col-md-6 col-md-offset-2">
-            <h3 class="text-center"> Here's what's on the menu:</h3>
-          </div>
+        <div class="col-md-6">
+          <a href="/choice/{{ restaurant1.getId }}">
+            <h1>{{ restaurant1.getName }}</h1>
+            <img src="{{ restaurant1.getImg }}" alt="{{ restaurant1.getImg }}" />
+          </a>
 
-
-          <div class="row">
-            <div class="col-md-6">
-              <a href="/choice/{{ restaurant1.getId }}">
-                <h1>{{ restaurant1.getName }}</h1>
-                <p>{{ restaurant1.getImg }}</p>
-              </a>
-
-              <div class="col-md-3 col-md-offset-1">
-                <button href="/keep2" type="button" class="btn-danger">X</button>
-              </div>
-
-            </div>
-
-            <div class="col-md-6">
-              <a href="/choice/{{ restaurant2.getId }}">
-                <h1>{{ restaurant2.getName }}</h1>
-                <p>{{ restaurant2.getImg }}</p>
-              </a>
-            </div>
-
-              <div class="col-md-3 col-md-offset-1">
-                <button href="/keep1" type="button" class="btn-danger">X</button>
-              </div>
-          </div>
-
-          <br>
-          <br>
-
-          <div class="row">
-            <div class="col-md-6 col-md-offset-2">
-              <button href="/options" type="submit" name="pass" class="btn-warning btn-lg btn-block">Give me new options</button>
-            </div>
+          <div class="col-md-3 col-md-offset-1">
+            <button href="/keep2" type="button" class="btn-danger">X</button>
           </div>
 
         </div>
-      </div>
-    </div>
 
-  </body>
+        <div class="col-md-6">
+          <a href="/choice/{{ restaurant2.getId }}">
+            <h1>{{ restaurant2.getName }}</h1>
+            <img src="{{ restaurant2.getImg }}" alt="{{ restaurant2.getImg }}" />
+          </a>
+        </div>
+
+          <div class="col-md-3 col-md-offset-1">
+            <button href="/keep1" type="button" class="btn-danger">X</button>
+          </div>
+      </div>
+
+      <br>
+      <br>
+
+      <div class="row">
+        <div class="col-md-6 col-md-offset-2">
+            <button type="submit" name="pass" class="btn-warning btn-lg btn-block">Give me new options</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
 </html>
