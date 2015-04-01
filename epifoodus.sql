@@ -284,6 +284,8 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 --
 
 COPY cuisines (id, type) FROM stdin;
+1	Mexican
+2	Mexican
 \.
 
 
@@ -291,7 +293,7 @@ COPY cuisines (id, type) FROM stdin;
 -- Name: cuisines_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('cuisines_id_seq', 1, false);
+SELECT pg_catalog.setval('cuisines_id_seq', 2, true);
 
 
 --
@@ -299,6 +301,7 @@ SELECT pg_catalog.setval('cuisines_id_seq', 1, false);
 --
 
 COPY cuisines_restaurants (id, cuisine_id, restaurant_id) FROM stdin;
+1	2	4
 \.
 
 
@@ -306,7 +309,7 @@ COPY cuisines_restaurants (id, cuisine_id, restaurant_id) FROM stdin;
 -- Name: cuisines_restaurants_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('cuisines_restaurants_id_seq', 1, false);
+SELECT pg_catalog.setval('cuisines_restaurants_id_seq', 1, true);
 
 
 --
@@ -344,6 +347,10 @@ SELECT pg_catalog.setval('prices_id_seq', 1, false);
 --
 
 COPY restaurants (id, name, address, phone, price, vegie, opentime, closetime) FROM stdin;
+1	Testaurant	123 fake st	808 7777 3333	3	0	900	2200
+2	Beantown	333 boob ave	1800BEANBOOB	3	1	500	2300
+3	Doctor Taco	123 fake st	1800BEANBOOB	1	0	1	2
+4	Doctor Taco	123 fake st	808 7777 3333	1	0	1344	4321
 \.
 
 
@@ -351,7 +358,7 @@ COPY restaurants (id, name, address, phone, price, vegie, opentime, closetime) F
 -- Name: restaurants_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('restaurants_id_seq', 1, false);
+SELECT pg_catalog.setval('restaurants_id_seq', 4, true);
 
 
 --

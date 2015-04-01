@@ -1,4 +1,4 @@
-<?php
+// <?php
     /**
     * @backupGlobals disabled
     * @backupStaticAttributes disabled
@@ -6,7 +6,7 @@
     require_once "src/Restaurant.php";
     require_once "src/Cuisine.php";
 
-    $DB = new PDO('pgsql:host=localhost;dbname=epifoodus_test');
+    $DB = new PDO('pgsql:host=localhost;dbname=epifoodus');
 
     Class RestaurantTest extends PHPUnit_Framework_TestCase
     {
@@ -627,4 +627,4 @@
 
         }
     }
-?>
+// ?>
