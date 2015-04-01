@@ -26,12 +26,17 @@
 
     session_start();
     if (empty($_SESSION['user_id'])) {
-    $_SESSION['user_id'] = null;
+        $_SESSION['user_id'] = null;
+    };
+    if (empty($_SESSION['is_admin'])) {
+        $_SESSION['is_admin'] = null;
     };
 
     //main
+    //if user is already logged in, 
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('main.twig', array('user_id' => $_SESSION['user_id']));
+        $user = User::find($_SESSION['user_id']);
+        return $app['twig']->render('main.twig', array('user_id' => $_SESSION['user_id'], 'user' => $user));
     });
 
 
@@ -86,6 +91,8 @@
             $user->save();
             $new_user_id = $user->getId();
             $_SESSION['user_id'] = $new_user_id;
+            $new_user_is_admin = $user->getAdmin();
+            $_SESSION['is_admin'] = $new_user_is_admin;
         }
         else {
             return $app['twig']->render('create_user.twig', array('user_exist' => $user, 'user_id' => $_SESSION['user_id'],'exists' => $exists));
@@ -101,11 +108,13 @@
     $app->post("/login", function() use($app) {
         $username = $_POST['signin_username'];
         $password = $_POST['user_password'];
-        $user= User::authenticatePassword($username, $password);
+        $user = User::authenticatePassword($username, $password);
         if ($user) {
-        $user_id= $user->getId();
+            $user_id= $user->getId();
             $_SESSION['user_id']=$user_id;
-            return $app['twig']->render('user.twig', array('user'=> $user, 'user_id' => $_SESSION['user_id']));
+            $new_user_is_admin = $user->getAdmin();
+            $_SESSION['is_admin'] = $new_user_is_admin;
+            return $app['twig']->render('user.twig', array('user'=> $user, 'user_id' => $_SESSION['user_id'], 'is_admin' => $_SESSION['is_admin']));
         }
         else {
             return $app['twig']->render('main.twig',array('user_id' => $_SESSION['user_id']));

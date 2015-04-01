@@ -8,7 +8,7 @@
     <div class="container">
 
     <!-- main button -->
-  <form action="/options" method="get">
+    <form action="/options" method="get">
         <button name="options" class="btn-danger btn-xl">I'm Hungry!</button>
     </form>
 
@@ -27,8 +27,7 @@
       <button name="button">Sign Up</button>
     </form>
     {% else %}
-  <p>You are already logged in!</p>
-
+        <p>You are logged in as {{ user.getUsername }}</p>
     {% endif %}
 
 
