@@ -33,25 +33,28 @@
     };
 
     //main
-    //if user is already logged in, 
+    //if user is already logged in,
     $app->get("/", function() use ($app) {
         $user = User::find($_SESSION['user_id']);
         return $app['twig']->render('main.twig', array('user_id' => $_SESSION['user_id'], 'user' => $user));
     });
 
-
-
     //options -- randomly shows 2 restaurant options out of all restaurants
     $app->get("/options", function() use($app) {
 
-      $restaurants = Restaurant::getAll();
+        $restaurant_list = Restaurant::getAll();
 
-      $choices = array_rand($restaurants, 2);
+        $two_choices = [];
 
-      $restaurant1 = $restaurants[$choices[0]];
-      $restaurant2 = $restaurants[$choices[1]];
+        $picks = array_rand($restaurant_list, 2);
 
-      return $app['twig']->render('options.twig', array('restaurants' => Restaurant::getAll(), 'restaurant1' => $restaurant1, 'restaurant2' => $restaurant2));
+        array_push($two_choices, $restaurant_list[$picks[0]]);
+        array_push($two_choices, $restaurant_list[$picks[1]]);
+
+        $restaurant1 = $two_choices[0];
+        $restaurant2 = $two_choices[1];
+
+        return $app['twig']->render('options.twig', array('restaurant_list' => $restaurant_list, 'restaurant1' => $restaurant1, 'restaurant2' => $restaurant2));
     });
 
     //choice
