@@ -6,9 +6,47 @@
   <body>
 
     <div class="container">
-        <a href="/choice/{{ restaurant1.getId }}"><h1>{{ restaurant1.getName }}</h1></a>
-        <a href="/choice/{{ restaurant2.getId }}"><h1>{{ restaurant2.getName }}</h1></a>
+      <div class="row">
+        <div class="col-sm-9">
+          <h3 class="text-center"> Here's what's on the menu bub:</h3>
 
+
+          <div class="row">
+            <div class="col-md-6">
+              <a href="/choice/{{ restaurant1.getId }}">
+                <h1>{{ restaurant1.getName }}</h1>
+                <p>{{ restaurant1.getImg }}</p>
+              </a>
+
+              <div class="col-md-3 col-md-offset-1">
+                <button href="/keep2" type="button" name="button">X</button>
+              </div>
+
+            </div>
+
+            <div class="col-md-6">
+              <a href="/choice/{{ restaurant2.getId }}">
+                <h1>{{ restaurant2.getName }}</h1>
+                <p>{{ restaurant2.getImg }}</p>
+              </a>
+            </div>
+
+              <div class="col-md-3 col-md-offset-1">
+                <button href="/keep1" type="button" name="button">X</button>
+              </div>
+          </div>
+
+          <br>
+          <br>
+
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+              <button href="/options" type="submit" name="pass" class="btn-warning">Give me new options</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
 
   </body>
