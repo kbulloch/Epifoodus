@@ -100,7 +100,7 @@
 
         $new_restaurant->addCuisine($new_cuisine);
 
-        return $app['twig']->render('add_restaurant.twig', array('restaurant' => $new_restaurant, 'cuisine' => $new_cuisine));
+        return $app['twig']->render('add_restaurant.twig', array('restaurant' => $new_restaurant, 'cuisine' => $new_cuisine, 'restaurants' => Restaurant::getAll()));
     });
 
 
