@@ -66,6 +66,50 @@
       return $app['twig']->render('cuisine.twig', array('cuisine' => $current_cuisine, 'restaurants' => $current_cuisine->getRestaurants()));
     });
 
+    //view a single restaurant
+    $app->get("/restaurants/{id}", function($id) use ($app) {
+      $restaurant = Restaurant::find($id);
+      return $app['twig']->render('restaurant.twig', array('restaurant' => $restaurant, 'restaurants' => Restaurant::getAll()));
+    });
+
+    //all restaurants
+    $app->get("/restaurants", function() use ($app) {
+      return $app['twig']->render('restaurants.twig', array('restaurants' => Restaurant::getAll()));
+    });
+
+    //EDIT a restaurant
+    $app->get("/restaurants/{id}/edit", function($id) use ($app) {
+      $restaurant = Restaurant::find($id);
+      return $app['twig']->render('restaurant_edit.twig', array('restaurant' => $restaurant));
+    });
+
+    //DELETE a restaurant
+    $app->delete("/restaurants/{id}", function($id) use ($app) {
+      $restaurant = Restaurant::find($id);
+      $restaurant->delete();
+      return $app['twig']->render('restaurants.twig', array('restaurants' => Restaurant::getAll()));
+    });
+
+    //UPDATE a restaurant
+    $app->patch("/restaurants/{id}", function($id) use ($app) {
+      $name = $_POST['name'];
+      $address = $_POST['address'];
+      $phone = $_POST['phone'];
+      $opentime = $_POST['opentime'];
+      $closetime = $_POST['closetime'];
+      $restaurant = Restaurant::find($id);
+      $restaurant->updateName($name);
+      $restaurant->updateAddress($address);
+      $restaurant->updatePhone($phone);
+      // $price = $_POST['price'];
+      // $vegie = $_POST['vegie'];
+      // $restaurant->updatePrice($price);
+    //   $restaurant->updateVegie($vegie);
+      $restaurant->updateOpentime($opentime);
+      $restaurant->updateClosetime($closetime);
+      return $app['twig']->render('restaurants.twig', array('restaurant' => $restaurant, 'restaurants' => Restaurant::getAll()));
+    });
+
     //all cuisines
     $app->get("/cuisines", function() use($app) {
       return $app['twig']->render('cuisines.twig', array('cuisines' => Cuisine::getAll()));
@@ -162,7 +206,7 @@
 
         $new_restaurant->addCuisine($new_cuisine);
 
-        return $app['twig']->render('add_restaurant.twig', array('restaurant' => $new_restaurant, 'cuisine' => $new_cuisine));
+        return $app['twig']->render('add_restaurant.twig', array('restaurant' => $new_restaurant, 'cuisine' => $new_cuisine, 'restaurants' => Restaurant::getAll()));
     });
 
 
