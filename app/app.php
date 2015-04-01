@@ -73,14 +73,10 @@
 /////////////////////////////////////////////////////////////
     //create user
     $app->get("/create_user", function() use($app) {
-
-
       return $app['twig']->render('create_user.twig', array('user_id' => $_SESSION['user_id'], 'exists' => 0));
     });
 
-
-
-
+    //create user post route, will render profile page if user doesn't already exist, will render "create user" page with error msg if user exists already
     $app->post("/create_user", function() use($app) {
         $user = null;
         $exists = User::checkIfExists($_POST['username']);
@@ -97,14 +93,9 @@
         return $app['twig']->render('user.twig', array('user'=>$user, 'user_id' => $_SESSION['user_id'], 'exists' => $exists));
     });
 
-
-
-
-
-
     $app->post("/logout", function() use($app) {
         $_SESSION['user_id'] = null;
-        return $app['twig']->render('main.twig');
+        return $app['twig']->render('main.twig', array('user_id' => $_SESSION['user_id']));
     });
 
     $app->post("/login", function() use($app) {
