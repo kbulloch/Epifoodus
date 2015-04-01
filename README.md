@@ -30,7 +30,7 @@ CREATE TABLE restaurants (id serial PRIMARY KEY, name varchar, address varchar, 
 CREATE TABLE prices (id serial PRIMARY KEY, level int);
 CREATE TABLE cuisines (id serial PRIMARY KEY, type varchar);
 CREATE TABLE cuisines_restaurants (id serial PRIMARY KEY, cuisine_id int, restaurant_id int);
-CREATE TABLE users (id serial PRIMARY KEY, username varchar, password varchar);
+CREATE TABLE users (id serial PRIMARY KEY, username varchar, password varchar,vegie int,admin int);
 CREATE TABLE likes (id serial PRIMARY KEY, answer int, restaurant_id int, user_id int);
 CREATE DATABASE epifoodus_test WITH TEMPLATE epifoodus;
 

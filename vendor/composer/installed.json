@@ -175,18 +175,18 @@
     },
     {
         "name": "symfony/http-foundation",
-        "version": "v2.6.5",
-        "version_normalized": "2.6.5.0",
+        "version": "v2.6.6",
+        "version_normalized": "2.6.6.0",
         "target-dir": "Symfony/Component/HttpFoundation",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/HttpFoundation.git",
-            "reference": "d527885e37b55ec0e3dc6f4b70566d0f9b2f2388"
+            "reference": "8a6337233f08f7520de97f4ffd6f00e947d892f9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/d527885e37b55ec0e3dc6f4b70566d0f9b2f2388",
-            "reference": "d527885e37b55ec0e3dc6f4b70566d0f9b2f2388",
+            "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/8a6337233f08f7520de97f4ffd6f00e947d892f9",
+            "reference": "8a6337233f08f7520de97f4ffd6f00e947d892f9",
             "shasum": ""
         },
         "require": {
@@ -196,7 +196,7 @@
             "symfony/expression-language": "~2.4",
             "symfony/phpunit-bridge": "~2.7"
         },
-        "time": "2015-03-13 17:37:22",
+        "time": "2015-04-01 16:50:12",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -231,8 +231,8 @@
     },
     {
         "name": "symfony/event-dispatcher",
-        "version": "v2.6.5",
-        "version_normalized": "2.6.5.0",
+        "version": "v2.6.6",
+        "version_normalized": "2.6.6.0",
         "target-dir": "Symfony/Component/EventDispatcher",
         "source": {
             "type": "git",
