@@ -5,7 +5,7 @@
     */
     require_once "src/User.php";
     //require_once "src/Like.php";
-    $DB = new PDO('pgsql:host=localhost;dbname=epifoodus;user=abeer;password=abeer');
+    $DB = new PDO('pgsql:host=localhost;dbname=epifoodus');
   class UserTest extends PHPUnit_Framework_TestCase
     {
         protected function tearDown()
@@ -21,7 +21,7 @@
             $password= "Abeer";
             $id=null;
             $test_User = new User($user,$password,$id);
-           
+
             //Act
             $result = $test_User->getUsername();
             //Assert
@@ -97,13 +97,13 @@
             //That id in the object should be numeric (not null)
             $this->assertEquals(true, is_numeric($test_User->getId()));
         }
-        
+
         function testGetAll()
         {
             //Arrange
             $User = "Famous Footware";
             $password="password";
-            
+
             $test_User = new User($User,$password);
             $test_User->save();
             $name2 = "Epicodus PHP";
@@ -117,7 +117,7 @@
             //Assert
             $this->assertEquals([$test_User, $test_User2], $result);
         }
-      
+
         function testDeleteAll()
         {
             //Arrange
@@ -191,21 +191,21 @@
             //Assert
             $this->assertEquals([$test_User2], User::getAll());
         }
-        function testAddanswer()
-        {
-            //Arrange
-            //We need a User and a User saved
-            $User = "sHOE sTORE";
-            $test_User = new User($User,$password="pasnnnsword");
-            $test_User->save();
-
-            $name= "Drupal";
-            $test_store = new Store($name,$password="pasnnnsword");
-            $test_store->save();
-
-            $test_User->addStore($test_store);
-            $this->assertEquals($test_User->getStores(), [$test_store]);
-        }
+        // function testAddanswer()
+        // {
+        //     //Arrange
+        //     //We need a User and a User saved
+        //     $User = "sHOE sTORE";
+        //     $test_User = new User($User,$password="pasnnnsword");
+        //     $test_User->save();
+        //
+        //     $name= "Drupal";
+        //     $test_store = new Store($name,$password="pasnnnsword");
+        //     $test_store->save();
+        //
+        //     $test_User->addStore($test_store);
+        //     $this->assertEquals($test_User->getStores(), [$test_store]);
+        // }
         // //Now we write a test for the getStores method since we need it to be able to test the Add User method.
         // function testGetLikes()
         // {

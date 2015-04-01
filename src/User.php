@@ -43,7 +43,7 @@ class User
     $result= $statemnt->fetch(PDO::FETCH_ASSOC);
     $this->setId($result['id']);
     }
-    
+
     static function getAll(){
        $returned_users =$GLOBALS['DB']->query("SELECT * FROM users ;");
        $users=  array();
@@ -61,9 +61,9 @@ class User
 
     static function deleteAll()
     {
-    	
+
        $GLOBALS['DB']->exec("DELETE FROM users *;");
-    
+
     }
 
     static function find($search_id){
@@ -93,7 +93,7 @@ class User
     function delete(){
 
 	$GLOBALS['DB']->exec("DELETE FROM users * WHERE id={$this->getId()};");
-    
+
    }
 
    function addAnswer($user_id, $res_id, $answer)
@@ -114,7 +114,7 @@ class User
          $restaurant_id=$restaurant['id'];
          $restaurant_name= $restaurant['name'];
          $restaurant_price=$restaurant['price_id'];
-         $restaurant_vegetarian=$restaurant['vegetarian';]
+         $restaurant_vegetarian=$restaurant['vegetarian'];
          $restaurant_hours=$restaurant['hours'];
 
          $new_restaurant= new Restaurant();

@@ -206,6 +206,17 @@
             return $restaurants;
         }
 
+        static function getTwo()
+        {
+            $all_restaurants = Restaurant::getAll();
+            $picks = array_rand($all_restaurants, 2);
+            var_dump($picks);
+            // $picks = [0, 1];
+            $two_restaurants = [];
+            array_push($two_restaurants, $all_restaurants[$picks[0]]);
+            array_push($two_restaurants, $all_restaurants[$picks[1]]);
+            return $two_restaurants;
+        }
         static function find($search_id)
         {
             $found_restaurant = null;
