@@ -6,35 +6,47 @@
   <body>
     <div class="container">
       <h2>Edit {{ restaurant.getName }}</h2>
-
-      <form action='/restaurants/{{ restaurant.getId }}' method='post'>
+        <li>Address: {{ restaurant.getAddress }}</li>
+        <li>Phone: {{ restaurant.getPhone }}</li>
+        <li>Open: {{ restaurant.getOpentime }}</li>
+        <li>Close: {{ restaurant.getClosetime }}</li>
+        <li>Price: {{ restaurant.getPrice }}</li>
+        <li>Vegie: {{ restaurant.getVegie }}</li>
+    </div>
+    <br>
+    <div class="container">
+      <form action='/restaurants' method='post'>
         <input name='_method' type='hidden' value='patch'>
         <p>
           <label for='name'>Edit Name:</label>
           <input id='name' name='name' type='text'>
+          <button type='submit'>Update</button>
         </p>
 
         <p>
           <label for='address'>Edit Address:</label>
           <input id='address' name='address' type='text'>
+          <button type='submit'>Update</button>
         </p>
 
         <p>
           <label for='phone'>Edit Phone:</label>
           <input id='phone' name='phone' type='text'>
+          <button type='submit'>Update</button>
         </p>
 
         <p>
           <label for='opentime'>Edit Open:</label>
           <input id='opentime' name='opentime' type='text'>
+          <button type='submit'>Update</button>
         </p>
 
         <p>
           <label for='closetime'>Edit Close:</label>
           <input id='closetime' name='closetime' type='text'>
+          <button type='submit'>Update</button>
         </p>
 
-        <button type='submit'>Update</button>
       </form>
 
       <form action='/restaurants/{{ restaurant.getId }}'method='post'>

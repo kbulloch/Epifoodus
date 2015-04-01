@@ -23,17 +23,7 @@
       <p><a href="/restaurant_form">Add more!</a></p>
       <p><a href="/">Home</a></p>
 
-      <div class="right-block">
-        <p>
-          {% if restaurants is not empty %}
-            {% for restaurant in restaurants %}
-              <ul>
-                <li><a href="/restaurant/{{ restaurant.getId }}">{{ restaurant.getName }}</a></li>
-              </ul>
-            {% endfor %}
-          {% endif %}
-        </p>
-      </div>
+        <li><a href="/restaurants">View All Restaurants</a></li>
 
     </div>
   </body>

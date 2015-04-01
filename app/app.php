@@ -55,10 +55,9 @@
     });
 
     //view a single restaurant
-    $app->get("/restaurant/{id}", function($id) use ($app) {
+    $app->get("/restaurants/{id}", function($id) use ($app) {
       $restaurant = Restaurant::find($id);
-      $cuisine = Cuisine::find($id);
-      return $app['twig']->render('restaurant.twig', array('restaurant' => $restaurant, 'cuisine' => $cuisine, 'restaurants' => Restaurant::getAll()));
+      return $app['twig']->render('restaurant.twig', array('restaurant' => $restaurant, 'restaurants' => Restaurant::getAll()));
     });
 
     //EDIT a restaurant
@@ -78,7 +77,7 @@
     $app->patch("/restaurants/{id}", function($id) use ($app) {
       $name = $_POST['name'];
       $address = $_POST['address'];
-      $phone = $_POST['address'];
+      $phone = $_POST['phone'];
       // $price = $_POST['price'];
       // $vegie = $_POST['vegie'];
       $opentime = $_POST['opentime'];
@@ -94,9 +93,9 @@
       return $app['twig']->render('restaurants.twig', array('restaurant' => $restaurant, 'restaurants' => Restaurant::getAll()));
     });
 
-    // $app->get("/restaurants", function() use ($app) {
-    //   return $app['twig']->render('rest')
-    // })
+    $app->get("/restaurants", function() use ($app) {
+      return $app['twig']->render('restaurants.twig', array('restaurants' => Restaurant::getAll()));
+    });
 
     //all cuisines
     $app->get("/cuisines", function() use($app) {
