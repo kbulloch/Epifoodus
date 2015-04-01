@@ -27,11 +27,11 @@
     session_start();
     if (empty($_SESSION['user_id'])) {
     $_SESSION['user_id'] = null;
-    }
+    };
 
     //main
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('main.twig');
+        return $app['twig']->render('main.twig', array('user_id' => $_SESSION['user_id']));
     });
 
 
@@ -105,6 +105,21 @@
     $app->post("/logout", function() use($app) {
         $_SESSION['user_id'] = null;
         return $app['twig']->render('main.twig');
+    });
+
+    $app->post("/login", function() use($app) {
+        $username = $_POST['signin_username'];
+        $password = $_POST['user_password'];
+        $user= User::authenticatePassword($username, $password);
+        if ($user) {
+        $user_id= $user->getId();
+            $_SESSION['user_id']=$user_id;
+            return $app['twig']->render('user.twig', array('user'=> $user, 'user_id' => $_SESSION['user_id']));
+        }
+        else {
+            return $app['twig']->render('main.twig',array('user_id' => $_SESSION['user_id']));
+
+        }
     });
     /////////////////////////////////////////////////////////////
 

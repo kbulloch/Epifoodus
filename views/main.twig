@@ -8,16 +8,17 @@
     <div class="container">
 
     <!-- main button -->
-    <form action="/options" method="get">
+  <form action="/options" method="get">
         <button name="options" class="btn-danger btn-xl">I'm Hungry!</button>
     </form>
 
     <!-- user sign in -->
-    <form action="/options" method="get">
+    {% if user_id is empty %}
+    <form action="/login" method="post">
       <label for="signin_username">username:</label>
       <input type="text" id="signin_username" name="signin_username">
       <label for="user_password">Password:</label>
-      <input name="user_password" value="user_password">
+      <input name="user_password" type="password">
       <button name="sign_in">Sign In</button>
     </form>
 
@@ -25,6 +26,11 @@
     <form action="/create_user" method="get">
       <button name="button">Sign Up</button>
     </form>
+    {% else %}
+  <p>You are already logged in!</p>
+
+    {% endif %}
+
 
     </div>
 
