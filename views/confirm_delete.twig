@@ -1,0 +1,18 @@
+<html>
+<head>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    <title></title>
+</head>
+<body class="container">
+    <h1>are you sure?</h1>
+
+    <form action="/restaurants/{{ restaurant.getId }}/edit" method="get">
+        <button type='submit'>Nevermind</button>
+    </form>
+
+    <form action='/restaurants/{{ restaurant.getId }}' method='post'>
+      <input name='_method' type='hidden' value='delete'>
+      <button type='submit'>Delete this Restaurant</button>
+    </form>
+</body>
+</html>

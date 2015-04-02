@@ -162,7 +162,17 @@
 
         return $app['twig']->render('restaurant_edit.twig', array(
             'restaurant' => $restaurant,
-            'cuisine' => $cuisine));
+            'cuisine' => $cuisine, 'cuisines' => Cuisine::getAll()));
+    });
+
+    //confirm delete restaurant
+    $app->get("/restaurants/{id}/confirm_delete", function($id) use ($app) {
+
+        $restaurant = Restaurant::find($id);
+
+        return $app['twig']->render('confirm_delete.twig', array(
+            'restaurant' => $restaurant
+        ));
     });
 
     //DELETE a restaurant
@@ -189,6 +199,12 @@
         //   $restaurant->updateVegie($vegie);
         $restaurant->updateOpentime($opentime);
         $restaurant->updateClosetime($closetime);
+
+        $new_cuisine = $_POST['cuisine'];
+        $found_cuisine = Cuisine::findByType($new_cuisine);
+        var_dump($found_cuisine);
+        $restaurant->updateCuisine($found_cuisine);
+
         return $app['twig']->render('restaurants.twig', array(
             'restaurant' => $restaurant,
             'restaurants' => Restaurant::getAll()));

@@ -162,7 +162,7 @@
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE id = {$this->getId()};");
-            $GLOBALS['DB']->exec("DELETE FROM cuisines_restaurants WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM cuisines_restaurants WHERE restaurant_id = {$this->getId()};");
         }
 
         function addCuisine($cuisine)
@@ -170,9 +170,12 @@
             $GLOBALS['DB']->exec("INSERT INTO cuisines_restaurants (cuisine_id, restaurant_id) VALUES ({$cuisine->getId()}, {$this->getId()});");
         }
 
-        function unsetCuisine()
+        function updateCuisine($new_cuisine)
         {
-            $GLOBALS['DB']->exec("DELETE FROM cuisines_restaurants WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM cuisines_restaurants WHERE restaurant_id = {$this->getId()};");
+
+            $GLOBALS['DB']->exec("INSERT INTO cuisines_restaurants (cuisine_id, restaurant_id)
+                                  VALUES ({$new_cuisine->getId()}, {$this->getId()});");
         }
 
 
