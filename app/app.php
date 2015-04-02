@@ -174,9 +174,9 @@
             $_SESSION['is_admin'] = $new_user_is_admin;
         }
         else {
-            return $app['twig']->render('create_user.twig', array('user_exist' => $user, 'user_id' => $_SESSION['user_id'],'exists' => $exists));
+            return $app['twig']->render('create_user.twig', array('user_exist' => $user, 'user_id' => $_SESSION['user_id'],'exists' => $exists, 'is_vegie' => $_SESSION['is_vegie']));
         }
-        return $app['twig']->render('user.twig', array('user'=>$user, 'user_id' => $_SESSION['user_id'], 'exists' => $exists));
+        return $app['twig']->render('user.twig', array('user'=>$user, 'user_id' => $_SESSION['user_id'], 'exists' => $exists, 'is_vegie' => $_SESSION['is_vegie']));
     });
 
     $app->post("/logout", function() use($app) {
@@ -194,10 +194,10 @@
             $_SESSION['user_id']=$user_id;
             $new_user_is_admin = $user->getAdmin();
             $_SESSION['is_admin'] = $new_user_is_admin;
-            return $app['twig']->render('user.twig', array('user'=> $user, 'user_id' => $_SESSION['user_id'], 'is_admin' => $_SESSION['is_admin']));
+            return $app['twig']->render('user.twig', array('user'=> $user, 'user_id' => $_SESSION['user_id'], 'is_admin' => $_SESSION['is_admin'], 'is_vegie' => $_SESSION['is_vegie']));
         }
         else {
-            return $app['twig']->render('main.twig',array('user' => $user, 'user_id' => $_SESSION['user_id']));
+            return $app['twig']->render('main.twig',array('user' => $user, 'user_id' => $_SESSION['user_id'], 'is_vegie' => $_SESSION['is_vegie']));
 
         }
     });

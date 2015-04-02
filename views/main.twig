@@ -16,12 +16,12 @@
           <!-- sign in form -->
           <form action="/login" method="post">
             <label for="signin_username">Profile Name:</label>
-            <input type="text" id="signin_username" name="signin_username">
+            <input type="text" id="signin_username" name="signin_username" required>
 
             <br>
 
             <label for="user_password">Password:</label>
-            <input type="password" name="user_password">
+            <input type="password" name="user_password" required>
 
             <button class="btn btn-default btn-md">
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Sign in
@@ -35,7 +35,7 @@
             </button>
           </form>
 
-    
+
 
 
           {% endif %}
