@@ -61,8 +61,7 @@
 
       </form>
 
-      <form action='/restaurants/{{ restaurant.getId }}'method='post'>
-        <input name='_method' type='hidden' value='delete'>
+      <form action='/restaurants/{{ restaurant.getId }}/confirm_delete' method='get'>
         <button type='submit'>Delete this Restaurant</button>
       </form>
     </div>

@@ -165,6 +165,16 @@
             'cuisine' => $cuisine, 'cuisines' => Cuisine::getAll()));
     });
 
+    //confirm delete restaurant
+    $app->get("/restaurants/{id}/confirm_delete", function($id) use ($app) {
+
+        $restaurant = Restaurant::find($id);
+
+        return $app['twig']->render('confirm_delete.twig', array(
+            'restaurant' => $restaurant
+        ));
+    });
+
     //DELETE a restaurant
     $app->delete("/restaurants/{id}", function($id) use ($app) {
         $restaurant = Restaurant::find($id);
