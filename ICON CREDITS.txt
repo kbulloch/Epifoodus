@@ -78,3 +78,15 @@ beer
 
 croissant
 -- Daniele Falcone
+
+noodle
+-- Ji Sub Jeong
+
+vietnamese
+-- Brad Ashburn
+
+american
+-- Arthur Shlain
+
+korean
+-- Claire Jones
