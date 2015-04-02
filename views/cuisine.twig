@@ -11,11 +11,11 @@
 
       <h3>{{ cuisine.getType }}</h3>
 
-      {% if cuisine is not empty %}
+      {% if restaurants is not empty %}
 
-        {% for restaurants in cuisine %}
+        {% for restaurant in restaurants %}
 
-          <li><a href="/choices/{{ restaurant.getId }}">{{ restaurant.getName }}</a></li>
+          <li><a href="/choice/{{ restaurant.getId }}">{{ restaurant.getName }}</a></li>
 
         {% endfor %}
 
