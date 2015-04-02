@@ -74,41 +74,6 @@ class User
 		$this->setId($result['id']);
 	}
 
-	//static functions
-	static function getAll()
-	{
-		$returned_users = $GLOBALS['DB']->query("SELECT * FROM users ;");
-		$users = array();
-		foreach ($returned_users as $user) {
-			$username = $user['username'];
-			$password = $user['password'];
-			$admin    = $user['admin'];
-			$vegie    = $user['vegie'];
-			$id       = $user['id'];
-			$new_user = new User($username, $password, $vegie, $admin, $id);
-			array_push($users, $new_user);
-		}
-		return $users;
-	}
-
-	static function deleteAll()
-	{
-		$GLOBALS['DB']->exec("DELETE FROM users *;");
-	}
-
-	static function find($search_id)
-	{
-		$returned_user = null;
-		$all_users     = User::getAll();
-		foreach ($all_users as $user) {
-			$user_id = $user->getId();
-			if ($user_id == $search_id) {
-				$returned_user = $user;
-			}
-		}
-		return $returned_user;
-	}
-
 	function updateUsername($user_name)
 	{
 		$GLOBALS['DB']->exec("UPDATE users SET username={$user_name} WHERE id={$this->getId()};");
@@ -121,9 +86,9 @@ class User
 		$this->setPassword($new_password);
 	}
 
-	function delete()
+	function updateAnswer($answer, $rest_id)
 	{
-		$GLOBALS['DB']->exec("DELETE FROM users * WHERE id={$this->getId()};");
+		$GLOBALS['DB']->exec("UPDATE likes SET answer = {$answer} Where user_id={$this->getId() } AND restaurant_id={$rest_id};");
 	}
 
 	function addAnswer($user_id, $res_id, $answer)
@@ -132,9 +97,9 @@ class User
 			VALUES ($answer,{$this->getId()},$res_id)");
 	}
 
-	function updateAnswer($answer, $rest_id)
+	function delete()
 	{
-		$GLOBALS['DB']->exec("UPDATE likes SET answer = {$answer} Where user_id={$this->getId() } AND restaurant_id={$rest_id};");
+		$GLOBALS['DB']->exec("DELETE FROM users * WHERE id={$this->getId()};");
 	}
 
 	function getLikes()
@@ -181,6 +146,40 @@ class User
 		return $likes;
 	}
 
+	//static functions
+	static function getAll()
+	{
+		$returned_users = $GLOBALS['DB']->query("SELECT * FROM users ;");
+		$users = array();
+		foreach ($returned_users as $user) {
+			$username = $user['username'];
+			$password = $user['password'];
+			$admin    = $user['admin'];
+			$vegie    = $user['vegie'];
+			$id       = $user['id'];
+			$new_user = new User($username, $password, $vegie, $admin, $id);
+			array_push($users, $new_user);
+		}
+		return $users;
+	}
+
+	static function deleteAll()
+	{
+		$GLOBALS['DB']->exec("DELETE FROM users *;");
+	}
+
+	static function find($search_id)
+	{
+		$returned_user = null;
+		$all_users     = User::getAll();
+		foreach ($all_users as $user) {
+			$user_id = $user->getId();
+			if ($user_id == $search_id) {
+				$returned_user = $user;
+			}
+		}
+		return $returned_user;
+	}
 
 	static function CheckUsers($username){
 		//if a user already exists, CheckUsers will return 1. If not, the user can be created and CheckUsers will return 0.
