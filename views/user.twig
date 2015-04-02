@@ -19,8 +19,7 @@
             <input type="radio" name="vegie_status" value=1>Yes<br>
             <button type="submit">Submit</button>
         </form>
-        {% endif %}
-        {% if is_vegie == 1 %}
+        {% else %}
         <form action="/user" method="post">
             <label for="vegie_status">Are you a vegetarian?</label>
             <input type="radio" name="vegie_status" value=0>No<br>
@@ -36,5 +35,17 @@
 {% endif %}
 
 
+{% for like in likes %}
+<img src="{{ like.getImg }}" alt="{{ like.getImg }}" height="250px" width="250px"/>
+ <li>{{ like.getName }}</li>
+
+{% endfor %}
+<p>Here Are Your Dislikes</p>
+
+{% for dislike in dislikes %}
+<img src="{{ dislike.getImg }}" alt="{{ dislike.getImg }}" height="250px" width="250px"/>
+ <li>{{ dislike.getName }}</li>
+
+{% endfor %}
     </body>
 </html>

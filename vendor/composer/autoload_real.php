@@ -19,7 +19,7 @@ class ComposerAutoloaderInit204a45276a1656ef6d2ab0831ca0bbdf
             return self::$loader;
         }
 
-        spl_autoload_register(array('ComposerAutoloaderInit204a45276a1656ef6d2ab0831ca0bbdf', 'loadClassLoader'), true, true);
+        spl_autoload_register(array('ComposerAutoloaderInit871ac5390b9a485b5bc8f0928a305fdf', 'loadClassLoader'), true, true);
         self::$loader = $loader = new \Composer\Autoload\ClassLoader();
         spl_autoload_unregister(array('ComposerAutoloaderInit204a45276a1656ef6d2ab0831ca0bbdf', 'loadClassLoader'));
 

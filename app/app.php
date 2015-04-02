@@ -57,26 +57,50 @@
         $restaurant1 = $two_choices[0];
         $restaurant2 = $two_choices[1];
 
-        return $app['twig']->render('options.twig', array('restaurant_list' => $restaurant_list, 'restaurant1' => $restaurant1, 'restaurant2' => $restaurant2));
+        return $app['twig']->render('options.twig', array(
+            'restaurant_list' => $restaurant_list,
+            'restaurant1' => $restaurant1,
+            'restaurant2' => $restaurant2));
     });
 
     //choice
     $app->get("/choice/{id}", function($id) use($app) {
-      $current_restaurant = Restaurant::find($id);
-      $cuisine = $current_restaurant->getCuisines();
-      $user = User::find($_SESSION['user_id']);
-      return $app['twig']->render('choice.twig', array('restaurant' => $current_restaurant, 'cuisine' => $cuisine[0], 'user' => $user));
+        $current_restaurant = Restaurant::find($id);
+        $cuisine = $current_restaurant->getCuisines();
+        $user = User::find($_SESSION['user_id']);
+        return $app['twig']->render('choice.twig', array(
+            'restaurant' => $current_restaurant,
+            'cuisine' => $cuisine[0],
+            'user' => $user));
     });
+
+    //choice
+    $app->post("/choice/{id}", function($id) use($app) {
+
+        $current_restaurant = Restaurant::find($_POST['res_id']);
+        $cuisine = $current_restaurant->getCuisines();
+        $user = User::find($_SESSION['user_id']);
+        $user->addAnswer($_SESSION['user_id'],$_POST['res_id'],$_POST['like']);
+
+        return $app['twig']->render('choice.twig', array(
+            'restaurant' => $current_restaurant,
+            'cuisine' => $cuisine[0],
+            'user' => $user));
+    });
+
 
     //cuisine
     $app->get("/cuisines/{id}", function($id) use($app) {
-      $current_cuisine = Cuisine::find($id);
-      return $app['twig']->render('cuisine.twig', array('cuisine' => $current_cuisine, 'restaurants' => $current_cuisine->getRestaurants()));
+        $current_cuisine = Cuisine::find($id);
+        $restaurants = $current_cuisine->getRestaurants();
+        return $app['twig']->render('cuisine.twig', array(
+            'cuisine' => $current_cuisine,
+            'restaurants' => $restaurants));
     });
 
     //all cuisines
     $app->get("/cuisines", function() use($app) {
-      return $app['twig']->render('cuisines.twig', array('cuisines' => Cuisine::getAll()));
+        return $app['twig']->render('cuisines.twig', array('cuisines' => Cuisine::getAll()));
     });
 
 ////////////////////////////////////////////////////////////////
@@ -108,60 +132,80 @@
         $found_cuisine = Cuisine::findByType($new_cuisine);
         $new_restaurant->addCuisine($found_cuisine);
 
-        return $app['twig']->render('add_restaurant.twig', array('restaurant' => $new_restaurant, 'cuisine' => $found_cuisine, 'restaurants' => Restaurant::getAll()));
+
+        $user = User::find($_SESSION['user_id']);
+        return $app['twig']->render('add_restaurant.twig', array(
+            'user' => $user,
+            'restaurant' => $new_restaurant,
+            'cuisine' => $found_cuisine,
+            'restaurants' => Restaurant::getAll()));
     });
 
     //view a single restaurant
     $app->get("/restaurants/{id}", function($id) use ($app) {
-      $restaurant = Restaurant::find($id);
-      return $app['twig']->render('restaurant.twig', array('restaurant' => $restaurant, 'restaurants' => Restaurant::getAll()));
+        $restaurant = Restaurant::find($id);
+        return $app['twig']->render('restaurant.twig', array(
+            'restaurant' => $restaurant,
+            'restaurants' => Restaurant::getAll()));
     });
 
     //all restaurants
     $app->get("/restaurants", function() use ($app) {
-      return $app['twig']->render('restaurants.twig', array('restaurants' => Restaurant::getAll()));
+        return $app['twig']->render('restaurants.twig', array('restaurants' => Restaurant::getAll()));
     });
 
     //EDIT a restaurant
     $app->get("/restaurants/{id}/edit", function($id) use ($app) {
-      $restaurant = Restaurant::find($id);
-      return $app['twig']->render('restaurant_edit.twig', array('restaurant' => $restaurant));
+        $restaurant = Restaurant::find($id);
+        $cuisines = $restaurant->getCuisines();
+        $cuisine = $cuisines[0];
+
+        return $app['twig']->render('restaurant_edit.twig', array(
+            'restaurant' => $restaurant,
+            'cuisine' => $cuisine));
     });
 
     //DELETE a restaurant
     $app->delete("/restaurants/{id}", function($id) use ($app) {
-      $restaurant = Restaurant::find($id);
-      $restaurant->delete();
-      return $app['twig']->render('restaurants.twig', array('restaurants' => Restaurant::getAll()));
+        $restaurant = Restaurant::find($id);
+        $restaurant->delete();
+        return $app['twig']->render('restaurants.twig', array('restaurants' => Restaurant::getAll()));
     });
 
     //UPDATE a restaurant
     $app->patch("/restaurants/{id}", function($id) use ($app) {
-      $name = $_POST['name'];
-      $address = $_POST['address'];
-      $phone = $_POST['phone'];
-      $opentime = $_POST['opentime'];
-      $closetime = $_POST['closetime'];
-      $restaurant = Restaurant::find($id);
-      $restaurant->updateName($name);
-      $restaurant->updateAddress($address);
-      $restaurant->updatePhone($phone);
-      // $price = $_POST['price'];
-      // $vegie = $_POST['vegie'];
-      // $restaurant->updatePrice($price);
-    //   $restaurant->updateVegie($vegie);
-      $restaurant->updateOpentime($opentime);
-      $restaurant->updateClosetime($closetime);
-      return $app['twig']->render('restaurants.twig', array('restaurant' => $restaurant, 'restaurants' => Restaurant::getAll()));
+        $name = $_POST['name'];
+        $address = $_POST['address'];
+        $phone = $_POST['phone'];
+        $opentime = $_POST['opentime'];
+        $closetime = $_POST['closetime'];
+        $restaurant = Restaurant::find($id);
+        $restaurant->updateName($name);
+        $restaurant->updateAddress($address);
+        $restaurant->updatePhone($phone);
+        // $price = $_POST['price'];
+        // $vegie = $_POST['vegie'];
+        // $restaurant->updatePrice($price);
+        //   $restaurant->updateVegie($vegie);
+        $restaurant->updateOpentime($opentime);
+        $restaurant->updateClosetime($closetime);
+        return $app['twig']->render('restaurants.twig', array(
+            'restaurant' => $restaurant,
+            'restaurants' => Restaurant::getAll()));
     });
 
 /////////////////////////////////////////////////////////////
     //create user
     $app->get("/create_user", function() use($app) {
-      return $app['twig']->render('create_user.twig', array('user_id' => $_SESSION['user_id'], 'exists' => 0, 'is_admin' => $_SESSION['is_admin']));
+        return $app['twig']->render('create_user.twig', array(
+            'user_id' => $_SESSION['user_id'],
+            'exists' => 0,
+            'is_admin' => $_SESSION['is_admin']));
     });
 
-    //create user post route, will render profile page if user doesn't already exist, will render "create user" page with error msg if user exists already
+    //create user post route,
+    //will render profile page if user doesn't already exist,
+    //will render "create user" page with error msg if user exists already
     $app->post("/create_user", function() use($app) {
         $user = null;
         $exists = User::checkIfExists($_POST['username']);
@@ -175,15 +219,29 @@
             $_SESSION['is_admin'] = $new_user_is_admin;
         }
         else {
-            return $app['twig']->render('create_user.twig', array('user_exist' => $user, 'user_id' => $_SESSION['user_id'],'exists' => $exists, 'is_vegie' => $_SESSION['is_vegie']));
+            return $app['twig']->render('create_user.twig', array(
+                'user_exist' => $user,
+                'user_id' => $_SESSION['user_id'],
+                'exists' => $exists,
+                'is_vegie' => $_SESSION['is_vegie'],
+                'is_admin' => $_SESSION['is_admin']));
         }
-        return $app['twig']->render('user.twig', array('user'=>$user, 'user_id' => $_SESSION['user_id'], 'exists' => $exists, 'is_vegie' => $_SESSION['is_vegie']));
+        return $app['twig']->render('user.twig', array(
+            'user'=>$user,
+            'user_id' => $_SESSION['user_id'],
+            'exists' => $exists,
+            'is_vegie' => $_SESSION['is_vegie'],
+            'is_admin' => $_SESSION['is_admin'],
+            'likes'=>$user->getLikes(),
+            'dislikes'=>$user->getDisLikes()));
     });
 
     $app->post("/logout", function() use($app) {
         $_SESSION['user_id'] = null;
         $user = User::find($_SESSION['user_id']);
-        return $app['twig']->render('main.twig', array('user_id' => $_SESSION['user_id'], 'user' => $user));
+        return $app['twig']->render('main.twig', array(
+            'user_id' => $_SESSION['user_id'],
+            'user' => $user));
     });
 
     $app->post("/login", function() use($app) {
@@ -195,10 +253,21 @@
             $_SESSION['user_id']=$user_id;
             $new_user_is_admin = $user->getAdmin();
             $_SESSION['is_admin'] = $new_user_is_admin;
-            return $app['twig']->render('user.twig', array('user'=> $user, 'user_id' => $_SESSION['user_id'], 'is_admin' => $_SESSION['is_admin'], 'is_vegie' => $_SESSION['is_vegie']));
+            return $app['twig']->render('user.twig', array(
+                'user'=> $user,
+                'user_id' => $_SESSION['user_id'],
+                'is_admin' => $_SESSION['is_admin'],
+                'is_vegie' => $_SESSION['is_vegie'],
+                'likes'=>$user->getLikes(),
+                'dislikes'=>$user->getDisLikes()));
         }
         else {
-            return $app['twig']->render('main.twig',array('user' => $user, 'user_id' => $_SESSION['user_id'], 'is_vegie' => $_SESSION['is_vegie']));
+            return $app['twig']->render('main.twig',array(
+                'user' => $user,
+                'user_id' => $_SESSION['user_id'],
+                'is_vegie' => $_SESSION['is_vegie'],
+                'likes'=>$user->getLikes(),
+                'dislikes'=>$user->getDisLikes()));
 
         }
     });
@@ -211,7 +280,13 @@
       $current_user = User::find($_SESSION['user_id']);
       $admin_status = $_SESSION['is_admin'];
       $is_vegie = $_SESSION['is_vegie'];
-      return $app['twig']->render('user.twig', array('user' => $current_user, 'is_admin' => $admin_status, 'is_vegie' => $is_vegie));
+
+      return $app['twig']->render('user.twig', array(
+          'user' => $current_user,
+          'is_admin' => $admin_status,
+          'is_vegie' => $is_vegie,
+          'likes'=>$current_user->getLikes(),
+          'dislikes'=>$current_user->getDisLikes()));
     });
 
     $app->post("/user", function() use($app) {
@@ -220,40 +295,15 @@
         $current_user->updateVegie($_POST['vegie_status']);
         $_SESSION['is_vegie']=$current_user->getVegie();
         $is_vegie = $_SESSION['is_vegie'];
-        return $app['twig']->render('user.twig', array('user' => $current_user, 'is_admin' => $admin_status, 'is_vegie' => $is_vegie));
+
+
+        return $app['twig']->render('user.twig', array(
+            'user' => $current_user,
+            'is_admin' => $admin_status,
+            'is_vegie' => $is_vegie ,
+            'likes'=>$current_user->getLikes(),
+            'dislikes'=>$current_user->getDisLikes()));
     });
-
-
-////// FUTURE WISHLIST CODE
-    // /* a route for keeping option 1 / option 2 but re-randoming the other
-    // * if we keep option 1, we use array_pop to drop restaurant2 from $choices
-    // * if we keep option 2, we use array_shift to drop restuarant1 from $choices
-    // */
-    // $app->get("/keep1", function() use($app) {
-    //   array_pop($choices);
-    //
-    //   $restaurants = Restaurant::getAll();
-    //
-    //   $new_choices = array_rand($restaurants, 2);
-    //
-    //   $restaurant3 = $new_choices[0];
-    //   $restaurant4 = $new_choices[1];
-    //
-    //   return $app['twig']->render('options.twig', array('restaurants' => Restaurant::getAll(), 'restaurant1' => $choices[0], 'restaurant2' => $restaurant3));
-    // });
-    //
-    // $app->get("/keep2", function() use($app) {
-    //   array_shift($choices);
-    //
-    //   $restaurants = Restaurant::getAll();
-    //
-    //   $new_choices = array_rand($restaurants, 2);
-    //
-    //   $restaurant3 = $new_choices[0];
-    //   $restaurant4 = $new_choices[1];
-    //
-    //   return $app['twig']->render('options.twig', array('restaurants' => Restaurant::getAll(), 'restaurant2' => $choices[0], 'restaurant1' => $restaurant3));
-    // });
 
     return $app;
 ?>

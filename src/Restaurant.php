@@ -170,8 +170,13 @@
             $GLOBALS['DB']->exec("INSERT INTO cuisines_restaurants (cuisine_id, restaurant_id) VALUES ({$cuisine->getId()}, {$this->getId()});");
         }
 
+        function unsetCuisine()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM cuisines_restaurants WHERE id = {$this->getId()};");
+        }
 
-        function getCuisines()
+
+        function getCuisines() //could change to not return array later if time permits
         {
             $cuisines = array();
             $returned_cuisines = $GLOBALS['DB']->query("SELECT cuisines.* FROM restaurants

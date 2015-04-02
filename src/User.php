@@ -187,7 +187,7 @@ restaurants.id) WHERE likes.answer = 2 AND likes.user_id = {$this->getId()};");
 		//0 means there is a match, which we want
 		$result = null;
 		$all_users= User::getAll();
-		 foreach($all_users as $user){
+		foreach($all_users as $user){
 			$user_username= $user->getUsername();
 			$user_password= $user->getPassword();
 			if($user_username == $username && $user_password == $password){
@@ -197,7 +197,7 @@ restaurants.id) WHERE likes.answer = 2 AND likes.user_id = {$this->getId()};");
 		}
 		return $result;
 
-    }
+	}
 
 //    function updateUsername($user_name){
 //
