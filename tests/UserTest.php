@@ -235,6 +235,26 @@
             //Assert
             $this->assertEquals("abeer", $test_User2->getPassword());
         }
+
+        function testUpdateVegie()
+        {
+            //Arrange
+            $user2 = "HIST100";
+            $password2= "Abeer";
+            $id2=null;
+            $vegie2=0;
+            $admin2=1;
+            $test_User2 = new User($user2,$password2,$vegie2,$admin2 , $id2);
+            $test_User2->save();
+
+            $new_password = 1;
+            //Act
+            $test_User2->updateVegie($new_password);
+            //Assert
+            $this->assertEquals(1, $test_User2->getVegie());
+        }
+
+
         function testDeleteUser()
         {
             //Arrange

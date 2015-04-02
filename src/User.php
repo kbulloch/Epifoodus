@@ -59,7 +59,7 @@ class User
 	{
 		$statemnt = $GLOBALS['DB']->query("INSERT INTO users (username, password,vegie,admin) VALUES
 	('{$this->getUsername()}', '{$this->getPassword()}',{$this->getVegie()},{$this->getAdmin()}) RETURNING id;");
-		$result   = $statemnt->fetch(PDO::FETCH_ASSOC);
+		$result = $statemnt->fetch(PDO::FETCH_ASSOC);
 		$this->setId($result['id']);
 	}
 	static function getAll()
@@ -112,6 +112,14 @@ class User
 		$GLOBALS['DB']->exec(" INSERT INTO likes (answer,user_id,
 restaurant_id)  VALUES ($answer,{$this->getId()},$res_id)");
 	}
+
+	function updateVegie($is_vegie)
+	{
+		$GLOBALS['DB']->exec("UPDATE users SET vegie={$is_vegie} WHERE id={$this->getId()};");
+		$this->setVegie($is_vegie);
+	}
+
+
 	function updateAnswer($answer, $rest_id)
 	{
 		$GLOBALS['DB']->exec("UPDATE likes SET answer = {$answer} Where user_id={$this->getId() } AND restaurant_id={$rest_id};");
