@@ -29,22 +29,32 @@
         {% endif %}
 
         {% if is_admin == 1 %}
-        <a href="/restaurant_form"><button type="submit">Add Restaurant</button></a>
-        <a href="/restaurants"><button type="submit">View All Restaurants</button></a>
-
+            <a href="/restaurant_form"><button type="submit">Add Restaurant</button></a>
+            <a href="/restaurants"><button type="submit">View All Restaurants</button></a>
         {% endif %}
 
         {% if likes is not empty %}
             <p>Likes</p>
             {% for like in likes %}
-                 <li>{{ like.getName }}</li>
+            <form action='/delete/like/{{ like.getId }}' method='post' class='inlineForm'>
+            <input name='_method' type='hidden' value='delete'>
+         <input type='submit' class='deleteLink' value='x'>
+                 <a href="/choice/{{ like.getId }}">{{ like.getName }}</a>
+
+            </form>
             {% endfor %}
         {% endif %}
 
         {% if dislikes is not empty %}
             <p>Dislikes</p>
             {% for dislike in dislikes %}
-                 <li>{{ dislike.getName }}</li>
+            <form action='/delete/like/{{ dislike.getId }}' method='post' class='inlineForm'>
+            <input name='_method' type='hidden' value='delete'>
+            <input type='submit' class='deleteLink' value='x'>
+            <a href="/choice/{{ dislike.getId }}">{{ dislike.getName }}</a>
+
+            </form>
+
             {% endfor %}
         {% endif %}
 

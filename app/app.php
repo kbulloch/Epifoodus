@@ -319,6 +319,19 @@
             'likes'=>$current_user->getLikes(),
             'dislikes'=>$current_user->getDisLikes()));
     });
+    $app->delete("/delete/like/{id}", function($id) use ($app) {
+        $restaurant = Restaurant::find($id);
+        $user=User::find($_SESSION['user_id']);
+        $rest_id=$restaurant->getId();
+        $user->deleteLike($rest_id);
+
+        return $app['twig']->render('user.twig', array(
+            'user' => $user,
+            'is_admin' =>  $_SESSION['is_admin'],
+            'is_vegie' =>$_SESSION['is_vegie'],
+            'likes'=>$user->getLikes(),
+            'dislikes'=>$user->getDisLikes()));
+    });
 
     return $app;
 ?>
