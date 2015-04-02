@@ -3,9 +3,7 @@
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
     <title>New Restaurant Form</title>
 </head>
-<body>
-    <div class="container">
-
+    <body class="container">
         <h1>Create a new restaurant:</h1>
         <form action="/add_restaurant" method="post">
 
@@ -59,11 +57,43 @@
                     <option value=3>$$$</option>
                 </select>
             </div>
+            <button submit="submit" class="btn btn-default btn-md">
+                    <span class="glyphicon glyphicon-plus"></span> Create
+                </button>
+            </form>
 
-            <button type="submit" class="btn btn-success">CREATE!!</button>
-        </form>
-        <br>
-        <p><a href="/restaurants">Back</a></p>
-    </div>
-</body>
+<!-- Footer navbar -->
+        <footer id="footer" class="navbar navbar-fixed-bottom">
+            <div class="well well-sm" style="text-align:center">
+
+
+            <p>You are logged in as {{ user.getUsername }}</p>
+                <!-- View all -->
+                <form class="btn-group inline" action="/restaurants" method="get">
+                    <button class="btn btn-default btn-md">
+                        <span class="glyphicon glyphicon-eye-open"></span> View All
+                    </button>
+                </form>
+                <!-- Add more -->
+                <form class="btn-group inline" action="/restaurants_form" method="get">
+                    <button class="btn btn-default btn-md">
+                        <span class="glyphicon glyphicon-plus"></span> Add More
+                    </button>
+                </form>
+                <!-- View Profile -->
+                <form class="btn-group inline" action="/user" method="get">
+                    <button class="btn btn-default btn-md">
+                        <span class="glyphicon glyphicon-user"></span> View Profile
+                    </button>
+                </form>
+                <!-- Sign out -->
+                <form class="btn-group" action="/logout" method="post">
+                    <button class="btn btn-default btn-md">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Sign Out
+                    </button>
+                </form>
+
+            </div>
+        </footer>
+    </body>
 </html>
