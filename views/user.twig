@@ -28,24 +28,25 @@
         </form>
         {% endif %}
 
-{% if is_admin == 1 %}
-<a href="/restaurant_form"><button type="submit">Add Restaurant</button></a>
-<a href="/restaurants"><button type="submit">View All Restaurants</button></a>
+        {% if is_admin == 1 %}
+        <a href="/restaurant_form"><button type="submit">Add Restaurant</button></a>
+        <a href="/restaurants"><button type="submit">View All Restaurants</button></a>
 
-{% endif %}
+        {% endif %}
 
+        {% if likes is not empty %}
+            <p>Likes</p>
+            {% for like in likes %}
+                 <li>{{ like.getName }}</li>
+            {% endfor %}
+        {% endif %}
 
-{% for like in likes %}
-<img src="{{ like.getImg }}" alt="{{ like.getImg }}" height="250px" width="250px"/>
- <li>{{ like.getName }}</li>
+        {% if dislikes is not empty %}
+            <p>Dislikes</p>
+            {% for dislike in dislikes %}
+                 <li>{{ dislike.getName }}</li>
+            {% endfor %}
+        {% endif %}
 
-{% endfor %}
-<p>Here Are Your Dislikes</p>
-
-{% for dislike in dislikes %}
-<img src="{{ dislike.getImg }}" alt="{{ dislike.getImg }}" height="250px" width="250px"/>
- <li>{{ dislike.getName }}</li>
-
-{% endfor %}
     </body>
 </html>

@@ -281,9 +281,8 @@
             return $app['twig']->render('main.twig',array(
                 'user' => $user,
                 'user_id' => $_SESSION['user_id'],
-                'is_vegie' => $_SESSION['is_vegie'],
-                'likes'=>$user->getLikes(),
-                'dislikes'=>$user->getDisLikes()));
+                'is_vegie' => $_SESSION['is_vegie']
+            ));
 
         }
     });

@@ -109,8 +109,10 @@ class User
 	}
 	function addAnswer($user_id, $res_id, $answer)
 	{
-		$GLOBALS['DB']->exec(" INSERT INTO likes (answer,user_id,
-restaurant_id)  VALUES ($answer,{$this->getId()},$res_id)");
+		$users_likes = $GLOBALS['DB']->query("SELECT * FROM likes WHERE user_id == $user_id AND restaurant_id = $res_id")
+		if (!$users_likes) {
+			$GLOBALS['DB']->exec("INSERT INTO likes (answer, user_id, restaurant_id)  VALUES ($answer, {$this->getId()}, $res_id)");
+		}
 	}
 
 	function updateVegie($is_vegie)
