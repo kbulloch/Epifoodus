@@ -583,48 +583,48 @@
             $this->assertEquals($test_cuisine->getImg(), $result);
         }
 
-        function test_getTwo()
-        {
-            //Arrange
-            $name = "Little Big Burger";
-            $address = "123 NW 23rd Ave.";
-            $phone = "971-289-8000";
-            $price = 1;
-            $vegie = 0;
-            $opentime = 0900;
-            $closetime = 2100;
-            $id = 1;
-            $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
-            $test_restaurant->save();
-
-            $name2 = "Kingsland";
-            $address2 = "124 SW 5th";
-            $phone2 = "456-292-2801";
-            $price2 = 2;
-            $vegie2 = 0;
-            $opentime2 = 0800;
-            $closetime2 = 2200;
-            $id2 = 2;
-            $test_restaurant2 = new Restaurant($name2, $address2, $phone2, $price2, $vegie2, $opentime2, $closetime2, $id2);
-            $test_restaurant2->save();
-
-            // $name3 = "Doctor Taco";
-            // $address3 = "134 SW 5th";
-            // $phone3 = "456-393-3801";
-            // $price3 = 3;
-            // $vegie3 = 0;
-            // $opentime3 = 0800;
-            // $closetime3 = 3300;
-            // $id3 = 3;
-            // $test_restaurant3 = new Restaurant($name3, $address3, $phone3, $price3, $vegie3, $opentime3, $closetime3, $id3);
-            // $test_restaurant3->save();
-
-            //Act
-            $result = Restaurant::getTwo();
-
-            //Assert
-            $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
-
-        }
+        // function test_getTwo()
+        // {
+        //     //Arrange
+        //     $name = "Little Big Burger";
+        //     $address = "123 NW 23rd Ave.";
+        //     $phone = "971-289-8000";
+        //     $price = 1;
+        //     $vegie = 0;
+        //     $opentime = 0900;
+        //     $closetime = 2100;
+        //     $id = 1;
+        //     $test_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
+        //     $test_restaurant->save();
+        //
+        //     $name2 = "Kingsland";
+        //     $address2 = "124 SW 5th";
+        //     $phone2 = "456-292-2801";
+        //     $price2 = 2;
+        //     $vegie2 = 0;
+        //     $opentime2 = 0800;
+        //     $closetime2 = 2200;
+        //     $id2 = 2;
+        //     $test_restaurant2 = new Restaurant($name2, $address2, $phone2, $price2, $vegie2, $opentime2, $closetime2, $id2);
+        //     $test_restaurant2->save();
+        //
+        //     // $name3 = "Doctor Taco";
+        //     // $address3 = "134 SW 5th";
+        //     // $phone3 = "456-393-3801";
+        //     // $price3 = 3;
+        //     // $vegie3 = 0;
+        //     // $opentime3 = 0800;
+        //     // $closetime3 = 3300;
+        //     // $id3 = 3;
+        //     // $test_restaurant3 = new Restaurant($name3, $address3, $phone3, $price3, $vegie3, $opentime3, $closetime3, $id3);
+        //     // $test_restaurant3->save();
+        //
+        //     //Act
+        //     $result = Restaurant::getTwo();
+        //
+        //     //Assert
+        //     $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
+        //
+        // }
     }
 // ?>
