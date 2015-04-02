@@ -4,59 +4,88 @@
         <title>Welcome To Your Page</title>
     </head>
     <body class="container">
-        <p>Welcome to your menu {{ user.getUsername }}</p>
+        <div class="well well-sm" style="text-align:center">
+        <h1>Welcome to your menu, {{ user.getUsername }}</h1>
 
-        <form action="/logout" method="post">
-            <button type="submit">Logout</button>
-        </form>
-
-        <a href="/"><button type="submit">Home</button></a>
 
         {% if is_vegie == 0 %}
         <form action="/user" method="post">
-            <label for="vegie_status">Are you a vegetarian?</label>
-            <input type="radio" name="vegie_status" value=0 checked>No<br>
-            <input type="radio" name="vegie_status" value=1>Yes<br>
-            <button type="submit">Submit</button>
+            <label for="vegie_status">Are you a vegetarian?</label><br>
+                <input type="radio" name="vegie_status" value=0 checked>No<br>
+                <input type="radio" name="vegie_status" value=1>Yes<br>
+                <button type="submit" class="btn btn-default btn-md">
+                    <span class="glyphicon glyphicon-cutlery"></span> Submit
+                </button>
         </form>
         {% else %}
         <form action="/user" method="post">
-            <label for="vegie_status">Are you a vegetarian?</label>
-            <input type="radio" name="vegie_status" value=0>No<br>
-            <input type="radio" name="vegie_status" value=1 checked>Yes<br>
-            <button type="submit">Submit</button>
+            <label for="vegie_status">Are you a vegetarian?</label><br>
+                <input type="radio" name="vegie_status" value=0>No<br>
+                <input type="radio" name="vegie_status" value=1 checked>Yes<br>
+            <button type="submit" class="btn btn-default btn-md">
+                <span class="glyphicon glyphicon-leaf"></span> Submit
+            </button>
         </form>
         {% endif %}
 
         {% if is_admin == 1 %}
-            <a href="/restaurant_form"><button type="submit">Add Restaurant</button></a>
-            <a href="/restaurants"><button type="submit">View All Restaurants</button></a>
+        <form class="btn-group inline" action="/restaurant_form" method="get">
+            <button class="btn btn-default btn-md">
+                <span class="glyphicon glyphicon-plus"></span> Add Restaurant
+            </button>
+        </form>
+        <form class="btn-group inline" action="/restaurant" method="get">
+            <button class="btn btn-default btn-md">
+                <span class="glyphicon glyphicon-eye-open"></span> View All Restaurants
+            </button>
+        </form>
         {% endif %}
 
         {% if likes is not empty %}
-            <p>Likes</p>
-            {% for like in likes %}
-            <form action='/delete/like/{{ like.getId }}' method='post' class='inlineForm'>
-            <input name='_method' type='hidden' value='delete'>
-         <input type='submit' class='deleteLink' value='x'>
-                 <a href="/choice/{{ like.getId }}">{{ like.getName }}</a>
-
-            </form>
-            {% endfor %}
+        <p>Here Are Your Likes</p>
         {% endif %}
 
+        {% for like in likes %}
+        <form action='/delete/like/{{ like.getId }}' method='post' class='inlineForm'>
+        <input name='_method' type='hidden' value='delete'>
+        <input type='submit' class='deleteLink' value='x'>
+             <a href="/choice/{{ like.getId }}">{{ like.getName }}</a>
+
+        </form>
+        {% endfor %}
+        <br>
         {% if dislikes is not empty %}
-            <p>Dislikes</p>
-            {% for dislike in dislikes %}
-            <form action='/delete/like/{{ dislike.getId }}' method='post' class='inlineForm'>
-            <input name='_method' type='hidden' value='delete'>
-            <input type='submit' class='deleteLink' value='x'>
-            <a href="/choice/{{ dislike.getId }}">{{ dislike.getName }}</a>
-
-            </form>
-
-            {% endfor %}
+        <p>Here Are Your Dislikes</p>
         {% endif %}
 
+        {% for dislike in dislikes %}
+
+        <form action='/delete/like/{{ dislike.getId }}' method='post' class='inlineForm'>
+        <input name='_method' type='hidden' value='delete'>
+        <input type='submit' class='deleteLink' value='x'>
+        <a href="/choice/{{ dislike.getId }}">{{ dislike.getName }}</a>
+
+        </form>
+
+        {% endfor %}
+    </div>
+
+        <footer id="footer" class="navbar navbar-fixed-bottom">
+            <div class="well well-sm" style="text-align:center">
+                    <p>You are logged in as {{ user.getUsername }}</p>
+                 <!-- home -->
+                 <form class="btn-group inline" action="/" method="get">
+                     <button class="btn btn-default btn-md">
+                         <span class="glyphicon glyphicon-home"></span> Home
+                     </button>
+                 </form>
+                 <!-- Sign out -->
+                 <form class="btn-group" action="/logout" method="post">
+                     <button class="btn btn-default btn-md">
+                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Sign Out
+                     </button>
+                 </form>
+             </div>
+         </footer>
     </body>
 </html>

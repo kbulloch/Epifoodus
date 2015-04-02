@@ -13,7 +13,7 @@
         <p>
           <img src="{{ restaurant.getImg }}" alt="{{ restaurant.getImg }}" height="250px" width="250px"/>
         </p>
-    <h2>Cuisine:<a href="/cuisines/{{ cuisine.getId }}">{{ cuisine.getType }}</a></h2>
+    <h2>Cuisine: <a href="/cuisines/{{ cuisine.getId }}">{{ cuisine.getType }}</a></h2>
       <p><strong>Address: </strong>{{ restaurant.getAddress}}</p>
       <p><strong>Phone: </strong>{{ restaurant.getPhone }}</p>
 
@@ -37,30 +37,61 @@
       <p><strong>Open Time: </strong>{{ restaurant.getOpenTime }}</p>
       <p><strong>Close Time: </strong>{{ restaurant.getCloseTime }}</p>
       <!-- buttons for negative or positive feedback -->
-
+      {% if user is not empty %}
       <form class="btn-group" action="/choice/{{ restaurant.getId }}" method="post">
           <input id="res_id" name="res_id" type="hidden" value="{{ restaurant.getId }}">
         <button name="like" class="btn btn-default btn-lg" value=2>
           <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-
-
         </button>
-
         <button name="like" class="btn btn-default btn-lg" value=0>
           <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
         </button>
       </form>
+      {% endif %}
   </div>
 
-      <!-- if they havent signed in, ask if they want to save their info -->
-      {% if user is empty %}
-        <p> Want to save your preferences for next time? Create an account with us!</p>
-          <form action="/create_user" method="post">
-            <button name="button">Sign Up</button>
-          </form>
-      {% endif %}
+
+     <footer id="footer" class="navbar navbar-fixed-bottom">
+         <div class="well well-sm" style="text-align:center">
+
+             <!-- if they havent signed in, ask if they want to save their info -->
+             {% if user is empty %}
+                    <p> Want to save your preferences for next time? Create an account with us!</p>
+
+                    <form class="btn-group inline" action="/create_user" method="get">
+                        <button class="btn btn-default btn-md">
+                             <span class="glyphicon glyphicon-user"></span> Sign Up
+                        </button>
+                    </form>
+             {% endif %}
 
 
-      <p><a href="/">Home</a></p>
+
+             {% if user is not empty %}
+                     <p>You are logged in as {{ user.getUsername }}</p>
+
+             <!-- home -->
+             <form class="btn-group inline" action="/" method="get">
+                 <button class="btn btn-default btn-md">
+                     <span class="glyphicon glyphicon-home"></span> Home
+                 </button>
+             </form>
+
+             <!-- View Profile -->
+             <form class="btn-group inline" action="/user" method="get">
+                 <button class="btn btn-default btn-md">
+                     <span class="glyphicon glyphicon-user"></span> View Profile
+                 </button>
+             </form>
+
+             <!-- Sign out -->
+             <form class="btn-group" action="/logout" method="post">
+                 <button class="btn btn-default btn-md">
+                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Sign Out
+                 </button>
+             </form>
+             {% endif %}
+         </div>
+     </footer>
   </body>
 </html>
