@@ -105,9 +105,10 @@
 
         //for now, do the check for dupes later bra
         $new_cuisine = $_POST['cuisine'];
-        $new_restaurant->addCuisine($new_cuisine);
+        $found_cuisine = Cuisine::findByType($new_cuisine);
+        $new_restaurant->addCuisine($found_cuisine);
 
-        return $app['twig']->render('add_restaurant.twig', array('restaurant' => $new_restaurant, 'cuisine' => $new_cuisine, 'restaurants' => Restaurant::getAll()));
+        return $app['twig']->render('add_restaurant.twig', array('restaurant' => $new_restaurant, 'cuisine' => $found_cuisine, 'restaurants' => Restaurant::getAll()));
     });
 
     //view a single restaurant
