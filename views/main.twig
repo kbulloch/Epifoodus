@@ -1,67 +1,60 @@
+<!DOCTYPE html>
 <html>
-<head>
+  <head>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
     <title>Epifoodus: I'm Hungry</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="container">
+      <!-- I'm hungry button -->
+      <a href="/options"><img src="/img/hungrybutton.png"></a>
 
-<!-- I'm hungry button -->
-        <a href="/options">
-            <img src="/img/hungrybutton.png">
-        </a>
-<!-- shaded box for footer -->
-<footer id="footer" class="navbar navbar-fixed-bottom">
-<div class="well well-sm" style="text-align:center">
+      <!-- shaded box for footer is the "well" in div-->
+      <footer id="footer" class="navbar navbar-fixed-bottom">
+        <div class="well well-sm" style="text-align:center">
+          {% if user_id is empty %}
+          <!-- sign in form -->
+          <form action="/login" method="post">
+            <label for="signin_username">Profile Name:</label>
+            <input type="text" id="signin_username" name="signin_username">
 
-<!-- btns sign in/create new user btn bar-->
+            <br>
 
-{% if user_id is empty %}
+            <label for="user_password">Password:</label>
+            <input type="password" name="user_password">
 
-<!-- sign in form -->
+            <button class="btn btn-default btn-md">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Sign in
+            </button>
 
-  <form action="/login" method="post">
-    <label for="signin_username">Profile Name:</label>
-      <input type="text" id="signin_username" name="signin_username">
-  <br>
-    <label for="user_password">Password:</label>
-      <input type="password" name="user_password">
+          </form>
 
-      <button class="btn btn-default btn-md">
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Sign in
-      </button>
-  </form>
-  <form class="btn-group inline" action="/create_user" method="get">
-    <button class="btn btn-default btn-md">
-      <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Create Profile
-    </button>
-  </form>
-  {% else %}
-    <p>You are logged in as {{ user.getUsername }}</p>
-{% endif %}
+          <form class="btn-group inline" action="/create_user" method="get">
+            <button class="btn btn-default btn-md">
+            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Create Profile
+            </button>
+          </form>
 
+          {% else %}
+          <p>You are logged in as {{ user.getUsername }}</p>
+          {% endif %}
 
-<!-- sign in/create new user btn bar-->
+          <!-- sign in/create new user btn bar-->
+          {% if user_id is not empty %}
+          <form class="btn-group inline" action="/logout" method="post">
+            <button class="btn btn-default btn-md">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Sign Out
+            </button>
+          </form>
+          <form class="btn-group inline" action="/user" method="get">
+              <button class="btn btn-default btn-md">
+              <span class="glyphicon glyphicon-user"></span>View Profile
+              </button>
+          </form>
+          {% endif %}
 
-
-
-
-<!-- sign in/create new user btn bar-->
-{% if user_id is not empty %}
-      <form class="btn-group inline" action="/logout" method="post">
-        <button class="btn btn-default btn-md">
-          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Sign out
-        </button>
-      </form>
-{% endif %}
-
-
-</div>
-</footer>
-
-
-
-
-</body>
+        </div>
+      </footer>
+    </div>
+  </body>
 </html>

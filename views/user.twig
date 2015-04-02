@@ -1,13 +1,20 @@
 <html>
     <head>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
         <title>Welcome To Your Page</title>
     </head>
-    <body>
-        {{ user.getUsername }}'s info
+    <body class="container">
+        <p>Welcome to your menu {{ user.getUsername }}</p>
 
         <form action="/logout" method="post">
             <button type="submit">Logout</button>
         </form>
 
+        <a href="/"><button type="submit">Home</button></a>
+{% if is_admin == 1 %}
+<a href="/restaurant_form"><button type="submit">Add Restaurant</button></a>
+<a href="/restaurants"><button type="submit">View All Restaurants</button></a>
+
+{% endif %}
     </body>
 </html>

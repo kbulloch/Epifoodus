@@ -31,6 +31,9 @@
     if (empty($_SESSION['is_admin'])) {
         $_SESSION['is_admin'] = null;
     };
+    if (empty($_SESSION['is_vegie'])) {
+        $_SESSION['is_vegie'] = 0;
+    };
 
     //main
     //if user is already logged in,
@@ -202,9 +205,18 @@
 
 
     //user info
-    $app->get("/user/{id}", function($id) use($app) {
-      $current_user = User::find($id);
-      return $app['twig']->render('user.twig', array('user' => $current_user));
+    $app->get("/user", function() use($app) {
+      $current_user = User::find($_SESSION['user_id']);
+      $admin_status = $_SESSION['is_admin'];
+      return $app['twig']->render('user.twig', array('user' => $current_user, 'is_admin' => $admin_status, 'is_vegie' => $is_vegie));
+    });
+
+    $app->post("/user", function() use($app) {
+        $current_user = User::find($_SESSION['user_id']);
+        $admin_status = $_SESSION['is_admin'];
+        $current_user->updateVegie($_POST['vegie_status']);
+        $is_vegie = $current_user->getVegie();
+        return $app['twig']->render('user.twig', array('user' => $current_user, 'is_admin' => $admin_status, 'is_vegie' => $is_vegie));
     });
 
 
