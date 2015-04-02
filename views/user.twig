@@ -11,10 +11,30 @@
         </form>
 
         <a href="/"><button type="submit">Home</button></a>
+
+        {% if is_vegie == 0 %}
+        <form action="/user" method="post">
+            <label for="vegie_status">Are you a vegetarian?</label>
+            <input type="radio" name="vegie_status" value=0 checked>No<br>
+            <input type="radio" name="vegie_status" value=1>Yes<br>
+            <button type="submit">Submit</button>
+        </form>
+        {% endif %}
+        {% if is_vegie == 1 %}
+        <form action="/user" method="post">
+            <label for="vegie_status">Are you a vegetarian?</label>
+            <input type="radio" name="vegie_status" value=0>No<br>
+            <input type="radio" name="vegie_status" value=1 checked>Yes<br>
+            <button type="submit">Submit</button>
+        </form>
+        {% endif %}
+
 {% if is_admin == 1 %}
 <a href="/restaurant_form"><button type="submit">Add Restaurant</button></a>
 <a href="/restaurants"><button type="submit">View All Restaurants</button></a>
 
 {% endif %}
+
+
     </body>
 </html>

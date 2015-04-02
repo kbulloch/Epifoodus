@@ -157,7 +157,7 @@
 /////////////////////////////////////////////////////////////
     //create user
     $app->get("/create_user", function() use($app) {
-      return $app['twig']->render('create_user.twig', array('user_id' => $_SESSION['user_id'], 'exists' => 0));
+      return $app['twig']->render('create_user.twig', array('user_id' => $_SESSION['user_id'], 'exists' => 0, 'is_admin' => $_SESSION['is_admin']));
     });
 
     //create user post route, will render profile page if user doesn't already exist, will render "create user" page with error msg if user exists already
@@ -181,7 +181,8 @@
 
     $app->post("/logout", function() use($app) {
         $_SESSION['user_id'] = null;
-        return $app['twig']->render('main.twig', array('user_id' => $_SESSION['user_id']));
+        $user = User::find($_SESSION['user_id']);
+        return $app['twig']->render('main.twig', array('user_id' => $_SESSION['user_id'], 'user' => $user));
     });
 
     $app->post("/login", function() use($app) {
@@ -196,7 +197,7 @@
             return $app['twig']->render('user.twig', array('user'=> $user, 'user_id' => $_SESSION['user_id'], 'is_admin' => $_SESSION['is_admin']));
         }
         else {
-            return $app['twig']->render('main.twig',array('user_id' => $_SESSION['user_id']));
+            return $app['twig']->render('main.twig',array('user' => $user, 'user_id' => $_SESSION['user_id']));
 
         }
     });
@@ -208,6 +209,7 @@
     $app->get("/user", function() use($app) {
       $current_user = User::find($_SESSION['user_id']);
       $admin_status = $_SESSION['is_admin'];
+      $is_vegie = $_SESSION['is_vegie'];
       return $app['twig']->render('user.twig', array('user' => $current_user, 'is_admin' => $admin_status, 'is_vegie' => $is_vegie));
     });
 
@@ -215,7 +217,8 @@
         $current_user = User::find($_SESSION['user_id']);
         $admin_status = $_SESSION['is_admin'];
         $current_user->updateVegie($_POST['vegie_status']);
-        $is_vegie = $current_user->getVegie();
+        $_SESSION['is_vegie']=$current_user->getVegie();
+        $is_vegie = $_SESSION['is_vegie'];
         return $app['twig']->render('user.twig', array('user' => $current_user, 'is_admin' => $admin_status, 'is_vegie' => $is_vegie));
     });
 
