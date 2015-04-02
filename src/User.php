@@ -109,8 +109,24 @@ class User
 	}
 	function addAnswer($user_id, $res_id, $answer)
 	{
-		$GLOBALS['DB']->exec(" INSERT INTO likes (answer,user_id,
-restaurant_id)  VALUES ($answer,{$this->getId()},$res_id)");
+		$response_all=  $GLOBALS['DB']->query("SELECT * FROM likes;");
+
+		$match = false;
+
+		foreach($response_all as $response) {
+			$this_user_id = $response['user_id'];
+			$restaurant_id=$response['restaurant_id'];
+
+			if ($this_user_id == $user_id && $restaurant_id ==$res_id){
+				$match = true;
+			}
+
+ 		}
+	if (!$match){
+		$GLOBALS['DB']->exec("INSERT INTO likes (answer, user_id, restaurant_id)  VALUES ($answer, {$this->getId()}, $res_id);");
+	}
+
+
 	}
 
 	function updateVegie($is_vegie)
@@ -197,6 +213,10 @@ restaurants.id) WHERE likes.answer = 2 AND likes.user_id = {$this->getId()};");
 		}
 		return $result;
 
+	}
+	function deleteLike($rest_id)
+	{
+		$GLOBALS['DB']->exec("DELETE FROM likes WHERE user_id = {$this->getId()} AND restaurant_id= {$rest_id};");
 	}
 
 //    function updateUsername($user_name){
