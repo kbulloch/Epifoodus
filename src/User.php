@@ -15,57 +15,70 @@ class User
 		$this->vegie    = $new_vegie;
 		$this->admin    = $new_admin;
 	}
-	function getUsername()
-	{
-		return $this->username;
-	}
+	//setters
 	function setUsername($new_username)
 	{
 		$this->username = $new_username;
 	}
-	function getId()
-	{
-		return $this->id;
-	}
-	function setId($new_id)
-	{
-		$this->id = (int) $new_id;
-	}
-	function getPassword()
-	{
-		return $this->password;
-	}
+
 	function setPassword($new_password)
 	{
 		$this->password = $new_password;
 	}
-	function getVegie()
-	{
-		return $this->vegie;
-	}
+
 	function setVegie($new_vegie)
 	{
 		$this->vegie = $new_vegie;
 	}
-	function getAdmin()
-	{
-		return $this->admin;
-	}
+
 	function setAdmin($new_admin)
 	{
 		$this->admin = $new_admin;
 	}
+
+	function setId($new_id)
+	{
+		$this->id = (int) $new_id;
+	}
+	//getters
+	function getUsername()
+	{
+		return $this->username;
+	}
+
+	function getPassword()
+	{
+		return $this->password;
+	}
+
+	function getVegie()
+	{
+		return $this->vegie;
+	}
+
+	function getAdmin()
+	{
+		return $this->admin;
+	}
+
+	function getId()
+	{
+		return $this->id;
+	}
+
 	function save()
 	{
 		$statemnt = $GLOBALS['DB']->query("INSERT INTO users (username, password,vegie,admin) VALUES
-	('{$this->getUsername()}', '{$this->getPassword()}',{$this->getVegie()},{$this->getAdmin()}) RETURNING id;");
+			('{$this->getUsername()}', '{$this->getPassword()}',{$this->getVegie()},{$this->getAdmin()}) RETURNING id;");
 		$result   = $statemnt->fetch(PDO::FETCH_ASSOC);
 		$this->setId($result['id']);
 	}
+
+	//static functions
 	static function getAll()
 	{
 		$returned_users = $GLOBALS['DB']->query("SELECT * FROM users ;");
-		$users          = array();
+		$users = array();
 		foreach ($returned_users as $user) {
 			$username = $user['username'];
 			$password = $user['password'];
@@ -77,10 +90,12 @@ class User
 		}
 		return $users;
 	}
+
 	static function deleteAll()
 	{
 		$GLOBALS['DB']->exec("DELETE FROM users *;");
 	}
+
 	static function find($search_id)
 	{
 		$returned_user = null;
@@ -93,35 +108,42 @@ class User
 		}
 		return $returned_user;
 	}
+
 	function updateUsername($user_name)
 	{
 		$GLOBALS['DB']->exec("UPDATE users SET username={$user_name} WHERE id={$this->getId()};");
 		$this->setUsername($user_name);
 	}
+
 	function updatePassword($new_password)
 	{
 		$GLOBALS['DB']->exec("UPDATE users SET password={$new_password} WHERE id={$this->getId()};");
 		$this->setPassword($new_password);
 	}
+
 	function delete()
 	{
 		$GLOBALS['DB']->exec("DELETE FROM users * WHERE id={$this->getId()};");
 	}
+
 	function addAnswer($user_id, $res_id, $answer)
 	{
-		$GLOBALS['DB']->exec(" INSERT INTO likes (answer,user_id,
-restaurant_id)  VALUES ($answer,{$this->getId()},$res_id)");
+		$GLOBALS['DB']->exec(" INSERT INTO likes (answer, user_id, restaurant_id)
+			VALUES ($answer,{$this->getId()},$res_id)");
 	}
+
 	function updateAnswer($answer, $rest_id)
 	{
 		$GLOBALS['DB']->exec("UPDATE likes SET answer = {$answer} Where user_id={$this->getId() } AND restaurant_id={$rest_id};");
 	}
+
 	function getLikes()
 	{
-		$user_likes = $GLOBALS['DB']->query("SELECT restaurants.* FROM users JOIN
-likes ON  (users.id = likes.user_id) JOIN restaurants ON (likes.restaurant_id =
-restaurants.id) WHERE likes.answer = 2 AND likes.user_id = {$this->getId()};");
-		$likes      = array();
+		$user_likes = $GLOBALS['DB']->query("SELECT restaurants.* FROM users
+			JOIN likes ON (users.id = likes.user_id)
+			JOIN restaurants ON (likes.restaurant_id = restaurants.id)
+			WHERE likes.answer = 2 AND likes.user_id = {$this->getId()};");
+		$likes = array();
 		foreach ($user_likes as $restaurant) {
 			$name           = $restaurant['name'];
 			$address        = $restaurant['address'];
@@ -139,9 +161,10 @@ restaurants.id) WHERE likes.answer = 2 AND likes.user_id = {$this->getId()};");
 
 	function getDisLikes()
 	{
-		$user_likes = $GLOBALS['DB']->query("SELECT restaurants.* FROM users JOIN
-	likes ON  (users.id = likes.user_id) JOIN restaurants ON (likes.restaurant_id =
-	restaurants.id) WHERE likes.answer = 0 AND likes.user_id = {$this->getId()};");
+		$user_likes = $GLOBALS['DB']->query("SELECT restaurants.* FROM users
+			JOIN likes ON  (users.id = likes.user_id)
+			JOIN restaurants ON (likes.restaurant_id = restaurants.id)
+			WHERE likes.answer = 0 AND likes.user_id = {$this->getId()};");
 		$likes      = array();
 		foreach ($user_likes as $restaurant) {
 			$name           = $restaurant['name'];
@@ -172,7 +195,7 @@ restaurants.id) WHERE likes.answer = 2 AND likes.user_id = {$this->getId()};");
 		return $result;
 	}
 
-	static function CheckPassword($username,$password)
+	static function CheckPassword($username, $password)
 	{
 		//0 means there is a match, which we want
 		$result = 1;
