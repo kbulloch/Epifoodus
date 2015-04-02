@@ -108,7 +108,8 @@
         $found_cuisine = Cuisine::findByType($new_cuisine);
         $new_restaurant->addCuisine($found_cuisine);
 
-        return $app['twig']->render('add_restaurant.twig', array('restaurant' => $new_restaurant, 'cuisine' => $found_cuisine, 'restaurants' => Restaurant::getAll()));
+        $user = User::find($_SESSION['user_id']);
+        return $app['twig']->render('add_restaurant.twig', array('user' => $user, 'restaurant' => $new_restaurant, 'cuisine' => $found_cuisine, 'restaurants' => Restaurant::getAll()));
     });
 
     //view a single restaurant
@@ -175,9 +176,9 @@
             $_SESSION['is_admin'] = $new_user_is_admin;
         }
         else {
-            return $app['twig']->render('create_user.twig', array('user_exist' => $user, 'user_id' => $_SESSION['user_id'],'exists' => $exists, 'is_vegie' => $_SESSION['is_vegie']));
+            return $app['twig']->render('create_user.twig', array('user_exist' => $user, 'user_id' => $_SESSION['user_id'],'exists' => $exists, 'is_vegie' => $_SESSION['is_vegie'], 'is_admin' => $_SESSION['is_admin']));
         }
-        return $app['twig']->render('user.twig', array('user'=>$user, 'user_id' => $_SESSION['user_id'], 'exists' => $exists, 'is_vegie' => $_SESSION['is_vegie']));
+        return $app['twig']->render('user.twig', array('user'=>$user, 'user_id' => $_SESSION['user_id'], 'exists' => $exists, 'is_vegie' => $_SESSION['is_vegie'], 'is_admin' => $_SESSION['is_admin']));
     });
 
     $app->post("/logout", function() use($app) {
