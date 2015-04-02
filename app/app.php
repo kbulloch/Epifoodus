@@ -111,7 +111,8 @@
 
 
     $app->get("/restaurant_form", function() use($app) {
-        return $app['twig']->render('restaurant_form.twig', array('cuisines' => Cuisine::getAll()));
+        $user = User::find($_SESSION['user_id']);
+        return $app['twig']->render('restaurant_form.twig', array('user' => $user, 'cuisines' => Cuisine::getAll()));
     });
 
     $app->post("/add_restaurant", function() use($app) {
