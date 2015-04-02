@@ -67,6 +67,17 @@
       $user = User::find($_SESSION['user_id']);
       return $app['twig']->render('choice.twig', array('restaurant' => $current_restaurant, 'cuisine' => $cuisine[0], 'user' => $user));
     });
+    //choice
+    $app->post("/choice/{id}", function($id) use($app) {
+
+      $current_restaurant = Restaurant::find($_POST['res_id']);
+      $cuisine = $current_restaurant->getCuisines();
+      $user = User::find($_SESSION['user_id']);
+      $user->addAnswer($_SESSION['user_id'],$_POST['res_id'],$_POST['like']);
+
+      return $app['twig']->render('choice.twig', array('restaurant' => $current_restaurant, 'cuisine' => $cuisine[0], 'user' => $user));
+    });
+
 
     //cuisine
     $app->get("/cuisines/{id}", function($id) use($app) {
@@ -105,12 +116,11 @@
 
         //for now, do the check for dupes later bra
         $new_cuisine = $_POST['cuisine'];
-        $found_cuisine = Cuisine::findByType($new_cuisine);
-        $new_restaurant->addCuisine($found_cuisine);
+        $new_restaurant->addCuisine($new_cuisine);
+
 
         $user = User::find($_SESSION['user_id']);
         return $app['twig']->render('add_restaurant.twig', array('user' => $user, 'restaurant' => $new_restaurant, 'cuisine' => $found_cuisine, 'restaurants' => Restaurant::getAll()));
-    });
 
     //view a single restaurant
     $app->get("/restaurants/{id}", function($id) use ($app) {
@@ -178,7 +188,11 @@
         else {
             return $app['twig']->render('create_user.twig', array('user_exist' => $user, 'user_id' => $_SESSION['user_id'],'exists' => $exists, 'is_vegie' => $_SESSION['is_vegie'], 'is_admin' => $_SESSION['is_admin']));
         }
+<<<<<<< HEAD
         return $app['twig']->render('user.twig', array('user'=>$user, 'user_id' => $_SESSION['user_id'], 'exists' => $exists, 'is_vegie' => $_SESSION['is_vegie'], 'is_admin' => $_SESSION['is_admin']));
+=======
+        return $app['twig']->render('user.twig', array('user'=>$user, 'user_id' => $_SESSION['user_id'], 'exists' => $exists, 'is_vegie' => $_SESSION['is_vegie'], 'is_admin' => $_SESSION['is_admin'],'likes'=>$user->getLikes(),'dislikes'=>$user->getDisLikes()));
+>>>>>>> 42038e9fc703489cc70da7e453e11853ee94d197
     });
 
     $app->post("/logout", function() use($app) {
@@ -196,10 +210,10 @@
             $_SESSION['user_id']=$user_id;
             $new_user_is_admin = $user->getAdmin();
             $_SESSION['is_admin'] = $new_user_is_admin;
-            return $app['twig']->render('user.twig', array('user'=> $user, 'user_id' => $_SESSION['user_id'], 'is_admin' => $_SESSION['is_admin'], 'is_vegie' => $_SESSION['is_vegie']));
+            return $app['twig']->render('user.twig', array('user'=> $user, 'user_id' => $_SESSION['user_id'], 'is_admin' => $_SESSION['is_admin'], 'is_vegie' => $_SESSION['is_vegie'],'likes'=>$user->getLikes(),'dislikes'=>$user->getDisLikes()));
         }
         else {
-            return $app['twig']->render('main.twig',array('user' => $user, 'user_id' => $_SESSION['user_id'], 'is_vegie' => $_SESSION['is_vegie']));
+            return $app['twig']->render('main.twig',array('user' => $user, 'user_id' => $_SESSION['user_id'], 'is_vegie' => $_SESSION['is_vegie'],'likes'=>$user->getLikes(),'dislikes'=>$user->getDisLikes()));
 
         }
     });
@@ -212,7 +226,8 @@
       $current_user = User::find($_SESSION['user_id']);
       $admin_status = $_SESSION['is_admin'];
       $is_vegie = $_SESSION['is_vegie'];
-      return $app['twig']->render('user.twig', array('user' => $current_user, 'is_admin' => $admin_status, 'is_vegie' => $is_vegie));
+
+      return $app['twig']->render('user.twig', array('user' => $current_user, 'is_admin' => $admin_status, 'is_vegie' => $is_vegie,'likes'=>$current_user->getLikes(),'dislikes'=>$current_user->getDisLikes()));
     });
 
     $app->post("/user", function() use($app) {
@@ -221,8 +236,12 @@
         $current_user->updateVegie($_POST['vegie_status']);
         $_SESSION['is_vegie']=$current_user->getVegie();
         $is_vegie = $_SESSION['is_vegie'];
-        return $app['twig']->render('user.twig', array('user' => $current_user, 'is_admin' => $admin_status, 'is_vegie' => $is_vegie));
+
+
+        return $app['twig']->render('user.twig', array('user' => $current_user, 'is_admin' => $admin_status, 'is_vegie' => $is_vegie , 'likes'=>$current_user->getLikes(),'dislikes'=>$current_user->getDisLikes()));
     });
+
+
 
 
 ////// FUTURE WISHLIST CODE

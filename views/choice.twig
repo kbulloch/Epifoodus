@@ -13,6 +13,8 @@
         <p>
           <img src="{{ restaurant.getImg }}" alt="{{ restaurant.getImg }}" height="250px" width="250px"/>
         </p>
+
+
     <h2>Cuisine:<a href="/cuisine/{{ cuisine.getId }}">{{ cuisine.getType }}</a></h2>
       <p><strong>Address: </strong>{{ restaurant.getAddress}}</p>
       <p><strong>Phone: </strong>{{ restaurant.getPhone }}</p>
@@ -37,13 +39,16 @@
       <p><strong>Open Time: </strong>{{ restaurant.getOpenTime }}</p>
       <p><strong>Close Time: </strong>{{ restaurant.getCloseTime }}</p>
       <!-- buttons for negative or positive feedback -->
-      <form class="btn-group" action="/..." method="post">
-        <button class="btn btn-default btn-lg">
+
+      <form class="btn-group" action="/choice/{{ restaurant.getId }}" method="post">
+          <input id="res_id" name="res_id" type="hidden" value="{{ restaurant.getId }}">
+        <button name="like" class="btn btn-default btn-lg" value=2>
           <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+
+
         </button>
-      </form>
-      <form class="btn-group inline" action="/..." method="post">
-        <button class="btn btn-default btn-lg">
+
+        <button name="like" class="btn btn-default btn-lg" value=0>
           <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
         </button>
       </form>
