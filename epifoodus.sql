@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: cuisines; Type: TABLE; Schema: public; Owner: tanner; Tablespace: 
+-- Name: cuisines; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
 CREATE TABLE cuisines (
@@ -39,10 +39,10 @@ CREATE TABLE cuisines (
 );
 
 
-ALTER TABLE cuisines OWNER TO tanner;
+ALTER TABLE cuisines OWNER TO "Guest";
 
 --
--- Name: cuisines_id_seq; Type: SEQUENCE; Schema: public; Owner: tanner
+-- Name: cuisines_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
 --
 
 CREATE SEQUENCE cuisines_id_seq
@@ -53,17 +53,17 @@ CREATE SEQUENCE cuisines_id_seq
     CACHE 1;
 
 
-ALTER TABLE cuisines_id_seq OWNER TO tanner;
+ALTER TABLE cuisines_id_seq OWNER TO "Guest";
 
 --
--- Name: cuisines_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: tanner
+-- Name: cuisines_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
 --
 
 ALTER SEQUENCE cuisines_id_seq OWNED BY cuisines.id;
 
 
 --
--- Name: cuisines_restaurants; Type: TABLE; Schema: public; Owner: tanner; Tablespace: 
+-- Name: cuisines_restaurants; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
 CREATE TABLE cuisines_restaurants (
@@ -73,10 +73,10 @@ CREATE TABLE cuisines_restaurants (
 );
 
 
-ALTER TABLE cuisines_restaurants OWNER TO tanner;
+ALTER TABLE cuisines_restaurants OWNER TO "Guest";
 
 --
--- Name: cuisines_restaurants_id_seq; Type: SEQUENCE; Schema: public; Owner: tanner
+-- Name: cuisines_restaurants_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
 --
 
 CREATE SEQUENCE cuisines_restaurants_id_seq
@@ -87,17 +87,17 @@ CREATE SEQUENCE cuisines_restaurants_id_seq
     CACHE 1;
 
 
-ALTER TABLE cuisines_restaurants_id_seq OWNER TO tanner;
+ALTER TABLE cuisines_restaurants_id_seq OWNER TO "Guest";
 
 --
--- Name: cuisines_restaurants_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: tanner
+-- Name: cuisines_restaurants_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
 --
 
 ALTER SEQUENCE cuisines_restaurants_id_seq OWNED BY cuisines_restaurants.id;
 
 
 --
--- Name: likes; Type: TABLE; Schema: public; Owner: tanner; Tablespace: 
+-- Name: likes; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
 CREATE TABLE likes (
@@ -108,10 +108,10 @@ CREATE TABLE likes (
 );
 
 
-ALTER TABLE likes OWNER TO tanner;
+ALTER TABLE likes OWNER TO "Guest";
 
 --
--- Name: likes_id_seq; Type: SEQUENCE; Schema: public; Owner: tanner
+-- Name: likes_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
 --
 
 CREATE SEQUENCE likes_id_seq
@@ -122,17 +122,17 @@ CREATE SEQUENCE likes_id_seq
     CACHE 1;
 
 
-ALTER TABLE likes_id_seq OWNER TO tanner;
+ALTER TABLE likes_id_seq OWNER TO "Guest";
 
 --
--- Name: likes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: tanner
+-- Name: likes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
 --
 
 ALTER SEQUENCE likes_id_seq OWNED BY likes.id;
 
 
 --
--- Name: prices; Type: TABLE; Schema: public; Owner: tanner; Tablespace: 
+-- Name: prices; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
 CREATE TABLE prices (
@@ -141,10 +141,10 @@ CREATE TABLE prices (
 );
 
 
-ALTER TABLE prices OWNER TO tanner;
+ALTER TABLE prices OWNER TO "Guest";
 
 --
--- Name: prices_id_seq; Type: SEQUENCE; Schema: public; Owner: tanner
+-- Name: prices_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
 --
 
 CREATE SEQUENCE prices_id_seq
@@ -155,17 +155,17 @@ CREATE SEQUENCE prices_id_seq
     CACHE 1;
 
 
-ALTER TABLE prices_id_seq OWNER TO tanner;
+ALTER TABLE prices_id_seq OWNER TO "Guest";
 
 --
--- Name: prices_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: tanner
+-- Name: prices_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
 --
 
 ALTER SEQUENCE prices_id_seq OWNED BY prices.id;
 
 
 --
--- Name: restaurants; Type: TABLE; Schema: public; Owner: tanner; Tablespace: 
+-- Name: restaurants; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
 CREATE TABLE restaurants (
@@ -180,10 +180,10 @@ CREATE TABLE restaurants (
 );
 
 
-ALTER TABLE restaurants OWNER TO tanner;
+ALTER TABLE restaurants OWNER TO "Guest";
 
 --
--- Name: restaurants_id_seq; Type: SEQUENCE; Schema: public; Owner: tanner
+-- Name: restaurants_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
 --
 
 CREATE SEQUENCE restaurants_id_seq
@@ -194,30 +194,32 @@ CREATE SEQUENCE restaurants_id_seq
     CACHE 1;
 
 
-ALTER TABLE restaurants_id_seq OWNER TO tanner;
+ALTER TABLE restaurants_id_seq OWNER TO "Guest";
 
 --
--- Name: restaurants_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: tanner
+-- Name: restaurants_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
 --
 
 ALTER SEQUENCE restaurants_id_seq OWNED BY restaurants.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: tanner; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
 CREATE TABLE users (
     id integer NOT NULL,
     username character varying,
-    password character varying
+    password character varying,
+    vegie integer,
+    admin integer
 );
 
 
-ALTER TABLE users OWNER TO tanner;
+ALTER TABLE users OWNER TO "Guest";
 
 --
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: tanner
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
 --
 
 CREATE SEQUENCE users_id_seq
@@ -228,59 +230,59 @@ CREATE SEQUENCE users_id_seq
     CACHE 1;
 
 
-ALTER TABLE users_id_seq OWNER TO tanner;
+ALTER TABLE users_id_seq OWNER TO "Guest";
 
 --
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: tanner
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
 --
 
 ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: tanner
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY cuisines ALTER COLUMN id SET DEFAULT nextval('cuisines_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: tanner
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY cuisines_restaurants ALTER COLUMN id SET DEFAULT nextval('cuisines_restaurants_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: tanner
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY likes ALTER COLUMN id SET DEFAULT nextval('likes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: tanner
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY prices ALTER COLUMN id SET DEFAULT nextval('prices_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: tanner
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY restaurants ALTER COLUMN id SET DEFAULT nextval('restaurants_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: tanner
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
--- Data for Name: cuisines; Type: TABLE DATA; Schema: public; Owner: tanner
+-- Data for Name: cuisines; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
 COPY cuisines (id, type) FROM stdin;
@@ -312,14 +314,14 @@ COPY cuisines (id, type) FROM stdin;
 
 
 --
--- Name: cuisines_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tanner
+-- Name: cuisines_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
 SELECT pg_catalog.setval('cuisines_id_seq', 24, true);
 
 
 --
--- Data for Name: cuisines_restaurants; Type: TABLE DATA; Schema: public; Owner: tanner
+-- Data for Name: cuisines_restaurants; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
 COPY cuisines_restaurants (id, cuisine_id, restaurant_id) FROM stdin;
@@ -327,33 +329,59 @@ COPY cuisines_restaurants (id, cuisine_id, restaurant_id) FROM stdin;
 2	2	2
 3	3	3
 4	4	4
+5	32	5
+6	33	6
+7	33	7
+8	35	8
+9	37	23
+10	38	24
+11	39	24
+12	40	25
+13	41	26
+14	49	30
+15	50	31
+16	50	32
+17	52	33
+18	54	48
+19	55	49
+20	56	49
+21	57	50
+22	58	51
 \.
 
 
 --
--- Name: cuisines_restaurants_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tanner
+-- Name: cuisines_restaurants_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
 SELECT pg_catalog.setval('cuisines_restaurants_id_seq', 4, true);
 
 
 --
--- Data for Name: likes; Type: TABLE DATA; Schema: public; Owner: tanner
+-- Data for Name: likes; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
 COPY likes (id, answer, restaurant_id, user_id) FROM stdin;
+1	2	1	4
+2	2	1	4
+3	0	1	4
+4	2	3	40
+5	2	3	40
+6	0	3	40
+7	0	2	40
+8	2	4	40
 \.
 
 
 --
--- Name: likes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tanner
+-- Name: likes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('likes_id_seq', 1, false);
+SELECT pg_catalog.setval('likes_id_seq', 8, true);
 
 
 --
--- Data for Name: prices; Type: TABLE DATA; Schema: public; Owner: tanner
+-- Data for Name: prices; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
 COPY prices (id, level) FROM stdin;
@@ -361,14 +389,14 @@ COPY prices (id, level) FROM stdin;
 
 
 --
--- Name: prices_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tanner
+-- Name: prices_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
 SELECT pg_catalog.setval('prices_id_seq', 1, false);
 
 
 --
--- Data for Name: restaurants; Type: TABLE DATA; Schema: public; Owner: tanner
+-- Data for Name: restaurants; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
 COPY restaurants (id, name, address, phone, price, vegie, opentime, closetime) FROM stdin;
@@ -380,29 +408,35 @@ COPY restaurants (id, name, address, phone, price, vegie, opentime, closetime) F
 
 
 --
--- Name: restaurants_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tanner
+-- Name: restaurants_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
 SELECT pg_catalog.setval('restaurants_id_seq', 4, true);
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: tanner
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY users (id, username, password) FROM stdin;
+COPY users (id, username, password, vegie, admin) FROM stdin;
+2	abeer101	abeer101	1	0
+4	dxfxdf	xx	0	0
+40	erica	hello	1	0
+41	jill	hihihi	1	0
+1	Abeer	Khakwani	0	0
+3	epicodus	epicodus	0	0
 \.
 
 
 --
--- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tanner
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('users_id_seq', 1, false);
+SELECT pg_catalog.setval('users_id_seq', 4, true);
 
 
 --
--- Name: cuisines_pkey; Type: CONSTRAINT; Schema: public; Owner: tanner; Tablespace: 
+-- Name: cuisines_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
 ALTER TABLE ONLY cuisines
@@ -410,7 +444,7 @@ ALTER TABLE ONLY cuisines
 
 
 --
--- Name: cuisines_restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: tanner; Tablespace: 
+-- Name: cuisines_restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
 ALTER TABLE ONLY cuisines_restaurants
@@ -418,7 +452,7 @@ ALTER TABLE ONLY cuisines_restaurants
 
 
 --
--- Name: likes_pkey; Type: CONSTRAINT; Schema: public; Owner: tanner; Tablespace: 
+-- Name: likes_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
 ALTER TABLE ONLY likes
@@ -426,7 +460,7 @@ ALTER TABLE ONLY likes
 
 
 --
--- Name: prices_pkey; Type: CONSTRAINT; Schema: public; Owner: tanner; Tablespace: 
+-- Name: prices_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
 ALTER TABLE ONLY prices
@@ -434,7 +468,7 @@ ALTER TABLE ONLY prices
 
 
 --
--- Name: restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: tanner; Tablespace: 
+-- Name: restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
 ALTER TABLE ONLY restaurants
@@ -442,7 +476,7 @@ ALTER TABLE ONLY restaurants
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: tanner; Tablespace: 
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
 ALTER TABLE ONLY users
@@ -450,12 +484,12 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: public; Type: ACL; Schema: -; Owner: tanner
+-- Name: public; Type: ACL; Schema: -; Owner: epicodus
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM tanner;
-GRANT ALL ON SCHEMA public TO tanner;
+REVOKE ALL ON SCHEMA public FROM epicodus;
+GRANT ALL ON SCHEMA public TO epicodus;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 

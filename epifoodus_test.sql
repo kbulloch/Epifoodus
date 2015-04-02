@@ -210,7 +210,9 @@ ALTER SEQUENCE restaurants_id_seq OWNED BY restaurants.id;
 CREATE TABLE users (
     id integer NOT NULL,
     username character varying,
-    password character varying
+    password character varying,
+    vegie integer,
+    admin integer
 );
 
 
@@ -284,6 +286,30 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 --
 
 COPY cuisines (id, type) FROM stdin;
+1	Bakery
+2	Bar
+3	Barbecue
+4	Breakfast
+5	Burgers
+6	Cafe
+7	Chicken
+8	Chinese
+9	Deli
+10	FastFood
+11	German
+12	Irish
+13	Italian
+14	Japanese
+15	Kebab
+16	Mediterranean
+17	Mexican
+18	Pizza
+19	Polish
+20	Sandwich
+21	Seafood
+22	Sushi
+23	Thai
+24	Wrap
 \.
 
 
@@ -291,7 +317,7 @@ COPY cuisines (id, type) FROM stdin;
 -- Name: cuisines_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('cuisines_id_seq', 170, true);
+SELECT pg_catalog.setval('cuisines_id_seq', 24, true);
 
 
 --
@@ -299,83 +325,10 @@ SELECT pg_catalog.setval('cuisines_id_seq', 170, true);
 --
 
 COPY cuisines_restaurants (id, cuisine_id, restaurant_id) FROM stdin;
-1	12	15
-2	13	16
-3	14	16
-4	15	17
-5	27	32
-6	28	33
-7	29	33
-8	30	34
-9	42	49
-10	43	50
-11	44	50
-12	45	51
-13	54	52
-14	54	53
-15	56	54
-16	57	69
-17	58	70
-18	59	70
-19	60	71
-20	68	72
-21	69	73
-22	69	74
-23	71	75
-24	72	90
-25	73	91
-26	74	91
-27	75	92
-28	83	93
-29	84	94
-30	84	95
-31	86	96
-32	87	111
-33	88	112
-34	89	112
-35	90	113
-36	98	114
-37	99	115
-38	99	116
-39	101	117
-40	102	132
-41	103	133
-42	104	133
-43	105	134
-44	113	135
-45	114	136
-46	114	137
-47	116	138
-48	117	153
-49	118	154
-50	119	154
-51	120	155
-52	128	156
-53	129	157
-54	129	158
-55	131	159
-56	133	174
-57	134	175
-58	135	175
-59	136	176
-60	144	177
-61	145	178
-62	145	179
-63	147	180
-64	149	195
-65	150	196
-66	151	196
-67	152	197
-68	153	198
-69	161	199
-70	162	200
-71	162	201
-72	164	202
-73	166	217
-74	167	218
-75	168	218
-76	169	219
-77	170	220
+1	1	1
+2	2	2
+3	3	3
+4	4	4
 \.
 
 
@@ -383,7 +336,7 @@ COPY cuisines_restaurants (id, cuisine_id, restaurant_id) FROM stdin;
 -- Name: cuisines_restaurants_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('cuisines_restaurants_id_seq', 77, true);
+SELECT pg_catalog.setval('cuisines_restaurants_id_seq', 4, true);
 
 
 --
@@ -421,6 +374,10 @@ SELECT pg_catalog.setval('prices_id_seq', 1, false);
 --
 
 COPY restaurants (id, name, address, phone, price, vegie, opentime, closetime) FROM stdin;
+1	Testaurant	123 fake st	555 555 5555	1	0	400	2000
+2	Doctor Taco	124 fake st	555 555 5556	1	1	600	1800
+3	Senor Bean	126 Fake St	420 6969	1	1	700	1400
+4	Hack A Planet	128 Fake St	111 1111 1	1	0	900	1100
 \.
 
 
@@ -428,14 +385,17 @@ COPY restaurants (id, name, address, phone, price, vegie, opentime, closetime) F
 -- Name: restaurants_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('restaurants_id_seq', 220, true);
+SELECT pg_catalog.setval('restaurants_id_seq', 4, true);
 
 
 --
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY users (id, username, password) FROM stdin;
+COPY users (id, username, password, vegie, admin) FROM stdin;
+1	erica	hello	0	0
+2			0	0
+3	jill	epicodus	\N	1
 \.
 
 
@@ -443,7 +403,7 @@ COPY users (id, username, password) FROM stdin;
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('users_id_seq', 1, false);
+SELECT pg_catalog.setval('users_id_seq', 3, true);
 
 
 --
