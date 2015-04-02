@@ -59,7 +59,7 @@ class User
 	{
 		$statemnt = $GLOBALS['DB']->query("INSERT INTO users (username, password,vegie,admin) VALUES
 	('{$this->getUsername()}', '{$this->getPassword()}',{$this->getVegie()},{$this->getAdmin()}) RETURNING id;");
-		$result   = $statemnt->fetch(PDO::FETCH_ASSOC);
+		$result = $statemnt->fetch(PDO::FETCH_ASSOC);
 		$this->setId($result['id']);
 	}
 	static function getAll()
