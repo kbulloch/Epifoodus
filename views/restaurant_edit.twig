@@ -46,6 +46,17 @@
           <label for='closetime'>Edit Close:</label>
           <input value="{{ restaurant.getClosetime }}" id='closetime' name='closetime' type='text'>
         </p>
+
+        <p>
+            <label for="cuisine">Cuisine:</label>
+            <select id="cuisine" name="cuisine">
+                {% for cuisine in cuisines %}
+                    <option value={{ cuisine.getType }}>{{ cuisine.getType }}</option>
+                {% endfor %}
+            </select>
+        </p>
+
+
         <button type='submit'>Update</button>
 
       </form>
