@@ -132,7 +132,10 @@
         $found_cuisine = Cuisine::findByType($new_cuisine);
         $new_restaurant->addCuisine($found_cuisine);
 
+
+        $user = User::find($_SESSION['user_id']);
         return $app['twig']->render('add_restaurant.twig', array(
+            'user' => $user,
             'restaurant' => $new_restaurant,
             'cuisine' => $found_cuisine,
             'restaurants' => Restaurant::getAll()));
