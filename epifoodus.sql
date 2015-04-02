@@ -460,6 +460,8 @@ SELECT pg_catalog.setval('restaurants_id_seq', 49, true);
 --
 
 COPY users (id, username, password, vegie, admin) FROM stdin;
+1	test	1	0	0
+2	admin	1234	0	1
 \.
 
 
@@ -467,7 +469,7 @@ COPY users (id, username, password, vegie, admin) FROM stdin;
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('users_id_seq', 1, false);
+SELECT pg_catalog.setval('users_id_seq', 2, true);
 
 
 --
