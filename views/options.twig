@@ -9,12 +9,35 @@
 
 <div class="container">
 <div class="well well-sm" style="text-align:center">
+
   <div class="row">
     <div class="col-sm-9">
       <div class="col-md-6 col-md-offset-2">
         <h3 class="text-center"> Here's what's on the menu:</h3>
       </div>
 
+  <!-- if user is vegetarian -->
+  {% if is_vegie == 1 %}
+
+  <div class="row">
+    <div class="col-md-6">
+      <a href="/choice/{{ restaurant1veg.getId }}">
+        <h1>{{ restaurant1veg.getName }}</h1>
+        <img src="{{ restaurant1veg.getImg }}" alt="{{ restaurant1veg.getImg }}" height="250px" width="250px"/>
+      </a>
+    </div>
+
+    <div class="col-md-6">
+      <a href="/choice/{{ restaurant2veg.getId }}">
+        <h1>{{ restaurant2veg.getName }}</h1>
+        <img src="{{ restaurant2veg.getImg }}" alt="{{ restaurant2veg.getImg }}" height="250px" width="250px"/>
+      </a>
+    </div>
+  </div>
+
+
+  <!-- if user is not vegetarian -->
+  {% else %}
 
       <div class="row">
         <div class="col-md-6">
@@ -22,11 +45,6 @@
             <h1>{{ restaurant1.getName }}</h1>
             <img src="{{ restaurant1.getImg }}" alt="{{ restaurant1.getImg }}" height="250px" width="250px"/>
           </a>
-
-          <!-- <div class="col-md-3 col-md-offset-1">
-            <button href="/keep2" type="button" class="btn-danger">X</button>
-          </div> -->
-
         </div>
 
         <div class="col-md-6">
@@ -35,11 +53,9 @@
             <img src="{{ restaurant2.getImg }}" alt="{{ restaurant2.getImg }}" height="250px" width="250px"/>
           </a>
         </div>
-
-          <!-- <div class="col-md-3 col-md-offset-1">
-            <button href="/keep1" type="button" class="btn-danger">X</button>
-          </div> -->
       </div>
+
+      {% endif %}
 
       <br>
       <br>
