@@ -57,6 +57,49 @@
     </div>
   </div>
 </div>
+
+     <footer id="footer" class="navbar navbar-fixed-bottom">
+         <div class="well well-sm" style="text-align:center">
+
+             <!-- if they havent signed in, ask if they want to save their info -->
+             {% if user is empty %}
+                    <p> Want to save your preferences for next time? Create an account with us!</p>
+
+                    <form class="btn-group inline" action="/create_user" method="get">
+                        <button class="btn btn-default btn-md">
+                             <span class="glyphicon glyphicon-user"></span> Sign Up
+                        </button>
+                    </form>
+             {% endif %}
+
+
+
+             {% if user is not empty %}
+                     <p>You are logged in as {{ user.getUsername }}</p>
+
+             <!-- home -->
+             <form class="btn-group inline" action="/" method="get">
+                 <button class="btn btn-default btn-md">
+                     <span class="glyphicon glyphicon-home"></span> Home
+                 </button>
+             </form>
+
+             <!-- View Profile -->
+             <form class="btn-group inline" action="/user" method="get">
+                 <button class="btn btn-default btn-md">
+                     <span class="glyphicon glyphicon-user"></span> View Profile
+                 </button>
+             </form>
+
+             <!-- Sign out -->
+             <form class="btn-group" action="/logout" method="post">
+                 <button class="btn btn-default btn-md">
+                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Sign Out
+                 </button>
+             </form>
+             {% endif %}
+         </div>
+     </footer>
 </div>
 </body>
 </html>

@@ -49,6 +49,7 @@
     //options -- randomly shows 2 restaurant options out of all restaurants
     //FUTURE: do not show restaurants that aren't veg-friendly if user is vegetarian
     $app->get("/options", function() use($app) {
+        $user = User::find($_SESSION['user_id']);
 
         $restaurant_list = Restaurant::getAll();
 
@@ -65,7 +66,7 @@
         return $app['twig']->render('options.twig', array(
             'restaurant_list' => $restaurant_list,
             'restaurant1' => $restaurant1,
-            'restaurant2' => $restaurant2));
+            'restaurant2' => $restaurant2,'user' => $user));
     });
 
     //choice
