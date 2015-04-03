@@ -4,7 +4,7 @@
     <title></title>
 </head>
 <body class="container">
-    <h1>are you sure?</h1>
+    <h1>Are you sure you want to delete {{ restaurant.getName }}?</h1>
 
     <form action="/restaurants/{{ restaurant.getId }}/edit" method="get">
         <button type='submit'>Nevermind</button>
