@@ -10,14 +10,14 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: cuisines; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: cuisines; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
 --
 
 CREATE TABLE cuisines (
@@ -63,7 +63,7 @@ ALTER SEQUENCE cuisines_id_seq OWNED BY cuisines.id;
 
 
 --
--- Name: cuisines_restaurants; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: cuisines_restaurants; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
 --
 
 CREATE TABLE cuisines_restaurants (
@@ -97,7 +97,7 @@ ALTER SEQUENCE cuisines_restaurants_id_seq OWNED BY cuisines_restaurants.id;
 
 
 --
--- Name: likes; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: likes; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
 --
 
 CREATE TABLE likes (
@@ -132,7 +132,7 @@ ALTER SEQUENCE likes_id_seq OWNED BY likes.id;
 
 
 --
--- Name: prices; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: prices; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
 --
 
 CREATE TABLE prices (
@@ -165,7 +165,7 @@ ALTER SEQUENCE prices_id_seq OWNED BY prices.id;
 
 
 --
--- Name: restaurants; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: restaurants; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
 --
 
 CREATE TABLE restaurants (
@@ -204,7 +204,7 @@ ALTER SEQUENCE restaurants_id_seq OWNED BY restaurants.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
 --
 
 CREATE TABLE users (
@@ -473,7 +473,7 @@ SELECT pg_catalog.setval('users_id_seq', 2, true);
 
 
 --
--- Name: cuisines_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: cuisines_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
 --
 
 ALTER TABLE ONLY cuisines
@@ -481,7 +481,7 @@ ALTER TABLE ONLY cuisines
 
 
 --
--- Name: cuisines_restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: cuisines_restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
 --
 
 ALTER TABLE ONLY cuisines_restaurants
@@ -489,7 +489,7 @@ ALTER TABLE ONLY cuisines_restaurants
 
 
 --
--- Name: likes_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: likes_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
 --
 
 ALTER TABLE ONLY likes
@@ -497,7 +497,7 @@ ALTER TABLE ONLY likes
 
 
 --
--- Name: prices_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: prices_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
 --
 
 ALTER TABLE ONLY prices
@@ -505,7 +505,7 @@ ALTER TABLE ONLY prices
 
 
 --
--- Name: restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
 --
 
 ALTER TABLE ONLY restaurants
@@ -513,7 +513,7 @@ ALTER TABLE ONLY restaurants
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
 --
 
 ALTER TABLE ONLY users
@@ -533,4 +533,3 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
-

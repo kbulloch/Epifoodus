@@ -9,8 +9,6 @@
     $app = new Silex\Application();
     $app['debug'] = true;
 
-    //do we need session info here for users who don't sign in ?
-
     $DB = new PDO('pgsql:host=localhost;dbname=epifoodus');
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -20,10 +18,11 @@
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
 
-    /*  get routes for all user-interacted pages:
-    *   main, options, choice, cuisine, all cuisines, create_user, user info
-    */
 
+    /* session is required for logins.
+    *  we check admin for each user session because some pages are admin-only
+    *  vegetarian is also checked, but currently non-functional for page-responses
+    */
     session_start();
     if (empty($_SESSION['user_id'])) {
         $_SESSION['user_id'] = null;
@@ -35,6 +34,11 @@
         $_SESSION['is_vegie'] = 0;
     };
 
+
+    /*  get routes for all user-interacted pages:
+    *   main, options, choice, cuisine, all cuisines, create_user, user info
+    */
+
     //main
     //if user is already logged in,
     $app->get("/", function() use ($app) {
@@ -43,6 +47,7 @@
     });
 
     //options -- randomly shows 2 restaurant options out of all restaurants
+    //FUTURE: do not show restaurants that aren't veg-friendly if user is vegetarian
     $app->get("/options", function() use($app) {
 
         $restaurant_list = Restaurant::getAll();
