@@ -214,6 +214,25 @@
             return $restaurants;
         }
 
+        static function getAllVeg()
+        {
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants WHERE vegie = 1;");
+            $restaurants = array();
+            foreach($returned_restaurants as $restaurant) {
+                $name = $restaurant['name'];
+                $address = $restaurant['address'];
+                $phone = $restaurant['phone'];
+                $price = $restaurant['price'];
+                $vegie = $restaurant['vegie'];
+                $opentime = $restaurant['opentime'];
+                $closetime = $restaurant['closetime'];
+                $id = $restaurant['id'];
+                $new_restaurant = new Restaurant($name, $address, $phone, $price, $vegie, $opentime, $closetime, $id);
+                array_push($restaurants, $new_restaurant);
+            }
+            return $restaurants;
+        }
+
         static function find($search_id)
         {
             $found_restaurant = null;

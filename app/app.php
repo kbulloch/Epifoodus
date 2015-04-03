@@ -63,10 +63,27 @@
         $restaurant1 = $two_choices[0];
         $restaurant2 = $two_choices[1];
 
+        //same code, for vegetarian options
+        $restaurant_list_veg = Restaurant::getAllVeg();
+        $two_veg_choices = [];
+        $veg_picks = array_rand($restaurant_list_veg, 2);
+        array_push($two_veg_choices, $restaurant_list_veg[$veg_picks[0]]);
+        array_push($two_veg_choices, $restaurant_list_veg[$veg_picks[1]]);
+
+        $restaurant1veg = $two_veg_choices[0];
+        $restaurant2veg = $two_veg_choices[1];
+
         return $app['twig']->render('options.twig', array(
             'restaurant_list' => $restaurant_list,
             'restaurant1' => $restaurant1,
-            'restaurant2' => $restaurant2,'user' => $user));
+            'restaurant2' => $restaurant2,
+            'user' => $user,
+            'restaurant2' => $restaurant2,
+            'restaurant_list_veg' => $restaurant_list_veg,
+            'restaurant1veg' => $restaurant1veg,
+            'restaurant2veg' => $restaurant2veg,
+            'is_vegie' => $_SESSION['is_vegie'],
+            ));
     });
 
     //choice
