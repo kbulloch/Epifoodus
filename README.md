@@ -1,7 +1,7 @@
-# Epifoodus
-### Group Project
-## by Patrick, Jill, Abeer, Erica, Kyle, Evan, Tanner
-### Date: March 30, 2015
+# Doe-board
+###
+## by Abeer Khakwani
+### Date: NOV,11,2015
 #### Description
 
 This app helps users make a decision about what to eat for lunch.
